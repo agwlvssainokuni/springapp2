@@ -1,0 +1,87 @@
+apply plugin: "java"
+apply plugin: "eclipse"
+
+allprojects {
+	version = "1.0"
+	ext {
+		propWithEclipse = (rootProject.hasProperty("withEclipse") ? rootProject.getProperty("withEclipse") == "true" : false)
+	}
+}
+
+subprojects {
+
+	apply plugin: "java"
+	apply plugin: "eclipse"
+
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+
+	sourceSets {
+		generated
+		testGenerated
+	}
+
+	configurations {
+		generated
+		testGenerated
+	}
+
+	compileJava.options.encoding = "UTF-8"
+	compileTestJava.options.encoding = "UTF-8"
+	compileGeneratedJava.options.encoding = "UTF-8"
+	compileTestGeneratedJava.options.encoding = "UTF-8"
+
+	task generatedJar(type: Jar, dependsOn: generatedClasses) {
+		from sourceSets.generated.output.classesDir
+		from sourceSets.generated.output.resourcesDir
+		appendix = "generated"
+	}
+
+	task testGeneratedJar(type: Jar, dependsOn: testGeneratedClasses) {
+		from sourceSets.testGenerated.output.classesDir
+		from sourceSets.testGenerated.output.resourcesDir
+		appendix = "testGenerated"
+	}
+
+	artifacts {
+		generated generatedJar
+		testGenerated testGeneratedJar
+	}
+
+	configurations {
+		compile.extendsFrom(generatedCompile)
+		runtime.extendsFrom(generatedRuntime)
+		testCompile.extendsFrom(testGeneratedCompile)
+		testRuntime.extendsFrom(testGeneratedRuntime)
+		compileExt
+		compile.extendsFrom(compileExt)
+	}
+
+	repositories { mavenCentral() }
+
+	configurations {
+		all*.exclude group: "commons-logging", module: "commons-logging"
+	}
+
+	ext {
+		// goods
+		versionGuava = "19.0"
+		versionCommonsLang3 = "3.4"
+		versionCommonsCollections4 = "4.0"
+		versionCommonsCodec = "1.10"
+		versionSlf4j = "1.7.21"
+		versionLogback = "1.1.7"
+		versionPoi = "3.11"
+		versionFluentLogger = "0.3.0"
+		// all
+		versionJunit = "4.12"
+		versionHamcrest = "1.3"
+		versionMockito = "2.0.2-beta"
+	}
+
+	dependencies {
+		testCompile "junit:junit:${versionJunit}"
+		testCompile "org.hamcrest:hamcrest-all:${versionHamcrest}"
+		testCompile "org.mockito:mockito-all:${versionMockito}"
+	}
+}

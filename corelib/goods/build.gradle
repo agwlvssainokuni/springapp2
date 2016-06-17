@@ -1,0 +1,68 @@
+sourceSets {
+	excel
+	telno
+	fluent
+}
+
+configurations {
+	excel
+	telno
+	fluent
+}
+
+compileExcelJava.options.encoding = compileJava.options.encoding
+task excelJar(type: Jar, dependsOn: excelClasses) {
+	from sourceSets.excel.output.classesDir
+	from sourceSets.excel.output.resourcesDir
+	appendix = "excel"
+}
+
+compileTelnoJava.options.encoding = compileJava.options.encoding
+task telnoJar(type: Jar, dependsOn: telnoClasses) {
+	from sourceSets.telno.output.classesDir
+	from sourceSets.telno.output.resourcesDir
+	appendix = "telno"
+}
+
+compileFluentJava.options.encoding = compileJava.options.encoding
+task fluentJar(type: Jar, dependsOn: fluentClasses) {
+	from sourceSets.fluent.output.classesDir
+	from sourceSets.fluent.output.resourcesDir
+	appendix = "fluent"
+}
+
+artifacts {
+	excel excelJar
+	telno telnoJar
+	fluent fluentJar
+}
+
+configurations {
+	testCompile.extendsFrom(excelCompile)
+	testCompile.extendsFrom(telnoCompile)
+}
+
+dependencies {
+	compile "com.google.guava:guava:${versionGuava}"
+	compile "org.apache.commons:commons-lang3:${versionCommonsLang3}"
+	compile "org.slf4j:slf4j-api:${versionSlf4j}"
+	runtime "org.slf4j:jcl-over-slf4j:${versionSlf4j}"
+	testCompile "commons-codec:commons-codec:${versionCommonsCodec}"
+	testCompile project(path: project.path, configuration: "excel")
+	testCompile project(path: project.path, configuration: "telno")
+
+	excelCompile "org.apache.poi:poi:${versionPoi}"
+	excelCompile "org.apache.poi:poi-ooxml:${versionPoi}"
+
+	telnoCompile "org.apache.commons:commons-lang3:${versionCommonsLang3}"
+	telnoCompile "org.apache.commons:commons-collections4:${versionCommonsCollections4}"
+	telnoCompile "org.apache.poi:poi:${versionPoi}"
+	telnoCompile "org.apache.poi:poi-ooxml:${versionPoi}"
+
+	fluentCompile "org.fluentd:fluent-logger:${versionFluentLogger}"
+	fluentCompile "ch.qos.logback:logback-classic:${versionLogback}"
+	if (propWithEclipse) {
+		compileOnly "org.fluentd:fluent-logger:${versionFluentLogger}"
+		compileOnly "ch.qos.logback:logback-classic:${versionLogback}"
+	}
+}
