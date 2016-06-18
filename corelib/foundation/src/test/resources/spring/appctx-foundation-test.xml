@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<context:property-placeholder location="classpath:foundation-test.properties" ignore-unresolvable="true" />
+
+	<import resource="appctx-foundation.xml" />
+	<import resource="appctx-foundation-trace.xml" />
+	<import resource="appctx-foundation-testtool.xml" />
+	<import resource="appctx-foundation-testtool-batch.xml" />
+	<import resource="appctx-foundation-testtool-web.xml" />
+	<import resource="appctx-foundation-biz.xml" />
+	<import resource="appctx-foundation-crypto.xml" />
+	<import resource="appctx-foundation-jdbc.xml" />
+	<import resource="appctx-foundation-optool.xml" />
+	<import resource="appctx-foundation-querydsl.xml" />
+	<import resource="appctx-foundation-servlet.xml" />
+	<import resource="appctx-foundation-servletext.xml" />
+	<import resource="appctx-foundation-telno.xml" />
+	<import resource="appctx-foundation-wakachi.xml" />
+
+	<context:component-scan base-package="cherry.foundation.batch.tools" />
+	<context:component-scan base-package="cherry.foundation.spring" />
+	<context:component-scan base-package="cherry.foundation.testtool" />
+
+	<jdbc:embedded-database id="dataSource" type="H2" />
+
+	<tx:annotation-driven />
+
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="flyway" class="org.flywaydb.core.Flyway" init-method="migrate">
+		<property name="dataSource" ref="dataSource" />
+		<property name="locations" value="db/migration" />
+		<property name="encoding" value="UTF-8" />
+	</bean>
+
+	<bean class="cherry.goods.log.Log" factory-method="setMessageDef">
+		<constructor-arg>
+			<list>
+				<value>cherry/goods/log/log1</value>
+			</list>
+		</constructor-arg>
+	</bean>
+	<bean class="cherry.goods.log.Log" factory-method="addMessageDef">
+		<constructor-arg>
+			<list>
+				<value>cherry/goods/log/log2</value>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/login/**" />
+			<mvc:mapping path="/logout/**" />
+			<mvc:mapping path="/secure/**" />
+			<bean class="cherry.foundation.spring.security.OperationLogHandlerInterceptor">
+				<property name="paramPattern">
+					<list value-type="java.util.regex.Pattern">
+						<value>(target|tgt)id</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:interceptor>
+		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+	</mvc:interceptors>
+	<mvc:annotation-driven conversion-service="conversionService">
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="objectMapper" ref="objectMapper" />
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	<mvc:default-servlet-handler />
+
+	<bean id="bizDateTime" class="cherry.foundation.bizcal.SimpleBizDateTime" />
+
+	<bean id="paginator" class="cherry.goods.paginate.PaginatorImpl">
+		<property name="paginateStrategy">
+			<bean class="cherry.goods.paginate.TotalCountStrategy">
+				<property name="totalCount" value="7" />
+				<property name="lowerSideHint" value="3" />
+				<property name="lowerTrim" value="1" />
+				<property name="upperTrim" value="1" />
+			</bean>
+		</property>
+	</bean>
+
+	<!-- <bean id="navigator" class="cherry.foundation.navi.NavigatorImpl" init-method="initialize"> <property name="objectMapper" ref="objectMapper" 
+		/> <property name="navigationDef" value="classpath:cherry/foundation/navi/navi.json" /> </bean> -->
+
+	<bean id="codeStore" class="cherry.foundation.code.SimpleCodeStore">
+		<property name="codeDefMap">
+			<map key-type="java.lang.String" value-type="java.util.Map">
+				<entry key="CODE0">
+					<map key-type="java.lang.String" value-type="java.lang.String">
+						<entry key="01" value="LABEL01" />
+						<entry key="02" value="LABEL02" />
+					</map>
+				</entry>
+				<entry key="CODE1">
+					<map key-type="java.lang.String" value-type="java.lang.String">
+						<entry key="11" value="LABEL11" />
+						<entry key="12" value="LABEL12" />
+						<entry key="13" value="LABEL13" />
+					</map>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="numberingStore" class="cherry.foundation.numbering.SimpleNumberingStore" init-method="initialize">
+		<property name="numberingDefinitionMap">
+			<map key-type="java.lang.String" value-type="cherry.foundation.numbering.NumberingDefinition">
+				<entry key="NUMA">
+					<bean class="cherry.foundation.numbering.NumberingDefinition">
+						<property name="template" value="AA{0,number,0000000000}" />
+						<property name="minValue" value="1" />
+						<property name="maxValue" value="9999999999" />
+					</bean>
+				</entry>
+				<entry key="NUMB">
+					<bean class="cherry.foundation.numbering.NumberingDefinition">
+						<property name="template" value="BB{0,number,0000000000}" />
+						<property name="minValue" value="1" />
+						<property name="maxValue" value="9999999999" />
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+</beans>

@@ -1,1 +1,1 @@
-include ":corelib:goods"
+include ":corelib:goods", ":corelib:foundation"

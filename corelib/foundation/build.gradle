@@ -1,0 +1,289 @@
+sourceSets {
+	async
+	batch
+	batchcli
+	batchext
+	jdbc
+	optool
+	querydsl
+	servlet
+	servletext
+	taglib
+	telno
+	testtool
+	webmvc
+}
+
+configurations {
+	async
+	batch
+	batchcli
+	batchext
+	jdbc
+	optool
+	querydsl
+	servlet
+	servletext
+	taglib
+	telno
+	testtool
+	webmvc
+}
+
+compileAsyncJava.options.encoding = compileJava.options.encoding
+task asyncJar(type: Jar, dependsOn: asyncClasses) {
+	from sourceSets.async.output.classesDir
+	from sourceSets.async.output.resourcesDir
+	appendix = "async"
+}
+
+compileBatchJava.options.encoding = compileJava.options.encoding
+task batchJar(type: Jar, dependsOn: batchClasses) {
+	from sourceSets.batch.output.classesDir
+	from sourceSets.batch.output.resourcesDir
+	appendix = "batch"
+}
+
+compileBatchcliJava.options.encoding = compileJava.options.encoding
+task batchcliJar(type: Jar, dependsOn: batchcliClasses) {
+	from sourceSets.batchcli.output.classesDir
+	from sourceSets.batchcli.output.resourcesDir
+	appendix = "batchcli"
+}
+
+compileBatchextJava.options.encoding = compileJava.options.encoding
+task batchextJar(type: Jar, dependsOn: batchextClasses) {
+	from sourceSets.batchext.output.classesDir
+	from sourceSets.batchext.output.resourcesDir
+	appendix = "batchext"
+}
+
+compileJdbcJava.options.encoding = compileJava.options.encoding
+task jdbcJar(type: Jar, dependsOn: jdbcClasses) {
+	from sourceSets.jdbc.output.classesDir
+	from sourceSets.jdbc.output.resourcesDir
+	appendix = "jdbc"
+}
+
+compileQuerydslJava.options.encoding = compileJava.options.encoding
+task querydslJar(type: Jar, dependsOn: querydslClasses) {
+	from sourceSets.querydsl.output.classesDir
+	from sourceSets.querydsl.output.resourcesDir
+	appendix = "querydsl"
+}
+
+compileOptoolJava.options.encoding = compileJava.options.encoding
+task optoolJar(type: Jar, dependsOn: optoolClasses) {
+	from sourceSets.optool.output.classesDir
+	from sourceSets.optool.output.resourcesDir
+	appendix = "optool"
+}
+
+compileServletJava.options.encoding = compileJava.options.encoding
+task servletJar(type: Jar, dependsOn: servletClasses) {
+	from sourceSets.servlet.output.classesDir
+	from sourceSets.servlet.output.resourcesDir
+	appendix = "servlet"
+}
+
+compileServletextJava.options.encoding = compileJava.options.encoding
+task servletextJar(type: Jar, dependsOn: servletextClasses) {
+	from sourceSets.servletext.output.classesDir
+	from sourceSets.servletext.output.resourcesDir
+	appendix = "servletext"
+}
+
+compileTaglibJava.options.encoding = compileJava.options.encoding
+task taglibJar(type: Jar, dependsOn: taglibClasses) {
+	from sourceSets.taglib.output.classesDir
+	from sourceSets.taglib.output.resourcesDir
+	appendix = "taglib"
+}
+
+compileTelnoJava.options.encoding = compileJava.options.encoding
+task telnoJar(type: Jar, dependsOn: telnoClasses) {
+	from sourceSets.telno.output.classesDir
+	from sourceSets.telno.output.resourcesDir
+	appendix = "telno"
+}
+
+compileTesttoolJava.options.encoding = compileJava.options.encoding
+task testtoolJar(type: Jar, dependsOn: testtoolClasses) {
+	from sourceSets.testtool.output.classesDir
+	from sourceSets.testtool.output.resourcesDir
+	appendix = "testtool"
+}
+
+compileWebmvcJava.options.encoding = compileJava.options.encoding
+task webmvcJar(type: Jar, dependsOn: webmvcClasses) {
+	from sourceSets.webmvc.output.classesDir
+	from sourceSets.webmvc.output.resourcesDir
+	appendix = "webmvc"
+}
+
+artifacts {
+	async asyncJar
+	batch batchJar
+	batchcli batchcliJar
+	batchext batchextJar
+	jdbc jdbcJar
+	optool optoolJar
+	querydsl querydslJar
+	servlet servletJar
+	servletext servletextJar
+	taglib taglibJar
+	telno telnoJar
+	testtool testtoolJar
+	webmvc webmvcJar
+}
+
+configurations {
+	testCompile.extendsFrom(asyncCompile)
+	testCompile.extendsFrom(batchCompile)
+	testCompile.extendsFrom(batchextCompile)
+	testCompile.extendsFrom(jdbcCompile)
+	testCompile.extendsFrom(optoolCompile)
+	testCompile.extendsFrom(querydslCompile)
+	testRuntime.extendsFrom(querydslRuntime)
+	testCompile.extendsFrom(servletCompile)
+	testCompile.extendsFrom(servletextCompile)
+	testCompile.extendsFrom(telnoCompile)
+	testCompile.extendsFrom(testtoolCompile)
+	testCompile.extendsFrom(webmvcCompile)
+}
+
+dependencies {
+	compile project(path: ":corelib:goods")
+	compile "org.apache.commons:commons-collections4:${versionCommonsCollections4}"
+	compile "commons-codec:commons-codec:${versionCommonsCodec}"
+	compile "org.freemarker:freemarker:${versionFreemarker}"
+	compile "com.ibm.icu:icu4j:${versionIcu4j}"
+	compile "com.fasterxml.jackson.core:jackson-core:${versionJackson}"
+	compile "com.fasterxml.jackson.core:jackson-annotations:${versionJackson}"
+	compile "com.fasterxml.jackson.core:jackson-databind:${versionJackson}"
+	runtime "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${versionJackson}"
+	runtime "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${versionJackson}"
+	runtime "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${versionJackson}"
+	compile "org.aspectj:aspectjrt:${versionAspectJ}"
+	compile "org.aspectj:aspectjweaver:${versionAspectJ}"
+	compile "aopalliance:aopalliance:${versionAopalliance}"
+	compile "org.springframework:spring-core:${versionSpring}"
+	compile "org.springframework:spring-beans:${versionSpring}"
+	compile "org.springframework:spring-expression:${versionSpring}"
+	compile "org.springframework:spring-aop:${versionSpring}"
+	compile "org.springframework:spring-context:${versionSpring}"
+	compile "org.springframework:spring-context-support:${versionSpring}"
+	compile "org.springframework:spring-tx:${versionSpring}"
+	compile "org.hibernate:hibernate-validator:${versionHibernateValidator}"
+	compile "javax.mail:mail:${versionJavaMail}"
+	compile "javax.validation:validation-api:${versionJavaValidation}"
+	runtime "javax.el:javax.el-api:${versionJavaEl}"
+	testCompile project(path: project.path, configuration: "testGenerated")
+	testCompile project(path: project.path, configuration: "async")
+	testCompile project(path: project.path, configuration: "batch")
+	testCompile project(path: project.path, configuration: "batchext")
+	testCompile project(path: project.path, configuration: "jdbc")
+	testCompile project(path: project.path, configuration: "optool")
+	testCompile project(path: project.path, configuration: "querydsl")
+	testCompile project(path: project.path, configuration: "servlet")
+	testCompile project(path: project.path, configuration: "servletext")
+	testCompile project(path: project.path, configuration: "telno")
+	testCompile project(path: project.path, configuration: "testtool")
+	testCompile project(path: project.path, configuration: "webmvc")
+	testCompile "org.springframework:spring-test:${versionSpring}"
+	testCompile "ch.qos.logback:logback-classic:${versionLogback}"
+	testRuntime "org.springframework:spring-webmvc:${versionSpring}"
+	testRuntime "org.glassfish:javax.el:${versionJavaEl}"
+	testRuntime "com.h2database:h2:${versionH2db}"
+	testRuntime "org.flywaydb:flyway-core:${versionFlyway}"
+
+	testGeneratedCompile "com.querydsl:querydsl-sql:${versionQuerydsl}"
+
+	asyncCompile project(path: project.path)
+	asyncCompile "org.springframework:spring-jms:${versionSpring}"
+	asyncCompile "org.springframework:spring-web:${versionSpring}"
+	asyncCompile "javax.jms:jms-api:${versionJavaJms}"
+
+	batchCompile project(path: project.path)
+
+	batchcliCompile project(path: project.path, configuration: "batch")
+	batchcliCompile "commons-cli:commons-cli:1.2"
+	if (propWithEclipse) {
+		compileOnly "commons-cli:commons-cli:1.2"
+	}
+
+	batchextCompile project(path: ":corelib:goods")
+	batchextCompile project(path: project.path, configuration: "batch")
+	batchextCompile project(path: project.path, configuration: "jdbc")
+
+	jdbcCompile project(path: ":corelib:goods")
+	jdbcCompile project(path: ":corelib:goods", configuration: "excel")
+	jdbcCompile "com.google.guava:guava:${versionGuava}"
+	jdbcCompile "org.apache.commons:commons-lang3:${versionCommonsLang3}"
+	jdbcCompile "org.springframework:spring-jdbc:${versionSpring}"
+	jdbcCompile "org.apache.poi:poi-ooxml:${versionPoi}"
+	jdbcCompile "org.slf4j:slf4j-api:${versionSlf4j}"
+	jdbcRuntime "org.slf4j:jcl-over-slf4j:${versionSlf4j}"
+
+	optoolCompile project(path: ":corelib:goods")
+	optoolCompile "com.google.guava:guava:${versionGuava}"
+	optoolCompile "org.springframework:spring-jdbc:${versionSpring}"
+	optoolCompile "org.springframework:spring-webmvc:${versionSpring}"
+	optoolCompile "com.querydsl:querydsl-sql:${versionQuerydsl}"
+
+	querydslCompile project(path: ":corelib:goods")
+	querydslCompile project(path: project.path, configuration: "jdbc")
+	querydslCompile "org.springframework:spring-jdbc:${versionSpring}"
+	querydslCompile "com.querydsl:querydsl-sql:${versionQuerydsl}"
+	querydslRuntime "com.querydsl:querydsl-sql-spring:${versionQuerydsl}"
+
+	servletCompile "com.google.guava:guava:${versionGuava}"
+	servletCompile "org.apache.commons:commons-lang3:${versionCommonsLang3}"
+	servletCompile "javax.servlet:javax.servlet-api:${versionJavaServlet}"
+	servletCompile "org.slf4j:slf4j-api:${versionSlf4j}"
+	servletRuntime "org.slf4j:jcl-over-slf4j:${versionSlf4j}"
+
+	servletextCompile project(path: ":corelib:goods", configuration: "excel")
+	servletextCompile project(path: project.path, configuration: "jdbc")
+	servletextCompile project(path: project.path, configuration: "querydsl")
+	servletextCompile project(path: project.path, configuration: "servlet")
+	servletextCompile "org.springframework:spring-tx:${versionSpring}"
+	servletextCompile "com.querydsl:querydsl-sql:${versionQuerydsl}"
+	servletextCompile "org.apache.poi:poi-ooxml:${versionPoi}"
+	servletextCompile "javax.servlet:javax.servlet-api:${versionJavaServlet}"
+
+	taglibCompile project(path: project.path)
+	taglibCompile project(path: project.path, configuration: "servlet")
+	taglibCompile "org.springframework:spring-webmvc:${versionSpring}"
+	taglibCompile "javax.el:javax.el-api:${versionJavaEl}"
+	taglibCompile "javax.servlet:javax.servlet-api:${versionJavaServlet}"
+	taglibCompile "javax.servlet.jsp:javax.servlet.jsp-api:${versionJavaJsp}"
+	if (propWithEclipse) {
+		compileOnly "org.springframework:spring-webmvc:${versionSpring}"
+		compileOnly "javax.el:javax.el-api:${versionJavaEl}"
+		compileOnly "javax.servlet:javax.servlet-api:${versionJavaServlet}"
+		compileOnly "javax.servlet.jsp:javax.servlet.jsp-api:${versionJavaJsp}"
+	}
+
+	telnoCompile project(path: ":corelib:goods", configuration: "telno")
+	telnoCompile "org.apache.commons:commons-lang3:${versionCommonsLang3}"
+	telnoCompile "org.apache.commons:commons-collections4:${versionCommonsCollections4}"
+	telnoCompile "org.springframework:spring-beans:${versionSpring}"
+	telnoCompile "org.apache.poi:poi-ooxml:${versionPoi}"
+
+	testtoolCompile project(path: ":corelib:goods")
+	testtoolCompile "com.google.guava:guava:${versionGuava}"
+	testtoolCompile "org.apache.commons:commons-collections4:${versionCommonsCollections4}"
+	testtoolCompile "aopalliance:aopalliance:${versionAopalliance}"
+	testtoolCompile "org.springframework:spring-context:${versionSpring}"
+	testtoolCompile "com.fasterxml.jackson.core:jackson-databind:${versionJackson}"
+	testtoolCompile "org.springframework:spring-web:${versionSpring}"
+
+	webmvcCompile "com.google.guava:guava:${versionGuava}"
+	webmvcCompile "org.apache.commons:commons-lang3:${versionCommonsLang3}"
+	webmvcCompile "org.apache.commons:commons-collections4:${versionCommonsCollections4}"
+	webmvcCompile "org.springframework:spring-webmvc:${versionSpring}"
+	webmvcCompile "org.springframework.security:spring-security-web:${versionSpringSecurity}"
+	webmvcCompile "org.slf4j:slf4j-api:${versionSlf4j}"
+	webmvcCompile "javax.servlet:javax.servlet-api:${versionJavaServlet}"
+}

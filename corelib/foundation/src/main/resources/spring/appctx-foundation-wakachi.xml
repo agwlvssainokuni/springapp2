@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 分かち書き -->
+	<bean id="wakachigakiTokenizer" class="cherry.goods.wakachi.CompositeTokenizer">
+		<property name="tokenizers">
+			<list value-type="cherry.goods.wakachi.Tokenizer">
+				<bean class="cherry.goods.wakachi.SpaceCharTokenizer" />
+				<bean class="cherry.goods.wakachi.UnicodeBlockTokenizer" />
+				<bean class="cherry.goods.wakachi.NgramTokenizer">
+					<property name="applyToAscii" value="false" />
+					<property name="length" value="2" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+</beans>

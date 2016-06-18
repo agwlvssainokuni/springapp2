@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- AOP設定 -->
+	<aop:config>
+		<aop:pointcut id="pointcut"
+			expression="execution(* cherry..*.*(..))
+				and !execution(* cherry.foundation.log..*.*(..)) 
+				and !execution(* cherry.foundation.format..*.*(..)) 
+				and !execution(* cherry.foundation.querydsl..*.*(..)) 
+				and !execution(* cherry.foundation.spring..*.*(..)) 
+				and !execution(* cherry.foundation.crypto..*.*(..)) 
+				and !execution(* cherry.goods.crypto..*.*(..)) 
+				and !execution(* cherry.foundation.telno..*.*(..)) 
+				and !execution(* cherry.goods.telno..*.*(..)) 
+				and !execution(* cherry.goods.wakachi..*.*(..)) 
+				and !execution(* cherry.foundation.testtool.stub..*.*(..))
+				" />
+		<aop:advisor advice-ref="traceInterceptor" pointcut-ref="pointcut" />
+	</aop:config>
+
+	<!-- AOP: トレース設定 -->
+	<bean id="traceInterceptor" class="cherry.foundation.log.trace.TraceInterceptor">
+		<property name="arrayLengthLimit" value="0" />
+		<property name="objectLengthLimit" value="0" />
+		<property name="packagePrefix">
+			<list>
+				<value>cherry</value>
+			</list>
+		</property>
+	</bean>
+
+</beans>

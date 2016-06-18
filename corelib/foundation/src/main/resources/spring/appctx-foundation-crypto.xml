@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 暗号機能設定 -->
+	<!-- RSA -->
+	<bean id="rsaCrypto0" class="cherry.foundation.crypto.RSACryptoSupport" init-method="initialize">
+		<property name="publicKeyResource" value="${foundation.crypto.rsa.0.pubkey}" />
+		<property name="privateKeyResource" value="${foundation.crypto.rsa.0.privkey}" />
+		<property name="privateKeyPassword" value="${foundation.crypto.rsa.0.password}" />
+	</bean>
+	<bean id="rsaCrypto1" class="cherry.foundation.crypto.RSACryptoSupport" init-method="initialize">
+		<property name="publicKeyResource" value="${foundation.crypto.rsa.1.pubkey}" />
+		<property name="privateKeyResource" value="${foundation.crypto.rsa.1.privkey}" />
+		<property name="privateKeyPassword" value="${foundation.crypto.rsa.1.password}" />
+	</bean>
+
+	<!-- AES -->
+	<bean id="secureRandom" class="java.security.SecureRandom" />
+	<bean id="aesCrypto" class="cherry.goods.crypto.VersionedCrypto">
+		<property name="defaultVersion" value="${foundation.crypto.aes.defaultVersion}" />
+		<property name="cryptoMap">
+			<map key-type="java.lang.Integer" value-type="cherry.goods.crypto.Crypto">
+				<entry key="0">
+					<bean class="cherry.foundation.crypto.AESCryptoSupport" init-method="initialize">
+						<property name="secretKeyResource" value="${foundation.crypto.aes.0.key}" />
+						<property name="keyCrypto" ref="rsaCrypto0" />
+						<property name="random" ref="secureRandom" />
+					</bean>
+				</entry>
+				<entry key="1">
+					<bean class="cherry.foundation.crypto.AESCryptoSupport" init-method="initialize">
+						<property name="secretKeyResource" value="${foundation.crypto.aes.1.key}" />
+						<property name="keyCrypto" ref="rsaCrypto1" />
+						<property name="random" ref="secureRandom" />
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- 電子署名機能設定 -->
+	<bean id="rsaSignature" class="cherry.goods.crypto.VersionedSignature">
+		<property name="defaultVersion" value="${foundation.crypto.rsasig.defaultVersion}" />
+		<property name="signatureMap">
+			<map key-type="java.lang.Integer" value-type="cherry.goods.crypto.Signature">
+				<entry key="0">
+					<bean class="cherry.foundation.crypto.RSASignatureSupport" init-method="initialize">
+						<property name="publicKeyResource" value="${foundation.crypto.rsasig.0.pubkey}" />
+						<property name="privateKeyResource" value="${foundation.crypto.rsasig.0.privkey}" />
+						<property name="privateKeyPassword" value="${foundation.crypto.rsasig.0.password}" />
+					</bean>
+				</entry>
+				<entry key="1">
+					<bean class="cherry.foundation.crypto.RSASignatureSupport" init-method="initialize">
+						<property name="publicKeyResource" value="${foundation.crypto.rsasig.1.pubkey}" />
+						<property name="privateKeyResource" value="${foundation.crypto.rsasig.1.privkey}" />
+						<property name="privateKeyPassword" value="${foundation.crypto.rsasig.1.password}" />
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- 暗号機能設定 -->
+	<!-- SecureType -->
+	<bean class="cherry.foundation.crypto.SecureTypeConfigurer" init-method="initialize">
+		<property name="secureIntegerEncoder">
+			<bean class="cherry.foundation.crypto.SecureIntegerEncoder">
+				<property name="crypto" ref="aesCrypto" />
+			</bean>
+		</property>
+		<property name="secureLongEncoder">
+			<bean class="cherry.foundation.crypto.SecureLongEncoder">
+				<property name="crypto" ref="aesCrypto" />
+			</bean>
+		</property>
+		<property name="secureBigIntegerEncoder">
+			<bean class="cherry.foundation.crypto.SecureBigIntegerEncoder">
+				<property name="crypto" ref="aesCrypto" />
+			</bean>
+		</property>
+		<property name="secureBigDecimalEncoder">
+			<bean class="cherry.foundation.crypto.SecureBigDecimalEncoder">
+				<property name="crypto" ref="aesCrypto" />
+			</bean>
+		</property>
+		<property name="secureStringEncoder">
+			<bean class="cherry.foundation.crypto.SecureStringEncoder">
+				<property name="crypto" ref="aesCrypto" />
+				<property name="charset" value="UTF-8" />
+			</bean>
+		</property>
+	</bean>
+
+</beans>
