@@ -1,5 +1,5 @@
 /*
- * Copyright 2015,2016 agwlvssainokuni
+ * Copyright 2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,23 +14,26 @@
  * limitations under the License.
  */
 
-package cherry.foundation.batch.tools;
+package cherry.foundation.spring.webmvc;
 
-import java.util.Optional;
+public class UnauthorizedException extends RuntimeException {
 
-import org.springframework.stereotype.Component;
+	private static final long serialVersionUID = 1L;
 
-import cherry.foundation.batch.ExitStatus;
+	public UnauthorizedException() {
+		super();
+	}
 
-@Component
-public class TestExceptionExitStatusTranslator implements ExceptionExitStatusTranslator {
+	public UnauthorizedException(String message) {
+		super(message);
+	}
 
-	@Override
-	public Optional<ExitStatus> translate(Exception ex) {
-		if (ex instanceof IllegalStateException) {
-			return Optional.of(ExitStatus.valueOf(ex.getMessage()));
-		}
-		return Optional.empty();
+	public UnauthorizedException(Throwable cause) {
+		super(cause);
+	}
+
+	public UnauthorizedException(String message, Throwable cause) {
+		super(message, cause);
 	}
 
 }

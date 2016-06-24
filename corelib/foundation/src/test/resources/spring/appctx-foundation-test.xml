@@ -24,7 +24,6 @@
 	<import resource="appctx-foundation-telno.xml" />
 	<import resource="appctx-foundation-wakachi.xml" />
 
-	<context:component-scan base-package="cherry.foundation.batch.tools" />
 	<context:component-scan base-package="cherry.foundation.spring" />
 	<context:component-scan base-package="cherry.foundation.testtool" />
 
@@ -137,5 +136,9 @@
 			</map>
 		</property>
 	</bean>
+
+	<bean id="templateStore" class="cherry.foundation.mail.SimpleTemplateStore" />
+
+	<bean id="messageStore" class="cherry.foundation.mail.SimpleMessageStore"></bean>
 
 </beans>

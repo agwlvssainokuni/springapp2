@@ -1,5 +1,5 @@
 /*
- * Copyright 2015,2016 agwlvssainokuni
+ * Copyright 2014,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,23 +14,10 @@
  * limitations under the License.
  */
 
-package cherry.foundation.batch.tools;
+package cherry.foundation.mail;
 
-import java.util.Optional;
+public interface SendMailService {
 
-import org.springframework.stereotype.Component;
-
-import cherry.foundation.batch.ExitStatus;
-
-@Component
-public class TestExceptionExitStatusTranslator implements ExceptionExitStatusTranslator {
-
-	@Override
-	public Optional<ExitStatus> translate(Exception ex) {
-		if (ex instanceof IllegalStateException) {
-			return Optional.of(ExitStatus.valueOf(ex.getMessage()));
-		}
-		return Optional.empty();
-	}
+	void sendMail();
 
 }

@@ -16,10 +16,13 @@
 
 package cherry.foundation.batch.tools;
 
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceResolvable;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -28,8 +31,6 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 
 import cherry.foundation.batch.ExitStatus;
 import cherry.foundation.batch.IBatch;
-
-import com.google.common.base.Optional;
 
 /**
  * バッチプログラムを起動する機能を提供する。
@@ -69,15 +70,14 @@ public class Launcher {
 	 */
 	public ExitStatus launch(String... args) {
 		Msg msg = new Msg();
-		try {
 
-			log.info(msg.resolve("BATCH {0} STARTING", batchId));
-			for (String arg : args) {
-				log.info(msg.resolve("{0}", arg));
-			}
+		log.info(msg.resolve("BATCH {0} STARTING", batchId));
+		for (String arg : args) {
+			log.info(msg.resolve("{0}", arg));
+		}
 
-			@SuppressWarnings("resource")
-			ApplicationContext appCtx = new ClassPathXmlApplicationContext(APPCTX);
+		try (ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext(APPCTX)) {
+
 			IBatch batch = appCtx.getBean(batchId, IBatch.class);
 
 			log.info(msg.resolve("BATCH {0} STARTED", batchId));
@@ -141,7 +141,7 @@ public class Launcher {
 				return status;
 			}
 		}
-		return Optional.absent();
+		return Optional.empty();
 	}
 
 	/**

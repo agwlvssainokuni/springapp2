@@ -27,7 +27,7 @@ public class LauncherTest {
 
 	@Before
 	public void before() {
-		System.setProperty("batch.appCtx", "classpath:spring/appctx-foundation-test.xml");
+		System.setProperty("batch.appCtx", "classpath:spring/appctx-foundation-launcher-test.xml");
 	}
 
 	@Test

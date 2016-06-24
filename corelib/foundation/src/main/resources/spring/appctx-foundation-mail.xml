@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
+	<bean id="mailFacade" class="cherry.foundation.mail.MailFacadeImpl">
+		<property name="bizDateTime" ref="bizDateTime" />
+		<property name="mailDataHandler" ref="mailDataHandler" />
+		<property name="mailSendHandler" ref="mailSendHandler" />
+	</bean>
+
+	<bean id="mailDataHandler" class="cherry.foundation.mail.MailDataHandlerImpl">
+		<property name="templateStore" ref="templateStore" />
+		<property name="configuration">
+			<bean class="freemarker.template.Configuration">
+				<constructor-arg index="0" type="freemarker.template.Version">
+					<util:constant static-field="freemarker.template.Configuration.VERSION_2_3_23" />
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="mailSendHandler" class="cherry.foundation.mail.MailSendHandlerImpl">
+		<property name="bizDateTime" ref="bizDateTime" />
+		<property name="messageStore" ref="messageStore" />
+		<property name="mailSender">
+			<bean class="org.springframework.mail.javamail.JavaMailSenderImpl">
+				<property name="host" value="${foundation.mail.host}" />
+				<property name="port" value="${foundation.mail.port}" />
+				<property name="protocol" value="${foundation.mail.protocol}" />
+				<property name="defaultEncoding" value="${foundation.mail.encoding}" />
+			</bean>
+		</property>
+	</bean>
+
+</beans>

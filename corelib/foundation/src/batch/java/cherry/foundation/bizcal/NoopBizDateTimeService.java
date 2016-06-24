@@ -1,5 +1,5 @@
 /*
- * Copyright 2015,2016 agwlvssainokuni
+ * Copyright 2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,23 +14,30 @@
  * limitations under the License.
  */
 
-package cherry.foundation.batch.tools;
+package cherry.foundation.bizcal;
 
-import java.util.Optional;
+import java.time.LocalDate;
 
-import org.springframework.stereotype.Component;
-
-import cherry.foundation.batch.ExitStatus;
-
-@Component
-public class TestExceptionExitStatusTranslator implements ExceptionExitStatusTranslator {
+public class NoopBizDateTimeService implements BizDateTimeService {
 
 	@Override
-	public Optional<ExitStatus> translate(Exception ex) {
-		if (ex instanceof IllegalStateException) {
-			return Optional.of(ExitStatus.valueOf(ex.getMessage()));
-		}
-		return Optional.empty();
+	public boolean doSet(LocalDate value) {
+		return false;
+	}
+
+	@Override
+	public boolean doToday(int diff) {
+		return false;
+	}
+
+	@Override
+	public boolean doCurrent(int diff) {
+		return false;
+	}
+
+	@Override
+	public boolean doOffset(int offsetDay, int offsetHour, int offsetMinute, int offsetSecond) {
+		return false;
 	}
 
 }

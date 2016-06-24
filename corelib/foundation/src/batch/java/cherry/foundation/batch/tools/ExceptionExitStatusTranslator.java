@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 agwlvssainokuni
+ * Copyright 2015,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,9 @@
 
 package cherry.foundation.batch.tools;
 
-import cherry.foundation.batch.ExitStatus;
+import java.util.Optional;
 
-import com.google.common.base.Optional;
+import cherry.foundation.batch.ExitStatus;
 
 /**
  * バッチプログラムの起動および実行にあたり発生した例外を終了ステータスへ変換する。

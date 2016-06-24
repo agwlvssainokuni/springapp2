@@ -32,13 +32,13 @@ import static org.mockito.Mockito.when;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import java.time.LocalDateTime;
 import org.junit.Test;
 import org.springframework.mail.MailSendException;
 
@@ -168,9 +168,12 @@ public class SendMailBatchTest {
 			when(mailSendHandler.sendMessage(anyLong())).thenThrow(new MailSendException("sending mail failed"));
 		}
 
+		SendMailServiceImpl service = new SendMailServiceImpl();
+		service.setBizDateTime(bizDateTime);
+		service.setMailSendHandler(mailSendHandler);
+
 		SendMailBatch batch = new SendMailBatch();
-		batch.setBizDateTime(bizDateTime);
-		batch.setMailSendHandler(mailSendHandler);
+		batch.setSendMailService(service);
 		batch.setIntervalMillis(intervalMillis);
 		batch.setShutdownTrigger(shutdownTrigger);
 		return batch;

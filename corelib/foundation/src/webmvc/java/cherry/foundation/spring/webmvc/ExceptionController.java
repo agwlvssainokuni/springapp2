@@ -24,6 +24,16 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ExceptionController {
 
+	@ExceptionHandler(BadRequestException.class)
+	public ResponseEntity<String> handleBadRequestException(BadRequestException ex) {
+		return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+	}
+
+	@ExceptionHandler(UnauthorizedException.class)
+	public ResponseEntity<String> handleUnauthorizedException(UnauthorizedException ex) {
+		return new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
+	}
+
 	@ExceptionHandler(NotFoundException.class)
 	public ResponseEntity<String> handleNotFoundException(NotFoundException ex) {
 		return new ResponseEntity<String>(HttpStatus.NOT_FOUND);

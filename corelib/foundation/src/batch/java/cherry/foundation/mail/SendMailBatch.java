@@ -18,13 +18,8 @@ package cherry.foundation.mail;
 
 import java.io.File;
 
-import java.time.LocalDateTime;
-import org.springframework.dao.DataAccessException;
-import org.springframework.mail.MailException;
-
 import cherry.foundation.batch.ExitStatus;
 import cherry.foundation.batch.IBatch;
-import cherry.foundation.bizcal.BizDateTime;
 import cherry.goods.log.Log;
 import cherry.goods.log.LogFactory;
 
@@ -32,20 +27,14 @@ public class SendMailBatch implements IBatch {
 
 	private final Log log = LogFactory.getLog(getClass());
 
-	private BizDateTime bizDateTime;
-
-	private MailSendHandler mailSendHandler;
+	private SendMailService sendMailService;
 
 	private long intervalMillis;
 
 	private File shutdownTrigger;
 
-	public void setBizDateTime(BizDateTime bizDateTime) {
-		this.bizDateTime = bizDateTime;
-	}
-
-	public void setMailSendHandler(MailSendHandler mailSendHandler) {
-		this.mailSendHandler = mailSendHandler;
+	public void setSendMailService(SendMailService sendMailService) {
+		this.sendMailService = sendMailService;
 	}
 
 	public void setIntervalMillis(long intervalMillis) {
@@ -58,26 +47,13 @@ public class SendMailBatch implements IBatch {
 
 	@Override
 	public ExitStatus execute(String... args) {
-		sendMail();
+		sendMailService.sendMail();
 		while (!shutdownTrigger.exists()) {
 			sleep();
-			sendMail();
+			sendMailService.sendMail();
 		}
 		deleteShutdownTrigger();
 		return ExitStatus.NORMAL;
-	}
-
-	private void sendMail() {
-		try {
-			LocalDateTime now = bizDateTime.now();
-			for (long messageId : mailSendHandler.listMessage(now)) {
-				mailSendHandler.sendMessage(messageId);
-			}
-		} catch (MailException | DataAccessException ex) {
-			if (log.isDebugEnabled()) {
-				log.debug(ex, "failed to send mail");
-			}
-		}
 	}
 
 	private void sleep() {

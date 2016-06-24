@@ -26,6 +26,22 @@ import org.springframework.http.ResponseEntity;
 public class ExceptionControllerTest {
 
 	@Test
+	public void testHandleBadRequestException() {
+		ExceptionController c = new ExceptionController();
+		ResponseEntity<String> response = c.handleBadRequestException(new BadRequestException());
+		assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+		assertNull(response.getBody());
+	}
+
+	@Test
+	public void testUnauthorizedFoundException() {
+		ExceptionController c = new ExceptionController();
+		ResponseEntity<String> response = c.handleUnauthorizedException(new UnauthorizedException());
+		assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
+		assertNull(response.getBody());
+	}
+
+	@Test
 	public void testHandleNotFoundException() {
 		ExceptionController c = new ExceptionController();
 		ResponseEntity<String> response = c.handleNotFoundException(new NotFoundException());
