@@ -1,1 +1,2 @@
-include ":corelib:goods", ":corelib:foundation"
+include ":corelib:goods", ":corelib:foundation",
+	":tutorial:querytutorial"
