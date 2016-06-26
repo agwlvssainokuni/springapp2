@@ -1,2 +1,3 @@
 include ":corelib:goods", ":corelib:foundation",
+	":exampleapp:example-dbschema", ":exampleapp:example-common",
 	":tutorial:querytutorial"

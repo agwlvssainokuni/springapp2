@@ -1,0 +1,107 @@
+package cherry.example.db.gen.query;
+
+import javax.annotation.Generated;
+
+/**
+ * BMailTemplate is a Querydsl bean type
+ */
+@Generated("com.querydsl.codegen.BeanSerializer")
+public class BMailTemplate {
+
+    private String body;
+
+    private java.time.LocalDateTime createdAt;
+
+    private String fromAddr;
+
+    private Long id;
+
+    private Integer lockVersion;
+
+    private String replyToAddr;
+
+    private String subject;
+
+    private String templateName;
+
+    private java.time.LocalDateTime updatedAt;
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public java.time.LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(java.time.LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getFromAddr() {
+        return fromAddr;
+    }
+
+    public void setFromAddr(String fromAddr) {
+        this.fromAddr = fromAddr;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getLockVersion() {
+        return lockVersion;
+    }
+
+    public void setLockVersion(Integer lockVersion) {
+        this.lockVersion = lockVersion;
+    }
+
+    public String getReplyToAddr() {
+        return replyToAddr;
+    }
+
+    public void setReplyToAddr(String replyToAddr) {
+        this.replyToAddr = replyToAddr;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getTemplateName() {
+        return templateName;
+    }
+
+    public void setTemplateName(String templateName) {
+        this.templateName = templateName;
+    }
+
+    public java.time.LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(java.time.LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    @Override
+    public String toString() {
+         return "body = " + body + ", createdAt = " + createdAt + ", fromAddr = " + fromAddr + ", id = " + id + ", lockVersion = " + lockVersion + ", replyToAddr = " + replyToAddr + ", subject = " + subject + ", templateName = " + templateName + ", updatedAt = " + updatedAt;
+    }
+
+}
+
