@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 	<!-- DBアクセス設定 -->
 	<bean id="jdbcOperations" class="org.springframework.jdbc.core.JdbcTemplate">
@@ -16,11 +18,6 @@
 		<constructor-arg ref="transactionManager" />
 	</bean>
 
-	<!-- ダウンロード設定 - -> <bean id="downloadOperation" class="cherry.foundation.download.DownloadTemplate"> <property name="headerName" value="Content-Disposition" 
-		/> <property name="headerValue" value="attachment; filename=&quot;{0}&quot;; filename*={1}" /> <property name="formatter" value="yyyyMMddHHmmss" 
-		/> <property name="filenameEncoder"> <bean class="cherry.foundation.download.Rfc5987Encoder"> <property name="charset" value="UTF-8" /> <property 
-		name="languageTag" value="" /> </bean> </property> </bean> <bean id="tableDownloadOperation" class="cherry.foundation.download.TableDownloadTemplate"> 
-		<property name="downloadOperation" ref="downloadOperation" /> <property name="queryDslSupport" ref="queryDslSupport" /> <property name="csvType" 
-		value="text/csv" /> <property name="excelType" value="application/vnd.ms-excel" /> </bean> -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
 
 </beans>
