@@ -1,5 +1,5 @@
 /*
- * Copyright 2014,2015 agwlvssainokuni
+ * Copyright 2014,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,15 +25,15 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * 区分値管理機能。<br />
  * 区分値と表示文字列の対を保持する。
  */
-public class CodeEntry implements Serializable {
+public class CodeEntry implements ICodeEntry, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	/** 区分値。 */
-	private String value;
+	private String codeValue;
 
 	/** 区分値の表示文字列。 */
-	private String label;
+	private String codeLabel;
 
 	/** 画面に選択肢として表示する際の表示順序。 */
 	private int sortOrder;
@@ -43,22 +43,25 @@ public class CodeEntry implements Serializable {
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
 	}
 
-	public String getValue() {
-		return value;
+	@Override
+	public String getCodeValue() {
+		return codeValue;
 	}
 
-	public void setValue(String value) {
-		this.value = value;
+	public void setCodeValue(String codeValue) {
+		this.codeValue = codeValue;
 	}
 
-	public String getLabel() {
-		return label;
+	@Override
+	public String getCodeLabel() {
+		return codeLabel;
 	}
 
-	public void setLabel(String label) {
-		this.label = label;
+	public void setCodeLabel(String codeLabel) {
+		this.codeLabel = codeLabel;
 	}
 
+	@Override
 	public int getSortOrder() {
 		return sortOrder;
 	}

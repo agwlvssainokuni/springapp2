@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 agwlvssainokuni
+ * Copyright 2015,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,12 @@
 
 package cherry.foundation.code;
 
-public class CodeEntryTag extends CodeTagSupport<CodeEntry> {
+public class CodeEntryTag extends CodeTagSupport<ICodeEntry> {
 
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected CodeEntry getObject(CodeManager codeManager, String codeName, String value, Boolean plainLabel) {
+	protected ICodeEntry getObject(CodeManager codeManager, String codeName, String value, Boolean plainLabel) {
 		return codeManager.findByValue(codeName, value, plainLabel);
 	}
 

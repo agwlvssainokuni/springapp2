@@ -1,5 +1,5 @@
 /*
- * Copyright 2015,2016 agwlvssainokuni
+ * Copyright 2014,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,14 @@
 
 package cherry.foundation.code;
 
-import java.util.List;
+import cherry.foundation.type.ILabelledCodeType;
 
-public class CodeListTag extends CodeTagSupport<List<ICodeEntry>> {
+/**
+ * 区分値管理機能。<br />
+ * 区分値と表示文字列の対を保持する。
+ */
+public interface ICodeEntry extends ILabelledCodeType<String> {
 
-	private static final long serialVersionUID = 1L;
-
-	@Override
-	protected List<ICodeEntry> getObject(CodeManager codeManager, String codeName, String value, Boolean plainLabel) {
-		return codeManager.getCodeList(codeName, plainLabel);
-	}
+	int getSortOrder();
 
 }

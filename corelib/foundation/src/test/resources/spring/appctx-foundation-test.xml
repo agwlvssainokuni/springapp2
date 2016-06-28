@@ -14,6 +14,7 @@
 	<import resource="appctx-foundation-testtool-batch.xml" />
 	<import resource="appctx-foundation-testtool-web.xml" />
 	<import resource="appctx-foundation-biz.xml" />
+	<import resource="appctx-foundation-cache.xml" />
 	<import resource="appctx-foundation-crypto.xml" />
 	<import resource="appctx-foundation-jdbc.xml" />
 	<import resource="appctx-foundation-optool.xml" />

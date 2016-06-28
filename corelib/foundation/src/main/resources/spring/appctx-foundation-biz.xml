@@ -11,7 +11,7 @@
 		<entry key="instanceInformation.id" value="00" />
 		<entry key="instanceInformation.environmentName" value="develop" />
 	</util:map>
-	<context:property-placeholder properties-ref="defaultInstanceInformation" ignore-unresolvable="false" />
+	<context:property-placeholder properties-ref="defaultInstanceInformation" ignore-unresolvable="true" />
 	<bean id="instanceInformation" class="cherry.foundation.appinfo.InstanceInformationImpl">
 		<property name="id" value="${instanceInformation.id}" />
 		<property name="environmentName" value="${instanceInformation.environmentName}" />

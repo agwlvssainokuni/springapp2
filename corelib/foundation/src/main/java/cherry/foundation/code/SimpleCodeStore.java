@@ -1,5 +1,5 @@
 /*
- * Copyright 2014,2015 agwlvssainokuni
+ * Copyright 2014,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ public class SimpleCodeStore implements CodeStore {
 	}
 
 	@Override
-	public CodeEntry findByValue(String codeName, String value) {
+	public ICodeEntry findByValue(String codeName, String value) {
 		Map<String, String> map = codeDefMap.get(codeName);
 		if (map == null) {
 			return null;
@@ -39,23 +39,23 @@ public class SimpleCodeStore implements CodeStore {
 			return null;
 		}
 		CodeEntry entry = new CodeEntry();
-		entry.setValue(value);
-		entry.setLabel(label);
+		entry.setCodeValue(value);
+		entry.setCodeLabel(label);
 		entry.setSortOrder(0);
 		return entry;
 	}
 
 	@Override
-	public List<CodeEntry> getCodeList(String codeName) {
+	public List<ICodeEntry> getCodeList(String codeName) {
 		Map<String, String> map = codeDefMap.get(codeName);
 		if (map == null) {
 			return null;
 		}
-		List<CodeEntry> list = new ArrayList<>(map.entrySet().size());
+		List<ICodeEntry> list = new ArrayList<>(map.entrySet().size());
 		for (Map.Entry<String, String> e : map.entrySet()) {
 			CodeEntry entry = new CodeEntry();
-			entry.setValue(e.getKey());
-			entry.setLabel(e.getValue());
+			entry.setCodeValue(e.getKey());
+			entry.setCodeLabel(e.getValue());
 			entry.setSortOrder(0);
 			list.add(entry);
 		}

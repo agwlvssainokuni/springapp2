@@ -1,5 +1,5 @@
 /*
- * Copyright 2014,2015 agwlvssainokuni
+ * Copyright 2014,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ public interface CodeStore {
 	 * @param value 区分値。
 	 * @return 定義情報 (値と表示名)。
 	 */
-	CodeEntry findByValue(String codeName, String value);
+	ICodeEntry findByValue(String codeName, String value);
 
 	/**
 	 * 区分値の定義情報 (値と表示名) のリストを取得する。
@@ -38,6 +38,6 @@ public interface CodeStore {
 	 * @param codeName 区分値を識別する名前。
 	 * @return 定義情報 (値と表示名) のリスト。
 	 */
-	List<CodeEntry> getCodeList(String codeName);
+	List<ICodeEntry> getCodeList(String codeName);
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015,2016 agwlvssainokuni
+ * Copyright 2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,10 @@
  * limitations under the License.
  */
 
-package cherry.foundation.code;
+package cherry.foundation.type;
 
-import java.util.List;
+public interface ILabelledCodeType<T> extends ICodeType<T> {
 
-public class CodeListTag extends CodeTagSupport<List<ICodeEntry>> {
-
-	private static final long serialVersionUID = 1L;
-
-	@Override
-	protected List<ICodeEntry> getObject(CodeManager codeManager, String codeName, String value, Boolean plainLabel) {
-		return codeManager.getCodeList(codeName, plainLabel);
-	}
+	String getCodeLabel();
 
 }

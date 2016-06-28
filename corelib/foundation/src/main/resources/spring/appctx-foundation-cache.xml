@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans" xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<util:map id="defaultCacheManager" key-type="java.lang.String" value-type="java.lang.String">
+		<entry key="cacheManager.default" value="middleCacheManager" />
+		<entry key="cacheManager.short.spec" value="maximumSize=1000,expireAfterAccess=1m,expireAfterWrite=5m,softValues" />
+		<entry key="cacheManager.middle.spec" value="maximumSize=1000,expireAfterAccess=5m,expireAfterWrite=30m,softValues" />
+		<entry key="cacheManager.long.spec" value="maximumSize=1000,expireAfterAccess=30m,expireAfterWrite=120m,softValues" />
+	</util:map>
+	<context:property-placeholder properties-ref="defaultCacheManager" ignore-unresolvable="true" />
+
+	<cache:annotation-driven cache-manager="cacheManager" />
+
+	<alias alias="cacheManager" name="${cacheManager.default}" />
+
+	<bean id="shortCacheManager" class="org.springframework.cache.guava.GuavaCacheManager">
+		<property name="allowNullValues" value="true" />
+		<property name="cacheSpecification" value="${cacheManager.short.spec}" />
+	</bean>
+
+	<bean id="middleCacheManager" class="org.springframework.cache.guava.GuavaCacheManager">
+		<property name="allowNullValues" value="true" />
+		<property name="cacheSpecification" value="${cacheManager.middle.spec}" />
+	</bean>
+
+	<bean id="longCacheManager" class="org.springframework.cache.guava.GuavaCacheManager">
+		<property name="allowNullValues" value="true" />
+		<property name="cacheSpecification" value="${cacheManager.long.spec}" />
+	</bean>
+
+</beans>

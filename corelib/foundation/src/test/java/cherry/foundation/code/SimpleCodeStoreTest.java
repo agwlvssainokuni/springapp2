@@ -32,13 +32,13 @@ public class SimpleCodeStoreTest {
 		CodeStore codeStore = create();
 		assertNull(codeStore.findByValue("NONE", "01"));
 		assertNull(codeStore.findByValue("CODE0", "00"));
-		CodeEntry entry01 = codeStore.findByValue("CODE0", "01");
-		assertEquals("01", entry01.getValue());
-		assertEquals("LABEL01", entry01.getLabel());
+		ICodeEntry entry01 = codeStore.findByValue("CODE0", "01");
+		assertEquals("01", entry01.getCodeValue());
+		assertEquals("LABEL01", entry01.getCodeLabel());
 		assertEquals(0, entry01.getSortOrder());
-		CodeEntry entry02 = codeStore.findByValue("CODE0", "02");
-		assertEquals("02", entry02.getValue());
-		assertEquals("LABEL02", entry02.getLabel());
+		ICodeEntry entry02 = codeStore.findByValue("CODE0", "02");
+		assertEquals("02", entry02.getCodeValue());
+		assertEquals("LABEL02", entry02.getCodeLabel());
 		assertEquals(0, entry02.getSortOrder());
 		assertNull(codeStore.findByValue("CODE0", "03"));
 	}
@@ -48,17 +48,17 @@ public class SimpleCodeStoreTest {
 		CodeStore codeStore = create();
 		assertNull(codeStore.getCodeList("NONE"));
 
-		List<CodeEntry> list = codeStore.getCodeList("CODE0");
+		List<ICodeEntry> list = codeStore.getCodeList("CODE0");
 		assertEquals(2, list.size());
 
-		CodeEntry entry01 = list.get(0);
-		assertEquals("01", entry01.getValue());
-		assertEquals("LABEL01", entry01.getLabel());
+		ICodeEntry entry01 = list.get(0);
+		assertEquals("01", entry01.getCodeValue());
+		assertEquals("LABEL01", entry01.getCodeLabel());
 		assertEquals(0, entry01.getSortOrder());
 
-		CodeEntry entry02 = list.get(1);
-		assertEquals("02", entry02.getValue());
-		assertEquals("LABEL02", entry02.getLabel());
+		ICodeEntry entry02 = list.get(1);
+		assertEquals("02", entry02.getCodeValue());
+		assertEquals("LABEL02", entry02.getCodeLabel());
 		assertEquals(0, entry02.getSortOrder());
 	}
 

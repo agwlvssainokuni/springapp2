@@ -68,22 +68,22 @@ public class CodeManagerImplTest {
 			assertEquals("Not defined for (NONE, 01)", ex.getMessage());
 		}
 
-		CodeEntry entry01 = impl.findByValue(CodeType.CODE0, "01");
-		assertEquals("01", entry01.getValue());
-		assertEquals("01 - LABEL01", entry01.getLabel());
+		ICodeEntry entry01 = impl.findByValue(CodeType.CODE0, "01");
+		assertEquals("01", entry01.getCodeValue());
+		assertEquals("01 - LABEL01", entry01.getCodeLabel());
 		assertEquals(0, entry01.getSortOrder());
-		CodeEntry entry01p = impl.findByValue(CodeType.CODE0, "01", true);
-		assertEquals("01", entry01p.getValue());
-		assertEquals("LABEL01", entry01p.getLabel());
+		ICodeEntry entry01p = impl.findByValue(CodeType.CODE0, "01", true);
+		assertEquals("01", entry01p.getCodeValue());
+		assertEquals("LABEL01", entry01p.getCodeLabel());
 		assertEquals(0, entry01p.getSortOrder());
 
-		CodeEntry entry02 = impl.findByValue(CodeType.CODE0, "02");
-		assertEquals("02", entry02.getValue());
-		assertEquals("02 - LABEL02", entry02.getLabel());
+		ICodeEntry entry02 = impl.findByValue(CodeType.CODE0, "02");
+		assertEquals("02", entry02.getCodeValue());
+		assertEquals("02 - LABEL02", entry02.getCodeLabel());
 		assertEquals(0, entry02.getSortOrder());
-		CodeEntry entry02p = impl.findByValue(CodeType.CODE0, "02", true);
-		assertEquals("02", entry02p.getValue());
-		assertEquals("LABEL02", entry02p.getLabel());
+		ICodeEntry entry02p = impl.findByValue(CodeType.CODE0, "02", true);
+		assertEquals("02", entry02p.getCodeValue());
+		assertEquals("LABEL02", entry02p.getCodeLabel());
 		assertEquals(0, entry02p.getSortOrder());
 
 		try {
@@ -105,22 +105,22 @@ public class CodeManagerImplTest {
 			assertEquals("Not defined for (NONE, 01)", ex.getMessage());
 		}
 
-		CodeEntry entry01 = impl.findByValue("CODE0", "01");
-		assertEquals("01", entry01.getValue());
-		assertEquals("01 - LABEL01", entry01.getLabel());
+		ICodeEntry entry01 = impl.findByValue("CODE0", "01");
+		assertEquals("01", entry01.getCodeValue());
+		assertEquals("01 - LABEL01", entry01.getCodeLabel());
 		assertEquals(0, entry01.getSortOrder());
-		CodeEntry entry01p = impl.findByValue("CODE0", "01", true);
-		assertEquals("01", entry01p.getValue());
-		assertEquals("LABEL01", entry01p.getLabel());
+		ICodeEntry entry01p = impl.findByValue("CODE0", "01", true);
+		assertEquals("01", entry01p.getCodeValue());
+		assertEquals("LABEL01", entry01p.getCodeLabel());
 		assertEquals(0, entry01p.getSortOrder());
 
-		CodeEntry entry02 = impl.findByValue("CODE0", "02");
-		assertEquals("02", entry02.getValue());
-		assertEquals("02 - LABEL02", entry02.getLabel());
+		ICodeEntry entry02 = impl.findByValue("CODE0", "02");
+		assertEquals("02", entry02.getCodeValue());
+		assertEquals("02 - LABEL02", entry02.getCodeLabel());
 		assertEquals(0, entry02.getSortOrder());
-		CodeEntry entry02p = impl.findByValue("CODE0", "02", true);
-		assertEquals("02", entry02p.getValue());
-		assertEquals("LABEL02", entry02p.getLabel());
+		ICodeEntry entry02p = impl.findByValue("CODE0", "02", true);
+		assertEquals("02", entry02p.getCodeValue());
+		assertEquals("LABEL02", entry02p.getCodeLabel());
 		assertEquals(0, entry02p.getSortOrder());
 
 		try {
@@ -135,25 +135,25 @@ public class CodeManagerImplTest {
 	public void testGetCodeList_byENUM() {
 
 		CodeManagerImpl impl = create();
-		List<CodeEntry> code0 = impl.getCodeList(CodeType.CODE0);
-		List<CodeEntry> code0p = impl.getCodeList(CodeType.CODE0, true);
+		List<ICodeEntry> code0 = impl.getCodeList(CodeType.CODE0);
+		List<ICodeEntry> code0p = impl.getCodeList(CodeType.CODE0, true);
 
-		CodeEntry entry01 = code0.get(0);
-		assertEquals("01", entry01.getValue());
-		assertEquals("01 - LABEL01", entry01.getLabel());
+		ICodeEntry entry01 = code0.get(0);
+		assertEquals("01", entry01.getCodeValue());
+		assertEquals("01 - LABEL01", entry01.getCodeLabel());
 		assertEquals(0, entry01.getSortOrder());
-		CodeEntry entry01p = code0p.get(0);
-		assertEquals("01", entry01p.getValue());
-		assertEquals("LABEL01", entry01p.getLabel());
+		ICodeEntry entry01p = code0p.get(0);
+		assertEquals("01", entry01p.getCodeValue());
+		assertEquals("LABEL01", entry01p.getCodeLabel());
 		assertEquals(0, entry01p.getSortOrder());
 
-		CodeEntry entry02 = code0.get(1);
-		assertEquals("02", entry02.getValue());
-		assertEquals("02 - LABEL02", entry02.getLabel());
+		ICodeEntry entry02 = code0.get(1);
+		assertEquals("02", entry02.getCodeValue());
+		assertEquals("02 - LABEL02", entry02.getCodeLabel());
 		assertEquals(0, entry02.getSortOrder());
-		CodeEntry entry02p = code0p.get(1);
-		assertEquals("02", entry02p.getValue());
-		assertEquals("LABEL02", entry02p.getLabel());
+		ICodeEntry entry02p = code0p.get(1);
+		assertEquals("02", entry02p.getCodeValue());
+		assertEquals("LABEL02", entry02p.getCodeLabel());
 		assertEquals(0, entry02p.getSortOrder());
 	}
 
@@ -161,25 +161,25 @@ public class CodeManagerImplTest {
 	public void testGetCodeList_byNAME() {
 
 		CodeManagerImpl impl = create();
-		List<CodeEntry> code0 = impl.getCodeList("CODE0");
-		List<CodeEntry> code0p = impl.getCodeList("CODE0", true);
+		List<ICodeEntry> code0 = impl.getCodeList("CODE0");
+		List<ICodeEntry> code0p = impl.getCodeList("CODE0", true);
 
-		CodeEntry entry01 = code0.get(0);
-		assertEquals("01", entry01.getValue());
-		assertEquals("01 - LABEL01", entry01.getLabel());
+		ICodeEntry entry01 = code0.get(0);
+		assertEquals("01", entry01.getCodeValue());
+		assertEquals("01 - LABEL01", entry01.getCodeLabel());
 		assertEquals(0, entry01.getSortOrder());
-		CodeEntry entry01p = code0p.get(0);
-		assertEquals("01", entry01p.getValue());
-		assertEquals("LABEL01", entry01p.getLabel());
+		ICodeEntry entry01p = code0p.get(0);
+		assertEquals("01", entry01p.getCodeValue());
+		assertEquals("LABEL01", entry01p.getCodeLabel());
 		assertEquals(0, entry01p.getSortOrder());
 
-		CodeEntry entry02 = code0.get(1);
-		assertEquals("02", entry02.getValue());
-		assertEquals("02 - LABEL02", entry02.getLabel());
+		ICodeEntry entry02 = code0.get(1);
+		assertEquals("02", entry02.getCodeValue());
+		assertEquals("02 - LABEL02", entry02.getCodeLabel());
 		assertEquals(0, entry02.getSortOrder());
-		CodeEntry entry02p = code0p.get(1);
-		assertEquals("02", entry02p.getValue());
-		assertEquals("LABEL02", entry02p.getLabel());
+		ICodeEntry entry02p = code0p.get(1);
+		assertEquals("02", entry02p.getCodeValue());
+		assertEquals("LABEL02", entry02p.getCodeLabel());
 		assertEquals(0, entry02p.getSortOrder());
 	}
 

@@ -59,26 +59,26 @@ public class CodeManagerImpl implements CodeManager {
 
 	@Transactional(readOnly = true)
 	@Override
-	public <T extends ICodeType<String>> CodeEntry findByValue(T codeEnum, String value) {
+	public <T extends ICodeType<String>> ICodeEntry findByValue(T codeEnum, String value) {
 		return findByValue(codeEnum.getCodeValue(), value, false);
 	}
 
 	@Transactional(readOnly = true)
 	@Override
-	public <T extends ICodeType<String>> CodeEntry findByValue(T codeEnum, String value, boolean plainLabel) {
+	public <T extends ICodeType<String>> ICodeEntry findByValue(T codeEnum, String value, boolean plainLabel) {
 		return findByValue(codeEnum.getCodeValue(), value, plainLabel);
 	}
 
 	@Transactional(readOnly = true)
 	@Override
-	public CodeEntry findByValue(String codeName, String value) {
+	public ICodeEntry findByValue(String codeName, String value) {
 		return findByValue(codeName, value, false);
 	}
 
 	@Transactional(readOnly = true)
 	@Override
-	public CodeEntry findByValue(String codeName, String value, boolean plainLabel) {
-		CodeEntry entry = codeStore.findByValue(codeName, value);
+	public ICodeEntry findByValue(String codeName, String value, boolean plainLabel) {
+		ICodeEntry entry = codeStore.findByValue(codeName, value);
 		checkArgument(entry != null, "Not defined for (%s, %s)", codeName, value);
 		if (plainLabel) {
 			return entry;
@@ -88,31 +88,31 @@ public class CodeManagerImpl implements CodeManager {
 
 	@Transactional(readOnly = true)
 	@Override
-	public <T extends ICodeType<String>> List<CodeEntry> getCodeList(T codeEnum) {
+	public <T extends ICodeType<String>> List<ICodeEntry> getCodeList(T codeEnum) {
 		return getCodeList(codeEnum.getCodeValue(), false);
 	}
 
 	@Transactional(readOnly = true)
 	@Override
-	public <T extends ICodeType<String>> List<CodeEntry> getCodeList(T codeEnum, boolean plainLabel) {
+	public <T extends ICodeType<String>> List<ICodeEntry> getCodeList(T codeEnum, boolean plainLabel) {
 		return getCodeList(codeEnum.getCodeValue(), plainLabel);
 	}
 
 	@Transactional(readOnly = true)
 	@Override
-	public List<CodeEntry> getCodeList(String codeName) {
+	public List<ICodeEntry> getCodeList(String codeName) {
 		return getCodeList(codeName, false);
 	}
 
 	@Transactional(readOnly = true)
 	@Override
-	public List<CodeEntry> getCodeList(String codeName, boolean plainLabel) {
-		List<CodeEntry> list = codeStore.getCodeList(codeName);
+	public List<ICodeEntry> getCodeList(String codeName, boolean plainLabel) {
+		List<ICodeEntry> list = codeStore.getCodeList(codeName);
 		if (plainLabel) {
 			return list;
 		}
-		List<CodeEntry> result = new ArrayList<>(list.size());
-		for (CodeEntry entry : list) {
+		List<ICodeEntry> result = new ArrayList<>(list.size());
+		for (ICodeEntry entry : list) {
 			result.add(adjustCodeEntry(entry));
 		}
 		return result;
@@ -139,22 +139,22 @@ public class CodeManagerImpl implements CodeManager {
 	@Transactional(readOnly = true)
 	@Override
 	public Map<String, String> getCodeMap(String codeName, boolean plainLabel) {
-		List<CodeEntry> list = codeStore.getCodeList(codeName);
+		List<ICodeEntry> list = codeStore.getCodeList(codeName);
 		Map<String, String> result = new LinkedHashMap<>();
-		for (CodeEntry entry : list) {
+		for (ICodeEntry entry : list) {
 			if (plainLabel) {
-				result.put(entry.getValue(), entry.getLabel());
+				result.put(entry.getCodeValue(), entry.getCodeLabel());
 			} else {
-				result.put(entry.getValue(), formatLabel(entry.getValue(), entry.getLabel()));
+				result.put(entry.getCodeValue(), formatLabel(entry.getCodeValue(), entry.getCodeLabel()));
 			}
 		}
 		return result;
 	}
 
-	private CodeEntry adjustCodeEntry(CodeEntry entry) {
+	private ICodeEntry adjustCodeEntry(ICodeEntry entry) {
 		CodeEntry result = new CodeEntry();
-		result.setValue(entry.getValue());
-		result.setLabel(formatLabel(entry.getValue(), entry.getLabel()));
+		result.setCodeValue(entry.getCodeValue());
+		result.setCodeLabel(formatLabel(entry.getCodeValue(), entry.getCodeLabel()));
 		result.setSortOrder(entry.getSortOrder());
 		return result;
 	}
