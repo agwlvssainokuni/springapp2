@@ -16,18 +16,17 @@
 
 package cherry.tutorial.querytutorial;
 
-import static com.querydsl.core.types.dsl.Expressions.FOUR;
-import static com.querydsl.core.types.dsl.Expressions.THREE;
-import static com.querydsl.core.types.dsl.Expressions.TWO;
+import static com.querydsl.core.types.dsl.DateExpression.currentDate;
+import static com.querydsl.core.types.dsl.Expressions.dateTemplate;
 import static com.querydsl.core.types.dsl.Expressions.numberPath;
 import static com.querydsl.core.types.dsl.Expressions.numberTemplate;
 import static com.querydsl.sql.SQLExpressions.select;
-import static com.querydsl.sql.SQLExpressions.selectOne;
-import static com.querydsl.sql.SQLExpressions.selectZero;
 import static java.lang.System.out;
 import static java.text.MessageFormat.format;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -42,6 +41,8 @@ import cherry.querytutorial.db.gen.query.QTodo;
 
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.SubQueryExpression;
+import com.querydsl.core.types.dsl.DateTemplate;
 import com.querydsl.core.types.dsl.NumberExpression;
 import com.querydsl.core.types.dsl.NumberPath;
 import com.querydsl.sql.SQLExpressions;
@@ -145,23 +146,27 @@ public class AdvancedUsageTest {
 	@Test
 	public void test0505_UNION() {
 
-		@SuppressWarnings("unchecked")
-		Union<Integer> digit = SQLExpressions.unionAll(selectZero(), selectOne(), select(TWO), select(THREE),
-				select(FOUR), select(numberTemplate(Integer.class, "5")), select(numberTemplate(Integer.class, "6")),
-				select(numberTemplate(Integer.class, "7")), select(numberTemplate(Integer.class, "8")),
-				select(numberTemplate(Integer.class, "9")));
+		List<SubQueryExpression<Integer>> digit = new ArrayList<>(10);
+		for (int i = 0; i <= 9; i++) {
+			digit.add(select(numberTemplate(Integer.class, String.valueOf(i)).as("d")));
+		}
+
+		Union<Integer> seq = SQLExpressions.unionAll(digit);
 
 		NumberPath<Integer> a = numberPath(Integer.class, "a");
 		NumberPath<Integer> b = numberPath(Integer.class, "b");
 		NumberPath<Integer> c = numberPath(Integer.class, "c");
-		NumberExpression<Integer> a0 = numberPath(Integer.class, a, "0");
-		NumberExpression<Integer> b0 = numberPath(Integer.class, b, "0");
-		NumberExpression<Integer> c0 = numberPath(Integer.class, c, "0");
+		NumberExpression<Integer> a0 = numberPath(Integer.class, a, "d");
+		NumberExpression<Integer> b0 = numberPath(Integer.class, b, "d");
+		NumberExpression<Integer> c0 = numberPath(Integer.class, c, "d");
 
-		SQLQuery<Integer> query = queryFactory.query().from(digit.as(a), digit.as(b), digit.as(c))
-				.select(a0.multiply(100).add(b0.multiply(10).add(c0)));
+		DateTemplate<LocalDate> day = dateTemplate(LocalDate.class, "DATEADD('DAY', {0}, {1})",
+				a0.multiply(100).add(b0.multiply(10)).add(c0), currentDate(LocalDate.class));
 
-		for (Integer i : query.fetch()) {
+		SQLQuery<LocalDate> query = queryFactory.query().from(seq.as(a), seq.as(b), seq.as(c))
+				.where(numberTemplate(Integer.class, "DAY_OF_WEEK({0})", day).in(1, 7)).select(day);
+
+		for (LocalDate i : query.fetch()) {
 			System.out.println(i);
 		}
 	}
