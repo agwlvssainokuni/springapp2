@@ -1,0 +1,29 @@
+apply plugin: "war"
+
+dependencies {
+	compile project(path: ":exampleapp:example-common")
+	compile project(path: ":corelib:foundation", configuration: "servletextRuntime")
+	compile project(path: ":corelib:foundation", configuration: "webmvcRuntime")
+	runtime "org.apache.tiles:tiles-core:${versionTiles}"
+	runtime "org.apache.tiles:tiles-api:${versionTiles}"
+	runtime "org.apache.tiles:tiles-servlet:${versionTiles}"
+	runtime "org.apache.tiles:tiles-jsp:${versionTiles}"
+	runtime "org.apache.tiles:tiles-el:${versionTiles}"
+	runtime "org.apache.tiles:tiles-extras:${versionTiles}"
+	compile "org.springframework.security:spring-security-core:${versionSpringSecurity}"
+	compile "org.springframework.security:spring-security-acl:${versionSpringSecurity}"
+	compile "org.springframework.security:spring-security-web:${versionSpringSecurity}"
+	compile "org.springframework.security:spring-security-taglibs:${versionSpringSecurity}"
+	compile "org.springframework.security:spring-security-ldap:${versionSpringSecurity}"
+	compile "org.springframework.security:spring-security-config:${versionSpringSecurity}"
+	compile "org.springframework.mobile:spring-mobile-device:${versionSpringMobile}"
+	runtime "javax.servlet:jstl:${versionJstl}"
+	compileOnly "javax.servlet:javax.servlet-api:${versionJavaServlet}"
+	compileOnly "javax.servlet.jsp:javax.servlet.jsp-api:${versionJavaJsp}"
+	compileOnly "javax.jms:jms-api:${versionJavaJms}"
+	compileOnly "javax.transaction:transaction-api:${versionJavaTransaction}"
+	compileOnly "org.projectlombok:lombok:${versionLombok}"
+	testCompile "org.springframework:spring-test:${versionSpring}"
+	testRuntime "com.h2database:h2:${versionH2db}"
+	runtime "org.flywaydb:flyway-core:${versionFlyway}"
+}
