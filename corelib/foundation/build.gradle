@@ -274,9 +274,9 @@ dependencies {
 	testtoolCompile project(path: ":corelib:goods")
 	testtoolCompile "com.google.guava:guava:${versionGuava}"
 	testtoolCompile "org.apache.commons:commons-collections4:${versionCommonsCollections4}"
+	testtoolCompile "com.fasterxml.jackson.core:jackson-databind:${versionJackson}"
 	testtoolCompile "aopalliance:aopalliance:${versionAopalliance}"
 	testtoolCompile "org.springframework:spring-context:${versionSpring}"
-	testtoolCompile "com.fasterxml.jackson.core:jackson-databind:${versionJackson}"
 	testtoolCompile "org.springframework:spring-web:${versionSpring}"
 
 	webmvcCompile "com.google.guava:guava:${versionGuava}"

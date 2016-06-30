@@ -5,6 +5,9 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
+	<!-- アノテーションによるトランザクション制御を有効化 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
 	<!-- DBアクセス設定 -->
 	<bean id="jdbcOperations" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="dataSource" />
@@ -17,7 +20,5 @@
 	<bean id="transactionOperations" class="org.springframework.transaction.support.TransactionTemplate">
 		<constructor-arg ref="transactionManager" />
 	</bean>
-
-	<tx:annotation-driven transaction-manager="transactionManager" />
 
 </beans>
