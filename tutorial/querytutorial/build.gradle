@@ -3,7 +3,7 @@ dependencies {
 	compile project(path: ":corelib:foundation", configuration: "querydslRuntime")
 	testCompile project(path: project.path, configuration: "generatedRuntime")
 
-	compile "org.springframework:spring-web:${versionSpring}"
+	runtime "org.springframework:spring-web:${versionSpring}"
 	testCompile "org.springframework:spring-test:${versionSpring}"
 	testRuntime "com.h2database:h2:${versionH2db}"
 	testRuntime "org.flywaydb:flyway-core:${versionFlyway}"
