@@ -14,22 +14,6 @@ sourceSets {
 	webmvc
 }
 
-configurations {
-	async
-	batch
-	batchcli
-	batchext
-	jdbc
-	optool
-	querydsl
-	servlet
-	servletext
-	taglib
-	telno
-	testtool
-	webmvc
-}
-
 compileAsyncJava.options.encoding = compileJava.options.encoding
 task asyncJar(type: Jar, dependsOn: asyncClasses) {
 	from sourceSets.async.output.classesDir
@@ -65,18 +49,18 @@ task jdbcJar(type: Jar, dependsOn: jdbcClasses) {
 	appendix = "jdbc"
 }
 
-compileQuerydslJava.options.encoding = compileJava.options.encoding
-task querydslJar(type: Jar, dependsOn: querydslClasses) {
-	from sourceSets.querydsl.output.classesDir
-	from sourceSets.querydsl.output.resourcesDir
-	appendix = "querydsl"
-}
-
 compileOptoolJava.options.encoding = compileJava.options.encoding
 task optoolJar(type: Jar, dependsOn: optoolClasses) {
 	from sourceSets.optool.output.classesDir
 	from sourceSets.optool.output.resourcesDir
 	appendix = "optool"
+}
+
+compileQuerydslJava.options.encoding = compileJava.options.encoding
+task querydslJar(type: Jar, dependsOn: querydslClasses) {
+	from sourceSets.querydsl.output.classesDir
+	from sourceSets.querydsl.output.resourcesDir
+	appendix = "querydsl"
 }
 
 compileServletJava.options.encoding = compileJava.options.encoding
@@ -122,34 +106,19 @@ task webmvcJar(type: Jar, dependsOn: webmvcClasses) {
 }
 
 artifacts {
-	async asyncJar
-	batch batchJar
-	batchcli batchcliJar
-	batchext batchextJar
-	jdbc jdbcJar
-	optool optoolJar
-	querydsl querydslJar
-	servlet servletJar
-	servletext servletextJar
-	taglib taglibJar
-	telno telnoJar
-	testtool testtoolJar
-	webmvc webmvcJar
-}
-
-configurations {
-	testCompile.extendsFrom(asyncCompile)
-	testCompile.extendsFrom(batchCompile)
-	testCompile.extendsFrom(batchextCompile)
-	testCompile.extendsFrom(jdbcCompile)
-	testCompile.extendsFrom(optoolCompile)
-	testCompile.extendsFrom(querydslCompile)
-	testRuntime.extendsFrom(querydslRuntime)
-	testCompile.extendsFrom(servletCompile)
-	testCompile.extendsFrom(servletextCompile)
-	testCompile.extendsFrom(telnoCompile)
-	testCompile.extendsFrom(testtoolCompile)
-	testCompile.extendsFrom(webmvcCompile)
+	asyncRuntime asyncJar
+	batchRuntime batchJar
+	batchcliRuntime batchcliJar
+	batchextRuntime batchextJar
+	jdbcRuntime jdbcJar
+	optoolRuntime optoolJar
+	querydslRuntime querydslJar
+	servletRuntime servletJar
+	servletextRuntime servletextJar
+	taglibRuntime taglibJar
+	telnoRuntime telnoJar
+	testtoolRuntime testtoolJar
+	webmvcRuntime webmvcJar
 }
 
 dependencies {
@@ -164,8 +133,8 @@ dependencies {
 	runtime "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${versionJackson}"
 	runtime "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${versionJackson}"
 	runtime "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${versionJackson}"
-	compile "org.aspectj:aspectjrt:${versionAspectJ}"
-	compile "org.aspectj:aspectjweaver:${versionAspectJ}"
+	runtime "org.aspectj:aspectjrt:${versionAspectJ}"
+	runtime "org.aspectj:aspectjweaver:${versionAspectJ}"
 	compile "aopalliance:aopalliance:${versionAopalliance}"
 	compile "org.springframework:spring-core:${versionSpring}"
 	compile "org.springframework:spring-beans:${versionSpring}"
@@ -178,21 +147,22 @@ dependencies {
 	compile "javax.mail:mail:${versionJavaMail}"
 	compile "javax.validation:validation-api:${versionJavaValidation}"
 	runtime "javax.el:javax.el-api:${versionJavaEl}"
-	testCompile project(path: project.path, configuration: "testGenerated")
-	testCompile project(path: project.path, configuration: "async")
-	testCompile project(path: project.path, configuration: "batch")
-	testCompile project(path: project.path, configuration: "batchext")
-	testCompile project(path: project.path, configuration: "jdbc")
-	testCompile project(path: project.path, configuration: "optool")
-	testCompile project(path: project.path, configuration: "querydsl")
-	testCompile project(path: project.path, configuration: "servlet")
-	testCompile project(path: project.path, configuration: "servletext")
-	testCompile project(path: project.path, configuration: "telno")
-	testCompile project(path: project.path, configuration: "testtool")
-	testCompile project(path: project.path, configuration: "webmvc")
+	testCompile project(path: project.path, configuration: "testGeneratedRuntime")
+	testCompile project(path: project.path, configuration: "asyncRuntime")
+	testCompile project(path: project.path, configuration: "batchRuntime")
+	testCompile project(path: project.path, configuration: "batchextRuntime")
+	testCompile project(path: project.path, configuration: "jdbcRuntime")
+	testCompile project(path: project.path, configuration: "optoolRuntime")
+	testCompile project(path: project.path, configuration: "querydslRuntime")
+	testCompile project(path: project.path, configuration: "servletRuntime")
+	testCompile project(path: project.path, configuration: "servletextRuntime")
+	testCompile project(path: project.path, configuration: "telnoRuntime")
+	testCompile project(path: project.path, configuration: "testtoolRuntime")
+	testCompile project(path: project.path, configuration: "webmvcRuntime")
+	testRuntime "org.springframework:spring-webmvc:${versionSpring}"
 	testCompile "org.springframework:spring-test:${versionSpring}"
 	testCompile "ch.qos.logback:logback-classic:${versionLogback}"
-	testRuntime "org.springframework:spring-webmvc:${versionSpring}"
+	testCompile "javax.servlet:javax.servlet-api:${versionJavaServlet}"
 	testRuntime "org.glassfish:javax.el:${versionJavaEl}"
 	testRuntime "com.h2database:h2:${versionH2db}"
 	testRuntime "org.flywaydb:flyway-core:${versionFlyway}"
@@ -206,77 +176,54 @@ dependencies {
 
 	batchCompile project(path: project.path)
 
-	batchcliCompile project(path: project.path, configuration: "batch")
+	batchcliCompile project(path: project.path, configuration: "batchRuntime")
 	batchcliCompile "commons-cli:commons-cli:1.2"
 	if (propWithEclipse) {
 		compileOnly "commons-cli:commons-cli:1.2"
 	}
 
-	batchextCompile project(path: ":corelib:goods")
-	batchextCompile project(path: project.path, configuration: "batch")
-	batchextCompile project(path: project.path, configuration: "jdbc")
+	batchextCompile project(path: project.path, configuration: "batchRuntime")
+	batchextCompile project(path: project.path, configuration: "jdbcRuntime")
 
 	jdbcCompile project(path: ":corelib:goods")
-	jdbcCompile project(path: ":corelib:goods", configuration: "excel")
-	jdbcCompile "com.google.guava:guava:${versionGuava}"
-	jdbcCompile "org.apache.commons:commons-lang3:${versionCommonsLang3}"
+	jdbcCompile project(path: ":corelib:goods", configuration: "excelRuntime")
 	jdbcCompile "org.springframework:spring-jdbc:${versionSpring}"
-	jdbcCompile "org.apache.poi:poi-ooxml:${versionPoi}"
-	jdbcCompile "org.slf4j:slf4j-api:${versionSlf4j}"
-	jdbcRuntime "org.slf4j:jcl-over-slf4j:${versionSlf4j}"
+	jdbcRuntime "org.springframework:spring-tx:${versionSpring}"
 
 	optoolCompile project(path: ":corelib:goods")
-	optoolCompile "com.google.guava:guava:${versionGuava}"
 	optoolCompile "org.springframework:spring-jdbc:${versionSpring}"
 	optoolCompile "org.springframework:spring-webmvc:${versionSpring}"
 	optoolCompile "com.querydsl:querydsl-sql:${versionQuerydsl}"
 
-	querydslCompile project(path: ":corelib:goods")
-	querydslCompile project(path: project.path, configuration: "jdbc")
-	querydslCompile "org.springframework:spring-jdbc:${versionSpring}"
+	querydslCompile project(path: project.path, configuration: "jdbcRuntime")
 	querydslCompile "com.querydsl:querydsl-sql:${versionQuerydsl}"
 	querydslRuntime "com.querydsl:querydsl-sql-spring:${versionQuerydsl}"
 
-	servletCompile "com.google.guava:guava:${versionGuava}"
 	servletCompile "org.apache.commons:commons-lang3:${versionCommonsLang3}"
-	servletCompile "javax.servlet:javax.servlet-api:${versionJavaServlet}"
 	servletCompile "org.slf4j:slf4j-api:${versionSlf4j}"
-	servletRuntime "org.slf4j:jcl-over-slf4j:${versionSlf4j}"
+	servletCompileOnly "javax.servlet:javax.servlet-api:${versionJavaServlet}"
 
-	servletextCompile project(path: ":corelib:goods", configuration: "excel")
-	servletextCompile project(path: project.path, configuration: "jdbc")
-	servletextCompile project(path: project.path, configuration: "querydsl")
-	servletextCompile project(path: project.path, configuration: "servlet")
-	servletextCompile "org.springframework:spring-tx:${versionSpring}"
-	servletextCompile "com.querydsl:querydsl-sql:${versionQuerydsl}"
-	servletextCompile "org.apache.poi:poi-ooxml:${versionPoi}"
-	servletextCompile "javax.servlet:javax.servlet-api:${versionJavaServlet}"
+	servletextCompile project(path: project.path, configuration: "querydslRuntime")
+	servletextCompile project(path: project.path, configuration: "servletRuntime")
+	servletextCompileOnly "javax.servlet:javax.servlet-api:${versionJavaServlet}"
 
 	taglibCompile project(path: project.path)
-	taglibCompile project(path: project.path, configuration: "servlet")
+	taglibCompile project(path: project.path, configuration: "servletRuntime")
 	taglibCompile "org.springframework:spring-webmvc:${versionSpring}"
-	taglibCompile "javax.el:javax.el-api:${versionJavaEl}"
-	taglibCompile "javax.servlet:javax.servlet-api:${versionJavaServlet}"
-	taglibCompile "javax.servlet.jsp:javax.servlet.jsp-api:${versionJavaJsp}"
+	taglibCompileOnly "javax.servlet:javax.servlet-api:${versionJavaServlet}"
+	taglibCompileOnly "javax.servlet.jsp:javax.servlet.jsp-api:${versionJavaJsp}"
 	if (propWithEclipse) {
 		compileOnly "org.springframework:spring-webmvc:${versionSpring}"
-		compileOnly "javax.el:javax.el-api:${versionJavaEl}"
 		compileOnly "javax.servlet:javax.servlet-api:${versionJavaServlet}"
 		compileOnly "javax.servlet.jsp:javax.servlet.jsp-api:${versionJavaJsp}"
 	}
 
-	telnoCompile project(path: ":corelib:goods", configuration: "telno")
-	telnoCompile "org.apache.commons:commons-lang3:${versionCommonsLang3}"
-	telnoCompile "org.apache.commons:commons-collections4:${versionCommonsCollections4}"
+	telnoCompile project(path: ":corelib:goods", configuration: "telnoRuntime")
 	telnoCompile "org.springframework:spring-beans:${versionSpring}"
-	telnoCompile "org.apache.poi:poi-ooxml:${versionPoi}"
 
 	testtoolCompile project(path: ":corelib:goods")
-	testtoolCompile "com.google.guava:guava:${versionGuava}"
 	testtoolCompile "org.apache.commons:commons-collections4:${versionCommonsCollections4}"
 	testtoolCompile "com.fasterxml.jackson.core:jackson-databind:${versionJackson}"
-	testtoolCompile "aopalliance:aopalliance:${versionAopalliance}"
-	testtoolCompile "org.springframework:spring-context:${versionSpring}"
 	testtoolCompile "org.springframework:spring-web:${versionSpring}"
 
 	webmvcCompile "com.google.guava:guava:${versionGuava}"
@@ -285,5 +232,5 @@ dependencies {
 	webmvcCompile "org.springframework:spring-webmvc:${versionSpring}"
 	webmvcCompile "org.springframework.security:spring-security-web:${versionSpringSecurity}"
 	webmvcCompile "org.slf4j:slf4j-api:${versionSlf4j}"
-	webmvcCompile "javax.servlet:javax.servlet-api:${versionJavaServlet}"
+	webmvcCompileOnly "javax.servlet:javax.servlet-api:${versionJavaServlet}"
 }

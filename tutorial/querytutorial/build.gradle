@@ -1,21 +1,12 @@
 dependencies {
 	compile project(path: ":corelib:foundation")
-	compile project(path: ":corelib:foundation", configuration: "jdbc")
-	compile project(path: ":corelib:foundation", configuration: "querydsl")
-	testCompile project(path: project.path, configuration: "generated")
-	compile "com.fasterxml.jackson.core:jackson-core:${versionJackson}"
-	compile "com.fasterxml.jackson.core:jackson-annotations:${versionJackson}"
-	compile "com.fasterxml.jackson.core:jackson-databind:${versionJackson}"
-	runtime "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${versionJackson}"
-	runtime "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${versionJackson}"
-	runtime "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${versionJackson}"
-	compile "org.springframework:spring-tx:${versionSpring}"
-	compile "org.springframework:spring-jdbc:${versionSpring}"
+	compile project(path: ":corelib:foundation", configuration: "querydslRuntime")
+	testCompile project(path: project.path, configuration: "generatedRuntime")
+
 	compile "org.springframework:spring-web:${versionSpring}"
-	compile "com.querydsl:querydsl-sql:${versionQuerydsl}"
-	runtime "com.querydsl:querydsl-sql-spring:${versionQuerydsl}"
-	generatedCompile "com.querydsl:querydsl-sql:${versionQuerydsl}"
 	testCompile "org.springframework:spring-test:${versionSpring}"
 	testRuntime "com.h2database:h2:${versionH2db}"
 	testRuntime "org.flywaydb:flyway-core:${versionFlyway}"
+
+	generatedCompile "com.querydsl:querydsl-sql:${versionQuerydsl}"
 }

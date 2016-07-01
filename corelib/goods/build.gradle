@@ -4,12 +4,6 @@ sourceSets {
 	fluent
 }
 
-configurations {
-	excel
-	telno
-	fluent
-}
-
 compileExcelJava.options.encoding = compileJava.options.encoding
 task excelJar(type: Jar, dependsOn: excelClasses) {
 	from sourceSets.excel.output.classesDir
@@ -32,14 +26,9 @@ task fluentJar(type: Jar, dependsOn: fluentClasses) {
 }
 
 artifacts {
-	excel excelJar
-	telno telnoJar
-	fluent fluentJar
-}
-
-configurations {
-	testCompile.extendsFrom(excelCompile)
-	testCompile.extendsFrom(telnoCompile)
+	excelRuntime excelJar
+	telnoRuntime telnoJar
+	fluentRuntime fluentJar
 }
 
 dependencies {
@@ -48,8 +37,8 @@ dependencies {
 	compile "org.slf4j:slf4j-api:${versionSlf4j}"
 	runtime "org.slf4j:jcl-over-slf4j:${versionSlf4j}"
 	testCompile "commons-codec:commons-codec:${versionCommonsCodec}"
-	testCompile project(path: project.path, configuration: "excel")
-	testCompile project(path: project.path, configuration: "telno")
+	testCompile project(path: project.path, configuration: "excelRuntime")
+	testCompile project(path: project.path, configuration: "telnoRuntime")
 
 	excelCompile "org.apache.poi:poi:${versionPoi}"
 	excelCompile "org.apache.poi:poi-ooxml:${versionPoi}"

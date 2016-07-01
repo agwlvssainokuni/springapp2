@@ -21,11 +21,6 @@ subprojects {
 		testGenerated
 	}
 
-	configurations {
-		generated
-		testGenerated
-	}
-
 	compileJava.options.encoding = "UTF-8"
 	compileTestJava.options.encoding = "UTF-8"
 	compileGeneratedJava.options.encoding = "UTF-8"
@@ -44,15 +39,11 @@ subprojects {
 	}
 
 	artifacts {
-		generated generatedJar
-		testGenerated testGeneratedJar
+		generatedRuntime generatedJar
+		testGeneratedRuntime testGeneratedJar
 	}
 
 	configurations {
-		compile.extendsFrom(generatedCompile)
-		runtime.extendsFrom(generatedRuntime)
-		testCompile.extendsFrom(testGeneratedCompile)
-		testRuntime.extendsFrom(testGeneratedRuntime)
 		compileExt
 		compile.extendsFrom(compileExt)
 	}
