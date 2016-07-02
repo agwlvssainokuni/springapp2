@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 agwlvssainokuni
+ * Copyright 2015,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,7 +40,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import cherry.example.web.LogicalError;
 import cherry.example.web.basic.ex90.BasicEx90FormBase.Prop;
 import cherry.example.web.util.ViewNameUtil;
-import cherry.foundation.logicalerror.LogicalErrorUtil;
+import cherry.foundation.bizerror.BizErrorUtil;
 import cherry.foundation.onetimetoken.OneTimeTokenValidator;
 
 @Controller
@@ -76,7 +76,7 @@ public class BasicEx90ControllerImpl implements BasicEx90Controller {
 		}
 
 		if (!oneTimeTokenValidator.isValid(request.getNativeRequest(HttpServletRequest.class))) {
-			LogicalErrorUtil.rejectOnOneTimeTokenError(binding);
+			BizErrorUtil.rejectOnOneTimeTokenError(binding);
 			return withViewname(viewnameOfStart).build();
 		}
 
@@ -102,7 +102,7 @@ public class BasicEx90ControllerImpl implements BasicEx90Controller {
 
 		// 項目間チェック
 		if (form.getDt() == null && form.getTm() != null) {
-			LogicalErrorUtil.rejectValue(binding, Prop.Dt.getName(), LogicalError.RequiredWhen, Prop.Dt.resolve(),
+			BizErrorUtil.rejectValue(binding, Prop.Dt.getName(), LogicalError.RequiredWhen, Prop.Dt.resolve(),
 					Prop.Tm.resolve());
 		}
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 agwlvssainokuni
+ * Copyright 2015,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,10 @@
 
 package cherry.example.web.validation.ex30;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 import javax.validation.constraints.NotNull;
 
 import lombok.EqualsAndHashCode;
@@ -23,16 +27,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
-import org.joda.time.LocalTime;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
-import cherry.foundation.type.format.CustomDateTimeFormat;
-import cherry.foundation.type.format.CustomDateTimeFormat.Range;
-import cherry.foundation.validator.JodaTimeMax;
-import cherry.foundation.validator.JodaTimeMin;
+import cherry.foundation.validator.JavaTimeMax;
+import cherry.foundation.validator.JavaTimeMin;
 
 @Getter
 @Setter
@@ -50,23 +49,11 @@ public class ValidationEx30Form {
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	private LocalDateTime ldtmpat;
 
-	@CustomDateTimeFormat(Range.FROM)
-	private LocalDateTime ldtmfm;
-
-	@CustomDateTimeFormat(Range.TO)
-	private LocalDateTime ldtmto;
-
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate ldtiso;
 
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private LocalDate ldtpat;
-
-	@CustomDateTimeFormat(Range.FROM)
-	private LocalDate ldtfm;
-
-	@CustomDateTimeFormat(Range.TO)
-	private LocalDate ldtto;
 
 	@DateTimeFormat(iso = ISO.TIME)
 	private LocalTime ltmiso;
@@ -74,34 +61,28 @@ public class ValidationEx30Form {
 	@DateTimeFormat(pattern = "HH:mm:ss")
 	private LocalTime ltmpat;
 
-	@CustomDateTimeFormat(Range.FROM)
-	private LocalTime ltmfm;
-
-	@CustomDateTimeFormat(Range.TO)
-	private LocalTime ltmto;
-
-	@JodaTimeMin(value = "1900-01-01T00:00:00", inclusive = true)
+	@JavaTimeMin(value = "1900-01-01T00:00:00", inclusive = true)
 	private LocalDateTime ldtmmin19000101in;
 
-	@JodaTimeMax(value = "3000-01-01T00:00:00", inclusive = true)
+	@JavaTimeMax(value = "3000-01-01T00:00:00", inclusive = true)
 	private LocalDateTime ldtmmax30000101in;
 
-	@JodaTimeMin(value = "1900-01-01T00:00:00", inclusive = false)
+	@JavaTimeMin(value = "1900-01-01T00:00:00", inclusive = false)
 	private LocalDateTime ldtmmin19000101ex;
 
-	@JodaTimeMax(value = "3000-01-01T00:00:00", inclusive = false)
+	@JavaTimeMax(value = "3000-01-01T00:00:00", inclusive = false)
 	private LocalDateTime ldtmmax30000101ex;
 
-	@JodaTimeMin(value = "1900-01-01", inclusive = true)
+	@JavaTimeMin(value = "1900-01-01", inclusive = true)
 	private LocalDate ldtmin19000101in;
 
-	@JodaTimeMax(value = "3000-01-01", inclusive = true)
+	@JavaTimeMax(value = "3000-01-01", inclusive = true)
 	private LocalDate ldtmax30000101in;
 
-	@JodaTimeMin(value = "1900-01-01", inclusive = false)
+	@JavaTimeMin(value = "1900-01-01", inclusive = false)
 	private LocalDate ldtmin19000101ex;
 
-	@JodaTimeMax(value = "3000-01-01", inclusive = false)
+	@JavaTimeMax(value = "3000-01-01", inclusive = false)
 	private LocalDate ldtmax30000101ex;
 
 }

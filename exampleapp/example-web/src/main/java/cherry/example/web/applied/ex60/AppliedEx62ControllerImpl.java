@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 agwlvssainokuni
+ * Copyright 2015,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import cherry.example.web.LogicalError;
 import cherry.example.web.applied.ex60.AppliedEx62FormBase.Prop;
 import cherry.example.web.util.ViewNameUtil;
-import cherry.foundation.logicalerror.LogicalErrorUtil;
+import cherry.foundation.bizerror.BizErrorUtil;
 
 @Controller
 public class AppliedEx62ControllerImpl implements AppliedEx62Controller {
@@ -107,7 +107,7 @@ public class AppliedEx62ControllerImpl implements AppliedEx62Controller {
 
 		// 項目間チェック
 		if (form.getDt() == null && form.getTm() != null) {
-			LogicalErrorUtil.rejectValue(binding, Prop.Dt.getName(), LogicalError.RequiredWhen, Prop.Dt.resolve(),
+			BizErrorUtil.rejectValue(binding, Prop.Dt.getName(), LogicalError.RequiredWhen, Prop.Dt.resolve(),
 					Prop.Tm.resolve());
 		}
 

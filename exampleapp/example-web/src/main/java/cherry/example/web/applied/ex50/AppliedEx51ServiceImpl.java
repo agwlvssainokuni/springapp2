@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 agwlvssainokuni
+ * Copyright 2015,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 package cherry.example.web.applied.ex50;
 
-import static com.mysema.query.support.Expressions.cases;
+import static com.querydsl.core.types.dsl.Expressions.cases;
 
 import java.util.List;
 
@@ -29,12 +29,12 @@ import org.springframework.transaction.support.TransactionOperations;
 
 import cherry.example.db.gen.query.QExTbl1;
 
-import com.mysema.query.sql.SQLQueryFactory;
-import com.mysema.query.sql.dml.SQLUpdateClause;
-import com.mysema.query.types.OrderSpecifier;
-import com.mysema.query.types.QBean;
-import com.mysema.query.types.expr.CaseBuilder.Cases;
-import com.mysema.query.types.expr.NumberExpression;
+import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.CaseBuilder.Cases;
+import com.querydsl.core.types.dsl.NumberExpression;
+import com.querydsl.sql.SQLQueryFactory;
+import com.querydsl.sql.dml.SQLUpdateClause;
 
 @Service
 public class AppliedEx51ServiceImpl implements AppliedEx51Service {
@@ -54,8 +54,8 @@ public class AppliedEx51ServiceImpl implements AppliedEx51Service {
 				.from(et1)
 				.where(et1.id.in(id))
 				.orderBy(orderBy(id))
-				.list(new QBean<>(AppliedEx51SubForm.class, et1.id, et1.text10, et1.int64, et1.decimal1, et1.decimal3,
-						et1.dt, et1.tm, et1.dtm, et1.lockVersion));
+				.select(Projections.bean(AppliedEx51SubForm.class, et1.id, et1.text10, et1.int64, et1.decimal1,
+						et1.decimal3, et1.dt, et1.tm, et1.dtm, et1.lockVersion)).fetch();
 	}
 
 	@Override

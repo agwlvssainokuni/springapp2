@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 agwlvssainokuni
+ * Copyright 2015,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ import lombok.ToString;
 
 import org.springframework.context.MessageSourceResolvable;
 
-import cherry.foundation.logicalerror.LogicalErrorUtil;
+import cherry.foundation.bizerror.BizErrorUtil;
 
 @Getter
 @Setter
@@ -49,7 +49,7 @@ public class AppliedEx32Form {
 
 	public static MessageSourceResolvable resolveItemProp(int rownum, AppliedEx31SubFormBase.Prop prop) {
 		String formName = UPPER_CAMEL.to(LOWER_CAMEL, AppliedEx32Form.class.getSimpleName());
-		return LogicalErrorUtil.resolve(new StringBuilder(formName).append(".").append(getItemPropName(rownum, prop))
+		return BizErrorUtil.resolve(new StringBuilder(formName).append(".").append(getItemPropName(rownum, prop))
 				.toString());
 	}
 

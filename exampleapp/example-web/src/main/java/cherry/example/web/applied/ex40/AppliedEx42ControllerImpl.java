@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 agwlvssainokuni
+ * Copyright 2015,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,7 +41,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import cherry.example.web.LogicalError;
 import cherry.example.web.applied.ex40.AppliedEx41SubFormBase.Prop;
 import cherry.example.web.util.ViewNameUtil;
-import cherry.foundation.logicalerror.LogicalErrorUtil;
+import cherry.foundation.bizerror.BizErrorUtil;
 
 @Controller
 public class AppliedEx42ControllerImpl implements AppliedEx42Controller {
@@ -114,7 +114,7 @@ public class AppliedEx42ControllerImpl implements AppliedEx42Controller {
 
 		// 項目間チェック
 		if (form.getItem().get(rownum).getDt() == null && form.getItem().get(rownum).getTm() != null) {
-			LogicalErrorUtil.rejectValue(binding, AppliedEx42Form.getItemPropName(rownum, Prop.Dt),
+			BizErrorUtil.rejectValue(binding, AppliedEx42Form.getItemPropName(rownum, Prop.Dt),
 					LogicalError.RequiredWhen, AppliedEx42Form.resolveItemProp(rownum, Prop.Dt),
 					AppliedEx42Form.resolveItemProp(rownum, Prop.Tm));
 		}

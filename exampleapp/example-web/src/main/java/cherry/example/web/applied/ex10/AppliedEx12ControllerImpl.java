@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 agwlvssainokuni
+ * Copyright 2015,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import static cherry.example.web.ParamDef.REQ_ID;
 import static cherry.example.web.util.ModelAndViewBuilder.redirect;
 import static cherry.example.web.util.ModelAndViewBuilder.withViewname;
 import static cherry.example.web.util.ModelAndViewBuilder.withoutView;
-import static cherry.foundation.springmvc.Contract.shouldExist;
+import static cherry.foundation.spring.webmvc.Http4xxChecker.throwNotFoundIfNull;
 import static com.google.common.base.Preconditions.checkState;
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.fromMethodCall;
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
@@ -44,7 +44,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import cherry.example.web.LogicalError;
 import cherry.example.web.applied.ex10.AppliedEx10FormBase.Prop;
 import cherry.example.web.util.ViewNameUtil;
-import cherry.foundation.logicalerror.LogicalErrorUtil;
+import cherry.foundation.bizerror.BizErrorUtil;
 import cherry.foundation.onetimetoken.OneTimeTokenValidator;
 
 @Controller
@@ -72,7 +72,7 @@ public class AppliedEx12ControllerImpl implements AppliedEx12Controller {
 	public ModelAndView start(long id, AppliedEx10Form form, BindingResult binding, Authentication auth, Locale locale,
 			SitePreference sitePref, NativeWebRequest request) {
 		AppliedEx10Form f = service.findById(id);
-		shouldExist(f, AppliedEx10Form.class, id);
+		throwNotFoundIfNull(f, AppliedEx10Form.class, id);
 		return withViewname(viewnameOfStart).addObject(f).build();
 	}
 
@@ -108,7 +108,7 @@ public class AppliedEx12ControllerImpl implements AppliedEx12Controller {
 		}
 
 		if (!oneTimeTokenValidator.isValid(request.getNativeRequest(HttpServletRequest.class))) {
-			LogicalErrorUtil.rejectOnOneTimeTokenError(binding);
+			BizErrorUtil.rejectOnOneTimeTokenError(binding);
 			return withViewname(viewnameOfStart).build();
 		}
 
@@ -125,7 +125,7 @@ public class AppliedEx12ControllerImpl implements AppliedEx12Controller {
 		status.setComplete();
 
 		AppliedEx10Form f = service.findById(id);
-		shouldExist(f, AppliedEx10Form.class, id);
+		throwNotFoundIfNull(f, AppliedEx10Form.class, id);
 		return withoutView().addObject(f).build();
 	}
 
@@ -152,7 +152,7 @@ public class AppliedEx12ControllerImpl implements AppliedEx12Controller {
 
 		// 項目間チェック
 		if (form.getDt() == null && form.getTm() != null) {
-			LogicalErrorUtil.rejectValue(binding, Prop.Dt.getName(), LogicalError.RequiredWhen, Prop.Dt.resolve(),
+			BizErrorUtil.rejectValue(binding, Prop.Dt.getName(), LogicalError.RequiredWhen, Prop.Dt.resolve(),
 					Prop.Tm.resolve());
 		}
 
@@ -162,8 +162,7 @@ public class AppliedEx12ControllerImpl implements AppliedEx12Controller {
 
 		// 整合性チェック
 		if (service.exists(id, form.getText10())) {
-			LogicalErrorUtil.rejectValue(binding, Prop.Text10.getName(), LogicalError.AlreadyExists,
-					Prop.Text10.resolve());
+			BizErrorUtil.rejectValue(binding, Prop.Text10.getName(), LogicalError.AlreadyExists, Prop.Text10.resolve());
 		}
 
 		if (binding.hasErrors()) {

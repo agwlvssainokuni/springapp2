@@ -1,5 +1,5 @@
 /*
- * Copyright 2014,2015 agwlvssainokuni
+ * Copyright 2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import lombok.ToString;
 
 import org.springframework.context.MessageSourceResolvable;
 
-import cherry.foundation.logicalerror.LogicalErrorUtil;
+import cherry.foundation.bizerror.BizErrorUtil;
 
 @Getter
 @Setter
@@ -45,17 +45,19 @@ public abstract class BasicEx90LoadFormBase implements Serializable {
 
 	@javax.validation.constraints.Min(value = -1000000000, groups = { javax.validation.groups.Default.class })
 	@javax.validation.constraints.Max(value = 1000000000, groups = { javax.validation.groups.Default.class })
-	@cherry.foundation.type.format.CustomNumberFormat
+	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.LONG)
 	private Long int64;
 
 	@javax.validation.constraints.DecimalMin(value = "-1000000000", groups = { javax.validation.groups.Default.class })
 	@javax.validation.constraints.DecimalMax(value = "1000000000", groups = { javax.validation.groups.Default.class })
-	@cherry.foundation.type.format.CustomNumberFormat(1)
+	@cherry.foundation.validator.NumberScale(1)
+	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.DECIMAL_1)
 	private java.math.BigDecimal decimal1;
 
 	@javax.validation.constraints.DecimalMin(value = "-1000000000", groups = { javax.validation.groups.Default.class })
 	@javax.validation.constraints.DecimalMax(value = "1000000000", groups = { javax.validation.groups.Default.class })
-	@cherry.foundation.type.format.CustomNumberFormat(3)
+	@cherry.foundation.validator.NumberScale(3)
+	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.DECIMAL_3)
 	private java.math.BigDecimal decimal3;
 
 	@Getter
@@ -76,7 +78,7 @@ public abstract class BasicEx90LoadFormBase implements Serializable {
 		}
 
 		public MessageSourceResolvable resolve() {
-			return LogicalErrorUtil.resolve(nameWithForm);
+			return BizErrorUtil.resolve(nameWithForm);
 		}
 	}
 

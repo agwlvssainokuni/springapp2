@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 agwlvssainokuni
+ * Copyright 2015,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@
 
 package cherry.example.web.applied.ex10;
 
+import static com.querydsl.core.types.dsl.Expressions.ONE;
+
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -26,11 +28,12 @@ import org.springframework.transaction.annotation.Transactional;
 import cherry.example.db.gen.query.QExTbl1;
 import cherry.example.db.gen.query.QExTbl2;
 
-import com.mysema.query.sql.SQLQueryFactory;
-import com.mysema.query.sql.dml.SQLDeleteClause;
-import com.mysema.query.sql.dml.SQLInsertClause;
-import com.mysema.query.sql.dml.SQLUpdateClause;
-import com.mysema.query.types.QBean;
+import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.QBean;
+import com.querydsl.sql.SQLQueryFactory;
+import com.querydsl.sql.dml.SQLDeleteClause;
+import com.querydsl.sql.dml.SQLInsertClause;
+import com.querydsl.sql.dml.SQLUpdateClause;
 
 @Service
 public class AppliedEx10ServiceImpl implements AppliedEx10Service {
@@ -44,7 +47,7 @@ public class AppliedEx10ServiceImpl implements AppliedEx10Service {
 	@Transactional
 	@Override
 	public boolean exists(String text10) {
-		return qf.from(et1).where(et1.text10.eq(text10)).exists();
+		return qf.from(et1).where(et1.text10.eq(text10)).select(ONE).fetchFirst() != null;
 	}
 
 	@Transactional
@@ -94,19 +97,19 @@ public class AppliedEx10ServiceImpl implements AppliedEx10Service {
 	@Transactional
 	@Override
 	public AppliedEx10Form findById(long id) {
-		QBean<AppliedEx10Form> qb = new QBean<>(AppliedEx10Form.class, et1.text10, et1.text100, et1.int64,
+		QBean<AppliedEx10Form> qb = Projections.bean(AppliedEx10Form.class, et1.text10, et1.text100, et1.int64,
 				et1.decimal1, et1.decimal3, et1.dt, et1.tm, et1.dtm, et1.lockVersion);
-		QBean<AppliedEx10SubForm> qbSub = new QBean<>(AppliedEx10SubForm.class, et2.text10, et2.text100, et2.int64,
-				et2.decimal1, et2.decimal3, et2.dt, et2.tm, et2.dtm, et2.lockVersion);
-		AppliedEx10Form form = qf.from(et1).where(et1.id.eq(id)).singleResult(qb);
-		form.setItem(qf.from(et2).where(et2.parentId.eq(id)).list(qbSub));
+		QBean<AppliedEx10SubForm> qbSub = Projections.bean(AppliedEx10SubForm.class, et2.text10, et2.text100,
+				et2.int64, et2.decimal1, et2.decimal3, et2.dt, et2.tm, et2.dtm, et2.lockVersion);
+		AppliedEx10Form form = qf.from(et1).where(et1.id.eq(id)).select(qb).fetchOne();
+		form.setItem(qf.from(et2).where(et2.parentId.eq(id)).select(qbSub).fetch());
 		return form;
 	}
 
 	@Transactional
 	@Override
 	public boolean exists(long id, String text10) {
-		return qf.from(et1).where(et1.id.ne(id), et1.text10.eq(text10)).exists();
+		return qf.from(et1).where(et1.id.ne(id), et1.text10.eq(text10)).select(ONE).fetchOne() != null;
 	}
 
 	@Transactional
@@ -129,7 +132,7 @@ public class AppliedEx10ServiceImpl implements AppliedEx10Service {
 		update.set(et1.dtm, form.getDtm());
 		long count = update.execute();
 
-		List<Long> subId = qf.from(et2).where(et2.parentId.eq(id)).orderBy(et2.id.asc()).list(et2.id);
+		List<Long> subId = qf.from(et2).where(et2.parentId.eq(id)).orderBy(et2.id.asc()).select(et2.id).fetch();
 
 		SQLUpdateClause updateSub = qf.update(et2);
 		for (int rownum = 0; rownum < subId.size() && rownum < form.getItem().size(); rownum++) {

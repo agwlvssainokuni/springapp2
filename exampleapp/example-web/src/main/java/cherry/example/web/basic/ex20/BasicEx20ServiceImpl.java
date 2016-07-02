@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 agwlvssainokuni
+ * Copyright 2015,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@
 
 package cherry.example.web.basic.ex20;
 
+import static com.querydsl.core.types.dsl.Expressions.ONE;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,10 +25,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cherry.example.db.gen.query.QExTbl1;
 
-import com.mysema.query.sql.SQLQueryFactory;
-import com.mysema.query.sql.dml.SQLInsertClause;
-import com.mysema.query.sql.dml.SQLUpdateClause;
-import com.mysema.query.types.QBean;
+import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.QBean;
+import com.querydsl.sql.SQLQueryFactory;
+import com.querydsl.sql.dml.SQLInsertClause;
+import com.querydsl.sql.dml.SQLUpdateClause;
 
 @Service
 public class BasicEx20ServiceImpl implements BasicEx20Service {
@@ -39,7 +42,7 @@ public class BasicEx20ServiceImpl implements BasicEx20Service {
 	@Transactional
 	@Override
 	public boolean exists(String text10) {
-		return qf.from(et1).where(et1.text10.eq(text10)).exists();
+		return qf.from(et1).where(et1.text10.eq(text10)).select(ONE).fetchOne() != null;
 	}
 
 	@Transactional
@@ -64,15 +67,15 @@ public class BasicEx20ServiceImpl implements BasicEx20Service {
 	@Transactional
 	@Override
 	public BasicEx20Form findById(long id) {
-		QBean<BasicEx20Form> qb = new QBean<>(BasicEx20Form.class, et1.text10, et1.text100, et1.int64, et1.decimal1,
-				et1.decimal3, et1.dt, et1.tm, et1.dtm, et1.lockVersion);
-		return qf.from(et1).where(et1.id.eq(id)).singleResult(qb);
+		QBean<BasicEx20Form> qb = Projections.bean(BasicEx20Form.class, et1.text10, et1.text100, et1.int64,
+				et1.decimal1, et1.decimal3, et1.dt, et1.tm, et1.dtm, et1.lockVersion);
+		return qf.from(et1).where(et1.id.eq(id)).select(qb).fetchOne();
 	}
 
 	@Transactional
 	@Override
 	public boolean exists(long id, String text10) {
-		return qf.from(et1).where(et1.id.ne(id), et1.text10.eq(text10)).exists();
+		return qf.from(et1).where(et1.id.ne(id), et1.text10.eq(text10)).select(ONE).fetchOne() != null;
 	}
 
 	@Transactional

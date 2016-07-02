@@ -38,22 +38,6 @@
 		</div>
 		<div class="form-group">
 			<div>
-				<f:label path="ldtmfm" cssClass="col-md-3 control-label">日時【カスタム(範囲fm)】</f:label>
-			</div>
-			<div class="col-md-9">
-				<f:input path="ldtmfm" cssClass="form-control" readonly="true" />
-			</div>
-		</div>
-		<div class="form-group">
-			<div>
-				<f:label path="ldtmto" cssClass="col-md-3 control-label">日時【カスタム(範囲to)】</f:label>
-			</div>
-			<div class="col-md-9">
-				<f:input path="ldtmto" cssClass="form-control" readonly="true" />
-			</div>
-		</div>
-		<div class="form-group">
-			<div>
 				<f:label path="ldtiso" cssClass="col-md-3 control-label">日付【標準ISO】</f:label>
 			</div>
 			<div class="col-md-9">
@@ -70,22 +54,6 @@
 		</div>
 		<div class="form-group">
 			<div>
-				<f:label path="ldtfm" cssClass="col-md-3 control-label">日付【カスタム(範囲fm)】</f:label>
-			</div>
-			<div class="col-md-9">
-				<f:input path="ldtfm" cssClass="form-control" readonly="true" />
-			</div>
-		</div>
-		<div class="form-group">
-			<div>
-				<f:label path="ldtto" cssClass="col-md-3 control-label">日付【カスタム(範囲to)】</f:label>
-			</div>
-			<div class="col-md-9">
-				<f:input path="ldtto" cssClass="form-control" readonly="true" />
-			</div>
-		</div>
-		<div class="form-group">
-			<div>
 				<f:label path="ltmiso" cssClass="col-md-3 control-label">時刻【標準ISO】</f:label>
 			</div>
 			<div class="col-md-9">
@@ -98,22 +66,6 @@
 			</div>
 			<div class="col-md-9">
 				<f:input path="ltmpat" cssClass="form-control" readonly="true" />
-			</div>
-		</div>
-		<div class="form-group">
-			<div>
-				<f:label path="ltmfm" cssClass="col-md-3 control-label">時刻【カスタム(範囲fm)】</f:label>
-			</div>
-			<div class="col-md-9">
-				<f:input path="ltmfm" cssClass="form-control" readonly="true" />
-			</div>
-		</div>
-		<div class="form-group">
-			<div>
-				<f:label path="ltmto" cssClass="col-md-3 control-label">時刻【カスタム(範囲to)】</f:label>
-			</div>
-			<div class="col-md-9">
-				<f:input path="ltmto" cssClass="form-control" readonly="true" />
 			</div>
 		</div>
 		<div class="form-group">

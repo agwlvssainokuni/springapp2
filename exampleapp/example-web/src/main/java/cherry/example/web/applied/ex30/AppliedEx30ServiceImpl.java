@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 agwlvssainokuni
+ * Copyright 2015,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,12 +18,13 @@ package cherry.example.web.applied.ex30;
 
 import static java.util.Arrays.asList;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.function.Function;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,22 +34,21 @@ import cherry.example.db.gen.query.QExTbl1;
 import cherry.example.web.SortBy;
 import cherry.example.web.SortOrder;
 import cherry.example.web.SortParam;
-import cherry.foundation.bizdtm.BizDateTime;
+import cherry.foundation.bizcal.BizDateTime;
 import cherry.foundation.download.TableDownloadOperation;
-import cherry.foundation.querydsl.QueryConfigurer;
-import cherry.foundation.querydsl.QueryDslSupport;
+import cherry.foundation.querydsl.QuerydslSupport;
 import cherry.foundation.type.EnumCodeUtil;
 import cherry.goods.paginate.PagedList;
 
-import com.mysema.query.sql.SQLQuery;
-import com.mysema.query.types.OrderSpecifier;
-import com.mysema.query.types.expr.ComparableExpressionBase;
+import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.dsl.ComparableExpressionBase;
+import com.querydsl.sql.SQLQuery;
 
 @Service
 public class AppliedEx30ServiceImpl implements AppliedEx30Service {
 
 	@Autowired
-	private QueryDslSupport queryDslSupport;
+	private QuerydslSupport querydslSupport;
 
 	@Autowired
 	private TableDownloadOperation tableDownloadOperation;
@@ -65,7 +65,7 @@ public class AppliedEx30ServiceImpl implements AppliedEx30Service {
 	@Transactional
 	@Override
 	public PagedList<BExTbl1> search(AppliedEx30Form form) {
-		return queryDslSupport.search(commonClause(form), orderByClause(form), form.getPno(), form.getPsz(), et1);
+		return querydslSupport.search(commonClause(form), orderByClause(form), form.getPno(), form.getPsz(), et1);
 	}
 
 	@Transactional
@@ -76,69 +76,63 @@ public class AppliedEx30ServiceImpl implements AppliedEx30Service {
 				et1.id, et1.text10, et1.text100, et1.int64, et1.decimal1, et1.decimal3, et1.dt, et1.tm, et1.dtm);
 	}
 
-	private QueryConfigurer commonClause(final AppliedEx30Form form) {
-		return new QueryConfigurer() {
-			@Override
-			public SQLQuery configure(SQLQuery query) {
-				query.from(et1);
-				if (StringUtils.isNotEmpty(form.getText10())) {
-					query.where(et1.text10.startsWith(form.getText10()));
-				}
-				if (form.getInt64From() != null) {
-					query.where(et1.int64.goe(form.getInt64From()));
-				}
-				if (form.getInt64To() != null) {
-					query.where(et1.int64.loe(form.getInt64To()));
-				}
-				if (form.getDecimal1From() != null) {
-					query.where(et1.decimal1.goe(form.getDecimal1From()));
-				}
-				if (form.getDecimal1To() != null) {
-					query.where(et1.decimal1.loe(form.getDecimal1To()));
-				}
-				if (form.getDecimal3From() != null) {
-					query.where(et1.decimal3.goe(form.getDecimal3From()));
-				}
-				if (form.getDecimal3To() != null) {
-					query.where(et1.decimal3.loe(form.getDecimal3To()));
-				}
-				if (form.getDtFrom() != null) {
-					query.where(et1.dt.goe(form.getDtFrom()));
-				}
-				if (form.getDtTo() != null) {
-					query.where(et1.dt.loe(form.getDtTo()));
-				}
-				if (form.getTmFrom() != null) {
-					query.where(et1.tm.goe(form.getTmFrom()));
-				}
-				if (form.getTmTo() != null) {
-					query.where(et1.tm.loe(form.getTmTo()));
-				}
-				if (form.getDtmFromD() != null && form.getDtmFromT() != null) {
-					query.where(et1.dtm.goe(form.getDtmFromD().toLocalDateTime(form.getDtmFromT())));
-				}
-				if (form.getDtmToD() != null && form.getDtmToT() != null) {
-					query.where(et1.dtm.loe(form.getDtmToD().toLocalDateTime(form.getDtmToT())));
-				}
-				return query;
+	private Function<SQLQuery<?>, SQLQuery<?>> commonClause(final AppliedEx30Form form) {
+		return (SQLQuery<?> query) -> {
+			query.from(et1);
+			if (StringUtils.isNotEmpty(form.getText10())) {
+				query.where(et1.text10.startsWith(form.getText10()));
 			}
+			if (form.getInt64From() != null) {
+				query.where(et1.int64.goe(form.getInt64From()));
+			}
+			if (form.getInt64To() != null) {
+				query.where(et1.int64.loe(form.getInt64To()));
+			}
+			if (form.getDecimal1From() != null) {
+				query.where(et1.decimal1.goe(form.getDecimal1From()));
+			}
+			if (form.getDecimal1To() != null) {
+				query.where(et1.decimal1.loe(form.getDecimal1To()));
+			}
+			if (form.getDecimal3From() != null) {
+				query.where(et1.decimal3.goe(form.getDecimal3From()));
+			}
+			if (form.getDecimal3To() != null) {
+				query.where(et1.decimal3.loe(form.getDecimal3To()));
+			}
+			if (form.getDtFrom() != null) {
+				query.where(et1.dt.goe(form.getDtFrom()));
+			}
+			if (form.getDtTo() != null) {
+				query.where(et1.dt.loe(form.getDtTo()));
+			}
+			if (form.getTmFrom() != null) {
+				query.where(et1.tm.goe(form.getTmFrom()));
+			}
+			if (form.getTmTo() != null) {
+				query.where(et1.tm.loe(form.getTmTo()));
+			}
+			if (form.getDtmFromD() != null && form.getDtmFromT() != null) {
+				query.where(et1.dtm.goe(form.getDtmFromD().atTime(form.getDtmFromT())));
+			}
+			if (form.getDtmToD() != null && form.getDtmToT() != null) {
+				query.where(et1.dtm.loe(form.getDtmToD().atTime(form.getDtmToT())));
+			}
+			return query;
 		};
 	}
 
-	private QueryConfigurer orderByClause(final AppliedEx30Form form) {
-		return new QueryConfigurer() {
-			@Override
-			public SQLQuery configure(SQLQuery query) {
-				query.orderBy(createOrderSpec(form.getSort1()));
-				query.orderBy(createOrderSpec(form.getSort2()));
-				return query;
-			}
+	private Function<SQLQuery<?>, SQLQuery<?>> orderByClause(final AppliedEx30Form form) {
+		return (SQLQuery<?> query) -> {
+			query.orderBy(createOrderSpec(form.getSort1()));
+			query.orderBy(createOrderSpec(form.getSort2()));
+			return query;
 		};
 	}
 
 	private OrderSpecifier<?> createOrderSpec(SortParam sort) {
 
-		SortBy sortBy = EnumCodeUtil.getCodeMap(SortBy.class, SortBy.ID).get(sort.getBy());
+		SortBy sortBy = EnumCodeUtil.getCodeMap(SortBy.class).get(sort.getBy());
 
 		ComparableExpressionBase<?> sortKey;
 		if (sortBy == SortBy.ID) {

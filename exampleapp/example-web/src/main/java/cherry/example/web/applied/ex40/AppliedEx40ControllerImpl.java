@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 agwlvssainokuni
+ * Copyright 2015,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,12 +21,12 @@ import static cherry.example.web.util.ModelAndViewBuilder.withViewname;
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.fromMethodCall;
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
 
+import java.time.LocalDateTime;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mobile.device.site.SitePreference;
 import org.springframework.security.core.Authentication;
@@ -46,7 +46,7 @@ import cherry.example.web.SortOrder;
 import cherry.example.web.SortParam;
 import cherry.example.web.applied.ex40.AppliedEx40FormBase.Prop;
 import cherry.example.web.util.ViewNameUtil;
-import cherry.foundation.logicalerror.LogicalErrorUtil;
+import cherry.foundation.bizerror.BizErrorUtil;
 import cherry.goods.paginate.PagedList;
 
 @Controller
@@ -103,7 +103,7 @@ public class AppliedEx40ControllerImpl implements AppliedEx40Controller {
 
 		PagedList<BExTbl1> pagedList = service.search(form);
 		if (pagedList.getPageSet().getTotalCount() <= 0L) {
-			LogicalErrorUtil.rejectOnSearchResultEmpty(binding);
+			BizErrorUtil.rejectOnSearchResultEmpty(binding);
 			return withViewname(viewnameOfStart).build();
 		}
 
@@ -142,30 +142,30 @@ public class AppliedEx40ControllerImpl implements AppliedEx40Controller {
 		// 項目間チェック
 		if (form.getDtFrom() != null && form.getDtTo() != null) {
 			if (form.getDtFrom().isAfter(form.getDtTo())) {
-				LogicalErrorUtil.rejectValue(binding, Prop.DtFrom.getName(), LogicalError.RangeFromTo,
+				BizErrorUtil.rejectValue(binding, Prop.DtFrom.getName(), LogicalError.RangeFromTo,
 						Prop.DtFrom.resolve(), Prop.DtTo.resolve());
 			}
 		}
 		if (form.getTmFrom() != null && form.getTmTo() != null) {
 			if (form.getTmFrom().isAfter(form.getTmTo())) {
-				LogicalErrorUtil.rejectValue(binding, Prop.TmFrom.getName(), LogicalError.RangeFromTo,
+				BizErrorUtil.rejectValue(binding, Prop.TmFrom.getName(), LogicalError.RangeFromTo,
 						Prop.TmFrom.resolve(), Prop.TmTo.resolve());
 			}
 		}
 		if (form.getDtmFromD() == null && form.getDtmFromT() != null) {
-			LogicalErrorUtil.rejectValue(binding, Prop.DtmFromD.getName(), LogicalError.RequiredWhen,
+			BizErrorUtil.rejectValue(binding, Prop.DtmFromD.getName(), LogicalError.RequiredWhen,
 					Prop.DtmFromD.resolve(), Prop.DtmFromT.resolve());
 		}
 		if (form.getDtmToD() == null && form.getDtmToT() != null) {
-			LogicalErrorUtil.rejectValue(binding, Prop.DtmToD.getName(), LogicalError.RequiredWhen,
-					Prop.DtmToD.resolve(), Prop.DtmToT.resolve());
+			BizErrorUtil.rejectValue(binding, Prop.DtmToD.getName(), LogicalError.RequiredWhen, Prop.DtmToD.resolve(),
+					Prop.DtmToT.resolve());
 		}
 		if (form.getDtmFromD() != null && form.getDtmFromT() != null && form.getDtmToD() != null
 				&& form.getDtmToT() != null) {
-			LocalDateTime dtmFrom = form.getDtmFromD().toLocalDateTime(form.getDtmFromT());
-			LocalDateTime dtmTo = form.getDtmToD().toLocalDateTime(form.getDtmToT());
+			LocalDateTime dtmFrom = form.getDtmFromD().atTime(form.getDtmFromT());
+			LocalDateTime dtmTo = form.getDtmToD().atTime(form.getDtmToT());
 			if (dtmFrom.isAfter(dtmTo)) {
-				LogicalErrorUtil.rejectValue(binding, Prop.DtmFromD.getName(), LogicalError.RangeFromTo,
+				BizErrorUtil.rejectValue(binding, Prop.DtmFromD.getName(), LogicalError.RangeFromTo,
 						Prop.DtmFromD.resolve(), Prop.DtmToD.resolve());
 			}
 		}
@@ -185,7 +185,7 @@ public class AppliedEx40ControllerImpl implements AppliedEx40Controller {
 			form.setSort1(new SortParam());
 		}
 		if (form.getSort1().getBy() == null) {
-			form.getSort1().setBy(SortBy.ID.code());
+			form.getSort1().setBy(SortBy.ID.getCodeValue());
 		}
 		if (form.getSort1().getOrder() == null) {
 			form.getSort1().setOrder(SortOrder.ASC);
@@ -195,7 +195,7 @@ public class AppliedEx40ControllerImpl implements AppliedEx40Controller {
 			form.setSort2(new SortParam());
 		}
 		if (form.getSort2().getBy() == null) {
-			form.getSort2().setBy(SortBy.TEXT10.code());
+			form.getSort2().setBy(SortBy.TEXT10.getCodeValue());
 		}
 		if (form.getSort2().getOrder() == null) {
 			form.getSort2().setOrder(SortOrder.ASC);

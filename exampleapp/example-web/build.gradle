@@ -1,9 +1,20 @@
 apply plugin: "war"
+apply plugin: "eclipse-wtp"
+
+eclipse.wtp.facet {
+	facet name: "java", version: "1.8"
+	facet name: "jst.web", version: "3.0"
+}
+
+war {
+	classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
+}
 
 dependencies {
 	compile project(path: ":exampleapp:example-common")
 	compile project(path: ":corelib:foundation", configuration: "servletextRuntime")
 	compile project(path: ":corelib:foundation", configuration: "webmvcRuntime")
+	compile project(path: ":corelib:foundation", configuration: "taglibRuntime")
 	runtime "org.apache.tiles:tiles-core:${versionTiles}"
 	runtime "org.apache.tiles:tiles-api:${versionTiles}"
 	runtime "org.apache.tiles:tiles-servlet:${versionTiles}"

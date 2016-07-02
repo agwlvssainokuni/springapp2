@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 agwlvssainokuni
+ * Copyright 2015,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,9 @@
 
 package cherry.example.web;
 
-import cherry.foundation.type.Code;
+import cherry.foundation.type.ICodeType;
 
-public enum SortBy implements Code<String> {
+public enum SortBy implements ICodeType<String> {
 	/** 並べ替えキー: ID */
 	ID("00"),
 	/** 並べ替えキー: 文字列【10】 */
@@ -43,7 +43,7 @@ public enum SortBy implements Code<String> {
 	}
 
 	@Override
-	public String code() {
+	public String getCodeValue() {
 		return c;
 	}
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 agwlvssainokuni
+ * Copyright 2015,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,7 +44,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import cherry.example.web.LogicalError;
 import cherry.example.web.basic.ex20.BasicEx20FormBase.Prop;
 import cherry.example.web.util.ViewNameUtil;
-import cherry.foundation.logicalerror.LogicalErrorUtil;
+import cherry.foundation.bizerror.BizErrorUtil;
 import cherry.foundation.onetimetoken.OneTimeTokenValidator;
 
 @Controller
@@ -97,7 +97,7 @@ public class BasicEx20ControllerImpl implements BasicEx20Controller {
 		}
 
 		if (!oneTimeTokenValidator.isValid(request.getNativeRequest(HttpServletRequest.class))) {
-			LogicalErrorUtil.rejectOnOneTimeTokenError(binding);
+			BizErrorUtil.rejectOnOneTimeTokenError(binding);
 			return withViewname(viewnameOfStart).build();
 		}
 
@@ -131,7 +131,7 @@ public class BasicEx20ControllerImpl implements BasicEx20Controller {
 
 		// 項目間チェック
 		if (form.getDt() == null && form.getTm() != null) {
-			LogicalErrorUtil.rejectValue(binding, Prop.Dt.getName(), LogicalError.RequiredWhen, Prop.Dt.resolve(),
+			BizErrorUtil.rejectValue(binding, Prop.Dt.getName(), LogicalError.RequiredWhen, Prop.Dt.resolve(),
 					Prop.Tm.resolve());
 		}
 
@@ -141,8 +141,7 @@ public class BasicEx20ControllerImpl implements BasicEx20Controller {
 
 		// 整合性チェック
 		if (service.exists(form.getText10())) {
-			LogicalErrorUtil.rejectValue(binding, Prop.Text10.getName(), LogicalError.AlreadyExists,
-					Prop.Text10.resolve());
+			BizErrorUtil.rejectValue(binding, Prop.Text10.getName(), LogicalError.AlreadyExists, Prop.Text10.resolve());
 		}
 
 		if (binding.hasErrors()) {

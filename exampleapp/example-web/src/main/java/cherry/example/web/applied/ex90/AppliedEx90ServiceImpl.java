@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 agwlvssainokuni
+ * Copyright 2015,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package cherry.example.web.applied.ex90;
 import static com.google.common.base.CaseFormat.LOWER_CAMEL;
 import static com.google.common.base.CaseFormat.LOWER_UNDERSCORE;
 import static com.google.common.base.CaseFormat.UPPER_CAMEL;
+import static com.querydsl.core.types.dsl.Expressions.ONE;
 import static java.util.Arrays.asList;
 
 import java.io.File;
@@ -44,12 +45,12 @@ import org.springframework.validation.BindingResult;
 import cherry.example.db.gen.query.QExTbl1;
 import cherry.example.web.LogicalError;
 import cherry.example.web.applied.ex90.AppliedEx90LoadFormBase.Prop;
-import cherry.foundation.logicalerror.LogicalErrorUtil;
+import cherry.foundation.bizerror.BizErrorUtil;
 import cherry.foundation.validator.DataBinderHelper;
 import cherry.goods.csv.CsvParser;
 
-import com.mysema.query.sql.SQLQueryFactory;
-import com.mysema.query.sql.dml.SQLInsertClause;
+import com.querydsl.sql.SQLQueryFactory;
+import com.querydsl.sql.dml.SQLInsertClause;
 
 @Service
 public class AppliedEx90ServiceImpl implements AppliedEx90Service {
@@ -100,8 +101,8 @@ public class AppliedEx90ServiceImpl implements AppliedEx90Service {
 						continue;
 					}
 
-					if (qf.from(et1).where(et1.text10.eq(dto.getText10())).exists()) {
-						LogicalErrorUtil.rejectValue(binding, Prop.Text10.getName(), LogicalError.AlreadyExists,
+					if (qf.from(et1).where(et1.text10.eq(dto.getText10())).select(ONE).fetchOne() != null) {
+						BizErrorUtil.rejectValue(binding, Prop.Text10.getName(), LogicalError.AlreadyExists,
 								Prop.Text10.resolve());
 						ngInfo.put(totalCount,
 								dataBinderHelper.resolveAllMessage(binding, LocaleContextHolder.getLocale()));

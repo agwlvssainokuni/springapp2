@@ -1,5 +1,5 @@
 /*
- * Copyright 2014,2015 agwlvssainokuni
+ * Copyright 2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import lombok.ToString;
 
 import org.springframework.context.MessageSourceResolvable;
 
-import cherry.foundation.logicalerror.LogicalErrorUtil;
+import cherry.foundation.bizerror.BizErrorUtil;
 
 @Getter
 @Setter
@@ -41,57 +41,61 @@ public abstract class BasicEx40FormBase implements Serializable {
 
 	@javax.validation.constraints.Min(value = -1000000000, groups = { javax.validation.groups.Default.class })
 	@javax.validation.constraints.Max(value = 1000000000, groups = { javax.validation.groups.Default.class })
-	@cherry.foundation.type.format.CustomNumberFormat
+	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.LONG)
 	private Long int64From;
 
 	@javax.validation.constraints.Min(value = -1000000000, groups = { javax.validation.groups.Default.class })
 	@javax.validation.constraints.Max(value = 1000000000, groups = { javax.validation.groups.Default.class })
-	@cherry.foundation.type.format.CustomNumberFormat
+	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.LONG)
 	private Long int64To;
 
 	@javax.validation.constraints.DecimalMin(value = "-1000000000", groups = { javax.validation.groups.Default.class })
 	@javax.validation.constraints.DecimalMax(value = "1000000000", groups = { javax.validation.groups.Default.class })
-	@cherry.foundation.type.format.CustomNumberFormat(1)
+	@cherry.foundation.validator.NumberScale(1)
+	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.DECIMAL_1)
 	private java.math.BigDecimal decimal1From;
 
 	@javax.validation.constraints.DecimalMin(value = "-1000000000", groups = { javax.validation.groups.Default.class })
 	@javax.validation.constraints.DecimalMax(value = "1000000000", groups = { javax.validation.groups.Default.class })
-	@cherry.foundation.type.format.CustomNumberFormat(1)
+	@cherry.foundation.validator.NumberScale(1)
+	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.DECIMAL_1)
 	private java.math.BigDecimal decimal1To;
 
 	@javax.validation.constraints.DecimalMin(value = "-1000000000", groups = { javax.validation.groups.Default.class })
 	@javax.validation.constraints.DecimalMax(value = "1000000000", groups = { javax.validation.groups.Default.class })
-	@cherry.foundation.type.format.CustomNumberFormat(3)
+	@cherry.foundation.validator.NumberScale(3)
+	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.DECIMAL_3)
 	private java.math.BigDecimal decimal3From;
 
 	@javax.validation.constraints.DecimalMin(value = "-1000000000", groups = { javax.validation.groups.Default.class })
 	@javax.validation.constraints.DecimalMax(value = "1000000000", groups = { javax.validation.groups.Default.class })
-	@cherry.foundation.type.format.CustomNumberFormat(3)
+	@cherry.foundation.validator.NumberScale(3)
+	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.DECIMAL_3)
 	private java.math.BigDecimal decimal3To;
 
-	@cherry.foundation.type.format.CustomDateTimeFormat()
-	private org.joda.time.LocalDate dtFrom;
+	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.DATE)
+	private java.time.LocalDate dtFrom;
 
-	@cherry.foundation.type.format.CustomDateTimeFormat()
-	private org.joda.time.LocalDate dtTo;
+	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.DATE)
+	private java.time.LocalDate dtTo;
 
-	@cherry.foundation.type.format.CustomDateTimeFormat()
-	private org.joda.time.LocalTime tmFrom;
+	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.TIME)
+	private java.time.LocalTime tmFrom;
 
-	@cherry.foundation.type.format.CustomDateTimeFormat()
-	private org.joda.time.LocalTime tmTo;
+	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.TIME)
+	private java.time.LocalTime tmTo;
 
-	@cherry.foundation.type.format.CustomDateTimeFormat()
-	private org.joda.time.LocalDate dtmFromD;
+	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.DATE)
+	private java.time.LocalDate dtmFromD;
 
-	@cherry.foundation.type.format.CustomDateTimeFormat()
-	private org.joda.time.LocalTime dtmFromT;
+	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.TIME)
+	private java.time.LocalTime dtmFromT;
 
-	@cherry.foundation.type.format.CustomDateTimeFormat()
-	private org.joda.time.LocalDate dtmToD;
+	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.DATE)
+	private java.time.LocalDate dtmToD;
 
-	@cherry.foundation.type.format.CustomDateTimeFormat()
-	private org.joda.time.LocalTime dtmToT;
+	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.TIME)
+	private java.time.LocalTime dtmToT;
 
 	private long pno = 0L;
 
@@ -129,7 +133,7 @@ public abstract class BasicEx40FormBase implements Serializable {
 		}
 
 		public MessageSourceResolvable resolve() {
-			return LogicalErrorUtil.resolve(nameWithForm);
+			return BizErrorUtil.resolve(nameWithForm);
 		}
 	}
 

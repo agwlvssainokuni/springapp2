@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 agwlvssainokuni
+ * Copyright 2015,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,9 @@
 
 package cherry.example.web;
 
-import cherry.foundation.logicalerror.ILogicalError;
+import cherry.foundation.bizerror.IBizErrId;
 
-public enum LogicalError implements ILogicalError {
+public enum LogicalError implements IBizErrId {
 	/** {1} を指定する時は {0} が必須です。 */
 	RequiredWhen,
 	/** 登録済みです。{0} を見直してください。 */
@@ -27,7 +27,7 @@ public enum LogicalError implements ILogicalError {
 	RangeFromTo;
 
 	@Override
-	public String code() {
+	public String getId() {
 		return name();
 	}
 

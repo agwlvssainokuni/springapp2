@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 agwlvssainokuni
+ * Copyright 2015,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,12 +47,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import cherry.example.common.io.TempDirRepository;
 import cherry.example.web.LogicalError;
 import cherry.example.web.applied.ex90.AppliedEx90FormBase.Prop;
 import cherry.example.web.util.ViewNameUtil;
-import cherry.foundation.logicalerror.LogicalErrorUtil;
+import cherry.foundation.bizerror.BizErrorUtil;
 import cherry.foundation.onetimetoken.OneTimeTokenValidator;
+import cherry.foundation.tempdir.TempDirectoryManager;
 
 import com.google.common.io.ByteStreams;
 import com.ibm.icu.text.MessageFormat;
@@ -67,7 +67,7 @@ public class AppliedEx90ControllerImpl implements AppliedEx90Controller {
 	private AppliedEx90Service service;
 
 	@Autowired
-	private TempDirRepository tempDirRepository;
+	private TempDirectoryManager tempDirectoryManager;
 
 	private final String viewnameOfStart = ViewNameUtil.fromMethodCall(on(AppliedEx90Controller.class).start(null,
 			null, null, null, null, null));
@@ -117,7 +117,7 @@ public class AppliedEx90ControllerImpl implements AppliedEx90Controller {
 			}
 
 			if (!oneTimeTokenValidator.isValid(request.getNativeRequest(HttpServletRequest.class))) {
-				LogicalErrorUtil.rejectOnOneTimeTokenError(binding);
+				BizErrorUtil.rejectOnOneTimeTokenError(binding);
 				return withViewname(viewnameOfStart).build();
 			}
 
@@ -147,7 +147,7 @@ public class AppliedEx90ControllerImpl implements AppliedEx90Controller {
 
 		// 項目間チェック
 		if (form.getDt() == null && form.getTm() != null) {
-			LogicalErrorUtil.rejectValue(binding, Prop.Dt.getName(), LogicalError.RequiredWhen, Prop.Dt.resolve(),
+			BizErrorUtil.rejectValue(binding, Prop.Dt.getName(), LogicalError.RequiredWhen, Prop.Dt.resolve(),
 					Prop.Tm.resolve());
 		}
 
@@ -171,8 +171,8 @@ public class AppliedEx90ControllerImpl implements AppliedEx90Controller {
 	private Pair<String, List<String>> createTempFile(List<MultipartFile> file) {
 		try {
 
-			String dirname = tempDirRepository.createTempDir();
-			File dir = tempDirRepository.getTempDir(dirname);
+			String dirname = tempDirectoryManager.prepareTempDirectory();
+			File dir = tempDirectoryManager.getTempDirectory(dirname);
 
 			List<String> list = new ArrayList<>(file.size());
 			for (int num = 0; num < file.size(); num++) {
@@ -193,7 +193,7 @@ public class AppliedEx90ControllerImpl implements AppliedEx90Controller {
 
 	private List<File> getTempFile(String dirname, int numOfFile) {
 
-		File dir = tempDirRepository.getTempDir(dirname);
+		File dir = tempDirectoryManager.getTempDirectory(dirname);
 
 		List<File> list = new ArrayList<>(numOfFile);
 		for (int num = 0; num < numOfFile; num++) {
@@ -206,7 +206,7 @@ public class AppliedEx90ControllerImpl implements AppliedEx90Controller {
 
 	private void deleteTempDir(String dirname) {
 		if (StringUtils.isNotEmpty(dirname)) {
-			tempDirRepository.deleteTempDir(dirname);
+			tempDirectoryManager.cleanupTempDirectory(dirname);
 		}
 	}
 

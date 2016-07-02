@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 agwlvssainokuni
+ * Copyright 2015,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,22 +26,22 @@ import org.springframework.stereotype.Component;
 @Component("webConfig")
 public class Config {
 
-	@Value("${web.app.defaultPageSize}")
+	@Value("${example-web.app.defaultPageSize}")
 	private long defaultPageSize;
 
-	@Value("${web.app.historySize}")
+	@Value("${example-web.app.historySize}")
 	private int historySize;
 
-	@Value("${web.validation.ex40.list1}")
+	@Value("${example-web.validation.ex40.list1}")
 	private Resource validationEx40list1;
 
-	@Value("${web.validation.ex40.list2}")
+	@Value("${example-web.validation.ex40.list2}")
 	private Resource validationEx40list2;
 
-	@Value("${web.validation.ex40.map1}")
+	@Value("${example-web.validation.ex40.map1}")
 	private Resource validationEx40map1;
 
-	@Value("${web.validation.ex40.map2}")
+	@Value("${example-web.validation.ex40.map2}")
 	private Resource validationEx40map2;
 
 }

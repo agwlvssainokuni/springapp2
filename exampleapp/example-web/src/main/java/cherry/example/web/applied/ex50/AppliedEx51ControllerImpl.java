@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 agwlvssainokuni
+ * Copyright 2015,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,7 +41,7 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import cherry.example.web.util.ViewNameUtil;
-import cherry.foundation.logicalerror.LogicalErrorUtil;
+import cherry.foundation.bizerror.BizErrorUtil;
 import cherry.foundation.onetimetoken.OneTimeTokenValidator;
 
 @Controller
@@ -119,13 +119,13 @@ public class AppliedEx51ControllerImpl implements AppliedEx51Controller {
 		}
 
 		if (!oneTimeTokenValidator.isValid(request.getNativeRequest(HttpServletRequest.class))) {
-			LogicalErrorUtil.rejectOnOneTimeTokenError(binding);
+			BizErrorUtil.rejectOnOneTimeTokenError(binding);
 			return withViewname(viewnameOfStart).build();
 		}
 
 		long count = service.update(form);
 		if (count != form.getItem().size()) {
-			LogicalErrorUtil.rejectOnOptimisticLockError(binding);
+			BizErrorUtil.rejectOnOptimisticLockError(binding);
 			return withViewname(viewnameOfStart).build();
 		}
 

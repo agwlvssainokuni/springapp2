@@ -42,7 +42,7 @@
 	<tag>
 		<description>ObjectRenderer</description>
 		<name>render</name>
-		<tag-class>cherry.foundation.render.RenderTag</tag-class>
+		<tag-class>cherry.foundation.renderer.RenderTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>value</name>
@@ -233,17 +233,17 @@
 	</tag>
 
 	<function>
-		<description>GetLabeledEnumList</description>
-		<name>getLabeledEnumList</name>
+		<description>GetEnumList</description>
+		<name>getEnumList</name>
 		<function-class>cherry.foundation.type.EnumUtil</function-class>
-		<function-signature>java.util.List getLabeledEnumList(java.lang.String)</function-signature>
+		<function-signature>java.util.List getEnumList(java.lang.String)</function-signature>
 	</function>
 
 	<function>
-		<description>GetLabeledEnumCodeList</description>
-		<name>getLabeledEnumCodeList</name>
+		<description>GetEnumCodeList</description>
+		<name>getEnumCodeList</name>
 		<function-class>cherry.foundation.type.EnumCodeUtil</function-class>
-		<function-signature>java.util.List getLabeledCodeList(java.lang.String)</function-signature>
+		<function-signature>java.util.List getCodeList(java.lang.String)</function-signature>
 	</function>
 
 </taglib>

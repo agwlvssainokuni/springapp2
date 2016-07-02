@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 agwlvssainokuni
+ * Copyright 2015,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import static cherry.example.web.ParamDef.REQ_ID;
 import static cherry.example.web.util.ModelAndViewBuilder.redirect;
 import static cherry.example.web.util.ModelAndViewBuilder.withViewname;
 import static cherry.example.web.util.ModelAndViewBuilder.withoutView;
-import static cherry.foundation.springmvc.Contract.shouldExist;
+import static cherry.foundation.spring.webmvc.Http4xxChecker.throwNotFoundIfNull;
 import static com.google.common.base.Preconditions.checkState;
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.fromMethodCall;
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
@@ -45,7 +45,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import cherry.example.web.LogicalError;
 import cherry.example.web.basic.ex20.BasicEx20FormBase.Prop;
 import cherry.example.web.util.ViewNameUtil;
-import cherry.foundation.logicalerror.LogicalErrorUtil;
+import cherry.foundation.bizerror.BizErrorUtil;
 import cherry.foundation.onetimetoken.OneTimeTokenValidator;
 
 @Controller
@@ -70,7 +70,7 @@ public class BasicEx21ControllerImpl implements BasicEx21Controller {
 	public ModelAndView start(long id, BasicEx20Form form, BindingResult binding, Authentication auth, Locale locale,
 			SitePreference sitePref, NativeWebRequest request) {
 		BasicEx20Form f = service.findById(id);
-		shouldExist(f, BasicEx20Form.class, id);
+		throwNotFoundIfNull(f, BasicEx20Form.class, id);
 		return withViewname(viewnameOfStart).addObject(f).build();
 	}
 
@@ -100,7 +100,7 @@ public class BasicEx21ControllerImpl implements BasicEx21Controller {
 		}
 
 		if (!oneTimeTokenValidator.isValid(request.getNativeRequest(HttpServletRequest.class))) {
-			LogicalErrorUtil.rejectOnOneTimeTokenError(binding);
+			BizErrorUtil.rejectOnOneTimeTokenError(binding);
 			return withViewname(viewnameOfStart).build();
 		}
 
@@ -135,7 +135,7 @@ public class BasicEx21ControllerImpl implements BasicEx21Controller {
 
 		// 項目間チェック
 		if (form.getDt() == null && form.getTm() != null) {
-			LogicalErrorUtil.rejectValue(binding, Prop.Dt.getName(), LogicalError.RequiredWhen, Prop.Dt.resolve(),
+			BizErrorUtil.rejectValue(binding, Prop.Dt.getName(), LogicalError.RequiredWhen, Prop.Dt.resolve(),
 					Prop.Tm.resolve());
 		}
 
@@ -145,8 +145,7 @@ public class BasicEx21ControllerImpl implements BasicEx21Controller {
 
 		// 整合性チェック
 		if (service.exists(id, form.getText10())) {
-			LogicalErrorUtil.rejectValue(binding, Prop.Text10.getName(), LogicalError.AlreadyExists,
-					Prop.Text10.resolve());
+			BizErrorUtil.rejectValue(binding, Prop.Text10.getName(), LogicalError.AlreadyExists, Prop.Text10.resolve());
 		}
 
 		if (binding.hasErrors()) {

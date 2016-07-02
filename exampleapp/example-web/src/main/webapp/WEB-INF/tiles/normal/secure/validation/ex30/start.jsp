@@ -17,16 +17,10 @@
 					<f:errors path="notnull" element="div" />
 					<f:errors path="ldtmiso" element="div" />
 					<f:errors path="ldtmpat" element="div" />
-					<f:errors path="ldtmfm" element="div" />
-					<f:errors path="ldtmto" element="div" />
 					<f:errors path="ldtiso" element="div" />
 					<f:errors path="ldtpat" element="div" />
-					<f:errors path="ldtfm" element="div" />
-					<f:errors path="ldtto" element="div" />
 					<f:errors path="ltmiso" element="div" />
 					<f:errors path="ltmpat" element="div" />
-					<f:errors path="ltmfm" element="div" />
-					<f:errors path="ltmto" element="div" />
 					<f:errors path="ldtmmin19000101in" element="div" />
 					<f:errors path="ldtmmax30000101in" element="div" />
 					<f:errors path="ldtmmin19000101ex" element="div" />
@@ -67,22 +61,6 @@
 		</div>
 		<div class="form-group">
 			<div>
-				<f:label path="ldtmfm" cssClass="col-md-3 control-label" cssErrorClass="col-md-3 control-label has-error">日時【カスタム(範囲fm)】</f:label>
-			</div>
-			<div class="col-md-9">
-				<f:input path="ldtmfm" cssClass="form-control" cssErrorClass="form-control has-error" />
-			</div>
-		</div>
-		<div class="form-group">
-			<div>
-				<f:label path="ldtmto" cssClass="col-md-3 control-label" cssErrorClass="col-md-3 control-label has-error">日時【カスタム(範囲to)】</f:label>
-			</div>
-			<div class="col-md-9">
-				<f:input path="ldtmto" cssClass="form-control" cssErrorClass="form-control has-error" />
-			</div>
-		</div>
-		<div class="form-group">
-			<div>
 				<f:label path="ldtiso" cssClass="col-md-3 control-label" cssErrorClass="col-md-3 control-label has-error">日付【標準ISO】</f:label>
 			</div>
 			<div class="col-md-9">
@@ -99,22 +77,6 @@
 		</div>
 		<div class="form-group">
 			<div>
-				<f:label path="ldtfm" cssClass="col-md-3 control-label" cssErrorClass="col-md-3 control-label has-error">日付【カスタム(範囲fm)】</f:label>
-			</div>
-			<div class="col-md-9">
-				<f:input path="ldtfm" cssClass="form-control" cssErrorClass="form-control has-error" />
-			</div>
-		</div>
-		<div class="form-group">
-			<div>
-				<f:label path="ldtto" cssClass="col-md-3 control-label" cssErrorClass="col-md-3 control-label has-error">日付【カスタム(範囲to)】</f:label>
-			</div>
-			<div class="col-md-9">
-				<f:input path="ldtto" cssClass="form-control" cssErrorClass="form-control has-error" />
-			</div>
-		</div>
-		<div class="form-group">
-			<div>
 				<f:label path="ltmiso" cssClass="col-md-3 control-label" cssErrorClass="col-md-3 control-label has-error">時刻【標準ISO】</f:label>
 			</div>
 			<div class="col-md-9">
@@ -127,22 +89,6 @@
 			</div>
 			<div class="col-md-9">
 				<f:input path="ltmpat" cssClass="form-control" cssErrorClass="form-control has-error" />
-			</div>
-		</div>
-		<div class="form-group">
-			<div>
-				<f:label path="ltmfm" cssClass="col-md-3 control-label" cssErrorClass="col-md-3 control-label has-error">時刻【カスタム(範囲fm)】</f:label>
-			</div>
-			<div class="col-md-9">
-				<f:input path="ltmfm" cssClass="form-control" cssErrorClass="form-control has-error" />
-			</div>
-		</div>
-		<div class="form-group">
-			<div>
-				<f:label path="ltmto" cssClass="col-md-3 control-label" cssErrorClass="col-md-3 control-label has-error">時刻【カスタム(範囲to)】</f:label>
-			</div>
-			<div class="col-md-9">
-				<f:input path="ltmto" cssClass="form-control" cssErrorClass="form-control has-error" />
 			</div>
 		</div>
 		<div class="form-group">

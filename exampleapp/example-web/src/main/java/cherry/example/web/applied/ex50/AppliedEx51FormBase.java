@@ -1,5 +1,5 @@
 /*
- * Copyright 2014,2015 agwlvssainokuni
+ * Copyright 2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import lombok.ToString;
 
 import org.springframework.context.MessageSourceResolvable;
 
-import cherry.foundation.logicalerror.LogicalErrorUtil;
+import cherry.foundation.bizerror.BizErrorUtil;
 
 @Getter
 @Setter
@@ -35,14 +35,14 @@ public abstract class AppliedEx51FormBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@cherry.foundation.type.format.CustomDateTimeFormat()
-	private org.joda.time.LocalDate dt;
+	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.DATE)
+	private java.time.LocalDate dt;
 
-	@cherry.foundation.type.format.CustomDateTimeFormat()
-	private org.joda.time.LocalTime tm;
+	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.TIME)
+	private java.time.LocalTime tm;
 
-	@cherry.foundation.type.format.CustomDateTimeFormat()
-	private org.joda.time.LocalDateTime dtm;
+	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.DATETIME)
+	private java.time.LocalDateTime dtm;
 
 	@Getter
 	public enum Prop {
@@ -60,7 +60,7 @@ public abstract class AppliedEx51FormBase implements Serializable {
 		}
 
 		public MessageSourceResolvable resolve() {
-			return LogicalErrorUtil.resolve(nameWithForm);
+			return BizErrorUtil.resolve(nameWithForm);
 		}
 	}
 
