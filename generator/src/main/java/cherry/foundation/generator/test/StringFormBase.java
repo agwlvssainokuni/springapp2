@@ -1,5 +1,5 @@
 /*
- * Copyright 2014,2015 agwlvssainokuni
+ * Copyright 2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import lombok.ToString;
 
 import org.springframework.context.MessageSourceResolvable;
 
-import cherry.foundation.logicalerror.LogicalErrorUtil;
+import cherry.foundation.bizerror.BizErrorUtil;
 
 @Getter
 @Setter
@@ -128,7 +128,7 @@ public abstract class StringFormBase implements Serializable {
 		}
 
 		public MessageSourceResolvable resolve() {
-			return LogicalErrorUtil.resolve(nameWithForm);
+			return BizErrorUtil.resolve(nameWithForm);
 		}
 	}
 

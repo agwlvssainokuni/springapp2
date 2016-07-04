@@ -1,5 +1,5 @@
 /*
- * Copyright 2014,2015 agwlvssainokuni
+ * Copyright 2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import lombok.ToString;
 
 import org.springframework.context.MessageSourceResolvable;
 
-import cherry.foundation.logicalerror.LogicalErrorUtil;
+import cherry.foundation.bizerror.BizErrorUtil;
 
 @Getter
 @Setter
@@ -36,39 +36,39 @@ public abstract class NumberFormBase implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@javax.validation.constraints.NotNull(groups = { javax.validation.groups.Default.class })
-	@cherry.foundation.type.format.CustomNumberFormat
+	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.INTEGER)
 	private Integer int1;
 
 	@javax.validation.constraints.Min(value = 10, groups = { javax.validation.groups.Default.class })
-	@cherry.foundation.type.format.CustomNumberFormat
+	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.INTEGER)
 	private Integer int2;
 
 	@javax.validation.constraints.Max(value = 10, groups = { javax.validation.groups.Default.class })
-	@cherry.foundation.type.format.CustomNumberFormat
+	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.INTEGER)
 	private Integer int3;
 
 	@javax.validation.constraints.NotNull(groups = { javax.validation.groups.Default.class })
-	@cherry.foundation.type.format.CustomNumberFormat
+	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.LONG)
 	private Long long1;
 
 	@javax.validation.constraints.Min(value = 10, groups = { javax.validation.groups.Default.class })
-	@cherry.foundation.type.format.CustomNumberFormat
+	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.LONG)
 	private Long long2;
 
 	@javax.validation.constraints.Max(value = 10, groups = { javax.validation.groups.Default.class })
-	@cherry.foundation.type.format.CustomNumberFormat
+	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.LONG)
 	private Long long3;
 
 	@javax.validation.constraints.NotNull(groups = { javax.validation.groups.Default.class })
-	@cherry.foundation.type.format.CustomNumberFormat(pattern = "###0.##", scale = 2)
+	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.DECIMAL_X)
 	private java.math.BigDecimal decimal1;
 
 	@javax.validation.constraints.DecimalMin(value = "10", groups = { javax.validation.groups.Default.class })
-	@cherry.foundation.type.format.CustomNumberFormat(pattern = "###0.##", scale = 2)
+	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.DECIMAL_X)
 	private java.math.BigDecimal decimal2;
 
 	@javax.validation.constraints.DecimalMax(value = "10", groups = { javax.validation.groups.Default.class })
-	@cherry.foundation.type.format.CustomNumberFormat(pattern = "###0.##", scale = 2)
+	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.DECIMAL_X)
 	private java.math.BigDecimal decimal3;
 
 	@Getter
@@ -93,7 +93,7 @@ public abstract class NumberFormBase implements Serializable {
 		}
 
 		public MessageSourceResolvable resolve() {
-			return LogicalErrorUtil.resolve(nameWithForm);
+			return BizErrorUtil.resolve(nameWithForm);
 		}
 	}
 

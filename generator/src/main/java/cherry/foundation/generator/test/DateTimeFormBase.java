@@ -1,5 +1,5 @@
 /*
- * Copyright 2014,2015 agwlvssainokuni
+ * Copyright 2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import lombok.ToString;
 
 import org.springframework.context.MessageSourceResolvable;
 
-import cherry.foundation.logicalerror.LogicalErrorUtil;
+import cherry.foundation.bizerror.BizErrorUtil;
 
 @Getter
 @Setter
@@ -36,34 +36,34 @@ public abstract class DateTimeFormBase implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@javax.validation.constraints.NotNull(groups = { javax.validation.groups.Default.class })
-	@cherry.foundation.type.format.CustomDateTimeFormat()
-	private org.joda.time.LocalDate date1;
+	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.DATE)
+	private java.time.LocalDate date1;
 
-	@cherry.foundation.type.format.CustomDateTimeFormat(cherry.foundation.type.format.CustomDateTimeFormat.Range.FROM)
-	private org.joda.time.LocalDate date2;
+	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.DATE)
+	private java.time.LocalDate date2;
 
-	@cherry.foundation.type.format.CustomDateTimeFormat(cherry.foundation.type.format.CustomDateTimeFormat.Range.TO)
-	private org.joda.time.LocalDate date3;
-
-	@javax.validation.constraints.NotNull(groups = { javax.validation.groups.Default.class })
-	@cherry.foundation.type.format.CustomDateTimeFormat()
-	private org.joda.time.LocalTime time1;
-
-	@cherry.foundation.type.format.CustomDateTimeFormat(cherry.foundation.type.format.CustomDateTimeFormat.Range.FROM)
-	private org.joda.time.LocalTime time2;
-
-	@cherry.foundation.type.format.CustomDateTimeFormat(cherry.foundation.type.format.CustomDateTimeFormat.Range.TO)
-	private org.joda.time.LocalTime time3;
+	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.DATE)
+	private java.time.LocalDate date3;
 
 	@javax.validation.constraints.NotNull(groups = { javax.validation.groups.Default.class })
-	@cherry.foundation.type.format.CustomDateTimeFormat()
-	private org.joda.time.LocalDateTime datetime1;
+	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.TIME)
+	private java.time.LocalTime time1;
 
-	@cherry.foundation.type.format.CustomDateTimeFormat(cherry.foundation.type.format.CustomDateTimeFormat.Range.FROM)
-	private org.joda.time.LocalDateTime datetime2;
+	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.TIME)
+	private java.time.LocalTime time2;
 
-	@cherry.foundation.type.format.CustomDateTimeFormat(cherry.foundation.type.format.CustomDateTimeFormat.Range.TO)
-	private org.joda.time.LocalDateTime datetime3;
+	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.TIME)
+	private java.time.LocalTime time3;
+
+	@javax.validation.constraints.NotNull(groups = { javax.validation.groups.Default.class })
+	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.DATETIME)
+	private java.time.LocalDateTime datetime1;
+
+	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.DATETIME)
+	private java.time.LocalDateTime datetime2;
+
+	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.DATETIME)
+	private java.time.LocalDateTime datetime3;
 
 	@Getter
 	public enum Prop {
@@ -87,7 +87,7 @@ public abstract class DateTimeFormBase implements Serializable {
 		}
 
 		public MessageSourceResolvable resolve() {
-			return LogicalErrorUtil.resolve(nameWithForm);
+			return BizErrorUtil.resolve(nameWithForm);
 		}
 	}
 
