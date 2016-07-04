@@ -94,7 +94,7 @@ public class BasicEx90ServiceImpl implements BasicEx90Service {
 					continue;
 				}
 
-				if (qf.from(et1).where(et1.text10.eq(dto.getText10())).select(ONE).fetchOne() != null) {
+				if (qf.from(et1).where(et1.text10.eq(dto.getText10())).select(ONE).fetchFirst() != null) {
 					BizErrorUtil.rejectValue(binding, Prop.Text10.getName(), LogicalError.AlreadyExists,
 							Prop.Text10.resolve());
 					ngInfo.put(totalCount, dataBinderHelper.resolveAllMessage(binding, LocaleContextHolder.getLocale()));

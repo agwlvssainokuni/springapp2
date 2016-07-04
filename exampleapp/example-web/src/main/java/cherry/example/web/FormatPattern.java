@@ -22,11 +22,11 @@ public class FormatPattern {
 
 	public static final String LONG = "###0";
 
-	public static final String DECIMAL_1 = "###0.0#";
+	public static final String DECIMAL_1 = "###0.0#########";
 
-	public static final String DECIMAL_2 = "###0.00#";
+	public static final String DECIMAL_2 = "###0.00########";
 
-	public static final String DECIMAL_3 = "###0.000#";
+	public static final String DECIMAL_3 = "###0.000#######";
 
 	public static final String DECIMAL_X = "###0.##########";
 

@@ -42,7 +42,7 @@ public class BasicEx10ServiceImpl implements BasicEx10Service {
 	@Transactional
 	@Override
 	public boolean exists(String text10) {
-		return qf.from(et1).where(et1.text10.eq(text10)).select(ONE).fetchOne() != null;
+		return qf.from(et1).where(et1.text10.eq(text10)).select(ONE).fetchFirst() != null;
 	}
 
 	@Transactional
@@ -75,7 +75,7 @@ public class BasicEx10ServiceImpl implements BasicEx10Service {
 	@Transactional
 	@Override
 	public boolean exists(long id, String text10) {
-		return qf.from(et1).where(et1.id.ne(id), et1.text10.eq(text10)).select(ONE).fetchOne() != null;
+		return qf.from(et1).where(et1.id.ne(id), et1.text10.eq(text10)).select(ONE).fetchFirst() != null;
 	}
 
 	@Transactional

@@ -11,6 +11,8 @@
 	<import resource="appctx-example-common.xml" />
 	<import resource="appctx-foundation-servlet.xml" />
 	<import resource="appctx-foundation-servletext.xml" />
+	<import resource="appctx-foundation-testtool.xml" />
+	<import resource="appctx-foundation-testtool-web.xml" />
 
 	<context:component-scan base-package="cherry.example.web" />
 
