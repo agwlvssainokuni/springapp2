@@ -18,9 +18,9 @@ package cherry.example.web.applied.ex30;
 
 import static cherry.example.web.ParamDef.REQ_ID;
 import static cherry.example.web.ParamDef.REQ_ROWNUM;
-import static cherry.example.web.util.ModelAndViewBuilder.redirect;
-import static cherry.example.web.util.ModelAndViewBuilder.withViewname;
-import static cherry.example.web.util.ModelAndViewBuilder.withoutView;
+import static cherry.foundation.spring.webmvc.ModelAndViewBuilder.redirect;
+import static cherry.foundation.spring.webmvc.ModelAndViewBuilder.withViewname;
+import static cherry.foundation.spring.webmvc.ModelAndViewBuilder.withoutView;
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.fromMethodCall;
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
 
@@ -38,10 +38,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import cherry.example.web.LogicalError;
+import cherry.example.web.BizErrorId;
 import cherry.example.web.applied.ex30.AppliedEx31SubFormBase.Prop;
-import cherry.example.web.util.ViewNameUtil;
 import cherry.foundation.bizerror.BizErrorUtil;
+import cherry.foundation.spring.webmvc.ViewNameUtil;
 
 @Controller
 public class AppliedEx32ControllerImpl implements AppliedEx32Controller {
@@ -115,7 +115,7 @@ public class AppliedEx32ControllerImpl implements AppliedEx32Controller {
 		// 項目間チェック
 		if (form.getItem().get(rownum).getDt() == null && form.getItem().get(rownum).getTm() != null) {
 			BizErrorUtil.rejectValue(binding, AppliedEx32Form.getItemPropName(rownum, Prop.Dt),
-					LogicalError.RequiredWhen, AppliedEx32Form.resolveItemProp(rownum, Prop.Dt),
+					BizErrorId.RequiredWhen, AppliedEx32Form.resolveItemProp(rownum, Prop.Dt),
 					AppliedEx32Form.resolveItemProp(rownum, Prop.Tm));
 		}
 

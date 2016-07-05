@@ -16,8 +16,8 @@
 
 package cherry.example.web.applied.ex40;
 
-import static cherry.example.web.util.ModelAndViewBuilder.redirect;
-import static cherry.example.web.util.ModelAndViewBuilder.withViewname;
+import static cherry.foundation.spring.webmvc.ModelAndViewBuilder.redirect;
+import static cherry.foundation.spring.webmvc.ModelAndViewBuilder.withViewname;
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.fromMethodCall;
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
 
@@ -39,14 +39,14 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import cherry.example.db.gen.query.BExTbl1;
+import cherry.example.web.BizErrorId;
 import cherry.example.web.Config;
-import cherry.example.web.LogicalError;
 import cherry.example.web.SortBy;
 import cherry.example.web.SortOrder;
 import cherry.example.web.SortParam;
 import cherry.example.web.applied.ex40.AppliedEx40FormBase.Prop;
-import cherry.example.web.util.ViewNameUtil;
 import cherry.foundation.bizerror.BizErrorUtil;
+import cherry.foundation.spring.webmvc.ViewNameUtil;
 import cherry.goods.paginate.PagedList;
 
 @Controller
@@ -142,22 +142,22 @@ public class AppliedEx40ControllerImpl implements AppliedEx40Controller {
 		// 項目間チェック
 		if (form.getDtFrom() != null && form.getDtTo() != null) {
 			if (form.getDtFrom().isAfter(form.getDtTo())) {
-				BizErrorUtil.rejectValue(binding, Prop.DtFrom.getName(), LogicalError.RangeFromTo,
-						Prop.DtFrom.resolve(), Prop.DtTo.resolve());
+				BizErrorUtil.rejectValue(binding, Prop.DtFrom.getName(), BizErrorId.RangeFromTo, Prop.DtFrom.resolve(),
+						Prop.DtTo.resolve());
 			}
 		}
 		if (form.getTmFrom() != null && form.getTmTo() != null) {
 			if (form.getTmFrom().isAfter(form.getTmTo())) {
-				BizErrorUtil.rejectValue(binding, Prop.TmFrom.getName(), LogicalError.RangeFromTo,
-						Prop.TmFrom.resolve(), Prop.TmTo.resolve());
+				BizErrorUtil.rejectValue(binding, Prop.TmFrom.getName(), BizErrorId.RangeFromTo, Prop.TmFrom.resolve(),
+						Prop.TmTo.resolve());
 			}
 		}
 		if (form.getDtmFromD() == null && form.getDtmFromT() != null) {
-			BizErrorUtil.rejectValue(binding, Prop.DtmFromD.getName(), LogicalError.RequiredWhen,
+			BizErrorUtil.rejectValue(binding, Prop.DtmFromD.getName(), BizErrorId.RequiredWhen,
 					Prop.DtmFromD.resolve(), Prop.DtmFromT.resolve());
 		}
 		if (form.getDtmToD() == null && form.getDtmToT() != null) {
-			BizErrorUtil.rejectValue(binding, Prop.DtmToD.getName(), LogicalError.RequiredWhen, Prop.DtmToD.resolve(),
+			BizErrorUtil.rejectValue(binding, Prop.DtmToD.getName(), BizErrorId.RequiredWhen, Prop.DtmToD.resolve(),
 					Prop.DtmToT.resolve());
 		}
 		if (form.getDtmFromD() != null && form.getDtmFromT() != null && form.getDtmToD() != null
@@ -165,7 +165,7 @@ public class AppliedEx40ControllerImpl implements AppliedEx40Controller {
 			LocalDateTime dtmFrom = form.getDtmFromD().atTime(form.getDtmFromT());
 			LocalDateTime dtmTo = form.getDtmToD().atTime(form.getDtmToT());
 			if (dtmFrom.isAfter(dtmTo)) {
-				BizErrorUtil.rejectValue(binding, Prop.DtmFromD.getName(), LogicalError.RangeFromTo,
+				BizErrorUtil.rejectValue(binding, Prop.DtmFromD.getName(), BizErrorId.RangeFromTo,
 						Prop.DtmFromD.resolve(), Prop.DtmToD.resolve());
 			}
 		}

@@ -43,7 +43,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
 import cherry.example.db.gen.query.QExTbl1;
-import cherry.example.web.LogicalError;
+import cherry.example.web.BizErrorId;
 import cherry.example.web.applied.ex90.AppliedEx90LoadFormBase.Prop;
 import cherry.foundation.bizerror.BizErrorUtil;
 import cherry.foundation.validator.DataBinderHelper;
@@ -102,7 +102,7 @@ public class AppliedEx90ServiceImpl implements AppliedEx90Service {
 					}
 
 					if (qf.from(et1).where(et1.text10.eq(dto.getText10())).select(ONE).fetchFirst() != null) {
-						BizErrorUtil.rejectValue(binding, Prop.Text10.getName(), LogicalError.AlreadyExists,
+						BizErrorUtil.rejectValue(binding, Prop.Text10.getName(), BizErrorId.AlreadyExists,
 								Prop.Text10.resolve());
 						ngInfo.put(totalCount,
 								dataBinderHelper.resolveAllMessage(binding, LocaleContextHolder.getLocale()));

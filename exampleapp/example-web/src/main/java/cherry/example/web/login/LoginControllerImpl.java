@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 agwlvssainokuni
+ * Copyright 2015,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,8 @@
 
 package cherry.example.web.login;
 
-import static cherry.example.web.util.ModelAndViewBuilder.redirect;
-import static cherry.example.web.util.ModelAndViewBuilder.withoutView;
+import static cherry.foundation.spring.webmvc.ModelAndViewBuilder.redirect;
+import static cherry.foundation.spring.webmvc.ModelAndViewBuilder.withoutView;
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.fromMethodCall;
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
 

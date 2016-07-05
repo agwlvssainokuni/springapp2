@@ -18,10 +18,10 @@ package cherry.example.web.applied.ex20;
 
 import static cherry.example.web.ParamDef.FLASH_UPDATED;
 import static cherry.example.web.ParamDef.REQ_ID;
-import static cherry.example.web.util.ModelAndViewBuilder.redirect;
-import static cherry.example.web.util.ModelAndViewBuilder.withViewname;
-import static cherry.example.web.util.ModelAndViewBuilder.withoutView;
 import static cherry.foundation.spring.webmvc.Http4xxChecker.throwNotFoundIfNull;
+import static cherry.foundation.spring.webmvc.ModelAndViewBuilder.redirect;
+import static cherry.foundation.spring.webmvc.ModelAndViewBuilder.withViewname;
+import static cherry.foundation.spring.webmvc.ModelAndViewBuilder.withoutView;
 import static com.google.common.base.Preconditions.checkState;
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.fromMethodCall;
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
@@ -43,11 +43,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import cherry.example.web.LogicalError;
+import cherry.example.web.BizErrorId;
 import cherry.example.web.applied.ex20.AppliedEx20FormBase.Prop;
-import cherry.example.web.util.ViewNameUtil;
 import cherry.foundation.bizerror.BizErrorUtil;
 import cherry.foundation.onetimetoken.OneTimeTokenValidator;
+import cherry.foundation.spring.webmvc.ViewNameUtil;
 
 @Controller
 public class AppliedEx22ControllerImpl implements AppliedEx22Controller {
@@ -147,7 +147,7 @@ public class AppliedEx22ControllerImpl implements AppliedEx22Controller {
 
 		// 項目間チェック
 		if (form.getDt() == null && form.getTm() != null) {
-			BizErrorUtil.rejectValue(binding, Prop.Dt.getName(), LogicalError.RequiredWhen, Prop.Dt.resolve(),
+			BizErrorUtil.rejectValue(binding, Prop.Dt.getName(), BizErrorId.RequiredWhen, Prop.Dt.resolve(),
 					Prop.Tm.resolve());
 		}
 
@@ -157,7 +157,7 @@ public class AppliedEx22ControllerImpl implements AppliedEx22Controller {
 
 		// 整合性チェック
 		if (service.exists(id, form.getText10())) {
-			BizErrorUtil.rejectValue(binding, Prop.Text10.getName(), LogicalError.AlreadyExists, Prop.Text10.resolve());
+			BizErrorUtil.rejectValue(binding, Prop.Text10.getName(), BizErrorId.AlreadyExists, Prop.Text10.resolve());
 		}
 
 		if (binding.hasErrors()) {

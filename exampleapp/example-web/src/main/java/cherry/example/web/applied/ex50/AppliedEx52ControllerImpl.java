@@ -16,9 +16,9 @@
 
 package cherry.example.web.applied.ex50;
 
-import static cherry.example.web.util.ModelAndViewBuilder.redirect;
-import static cherry.example.web.util.ModelAndViewBuilder.withViewname;
-import static cherry.example.web.util.ModelAndViewBuilder.withoutView;
+import static cherry.foundation.spring.webmvc.ModelAndViewBuilder.redirect;
+import static cherry.foundation.spring.webmvc.ModelAndViewBuilder.withViewname;
+import static cherry.foundation.spring.webmvc.ModelAndViewBuilder.withoutView;
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.fromMethodCall;
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
 
@@ -34,10 +34,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import cherry.example.web.LogicalError;
+import cherry.example.web.BizErrorId;
 import cherry.example.web.applied.ex50.AppliedEx52FormBase.Prop;
-import cherry.example.web.util.ViewNameUtil;
 import cherry.foundation.bizerror.BizErrorUtil;
+import cherry.foundation.spring.webmvc.ViewNameUtil;
 
 @Controller
 public class AppliedEx52ControllerImpl implements AppliedEx52Controller {
@@ -107,7 +107,7 @@ public class AppliedEx52ControllerImpl implements AppliedEx52Controller {
 
 		// 項目間チェック
 		if (form.getDt() == null && form.getTm() != null) {
-			BizErrorUtil.rejectValue(binding, Prop.Dt.getName(), LogicalError.RequiredWhen, Prop.Dt.resolve(),
+			BizErrorUtil.rejectValue(binding, Prop.Dt.getName(), BizErrorId.RequiredWhen, Prop.Dt.resolve(),
 					Prop.Tm.resolve());
 		}
 

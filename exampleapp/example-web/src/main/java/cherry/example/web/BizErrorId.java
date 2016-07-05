@@ -18,7 +18,7 @@ package cherry.example.web;
 
 import cherry.foundation.bizerror.IBizErrId;
 
-public enum LogicalError implements IBizErrId {
+public enum BizErrorId implements IBizErrId {
 	/** {1} を指定する時は {0} が必須です。 */
 	RequiredWhen,
 	/** 登録済みです。{0} を見直してください。 */

@@ -17,9 +17,9 @@
 package cherry.example.web.applied.ex20;
 
 import static cherry.example.web.ParamDef.REQ_ROWNUM;
-import static cherry.example.web.util.ModelAndViewBuilder.redirect;
-import static cherry.example.web.util.ModelAndViewBuilder.withViewname;
-import static cherry.example.web.util.ModelAndViewBuilder.withoutView;
+import static cherry.foundation.spring.webmvc.ModelAndViewBuilder.redirect;
+import static cherry.foundation.spring.webmvc.ModelAndViewBuilder.withViewname;
+import static cherry.foundation.spring.webmvc.ModelAndViewBuilder.withoutView;
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.fromMethodCall;
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
 
@@ -37,10 +37,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import cherry.example.web.LogicalError;
+import cherry.example.web.BizErrorId;
 import cherry.example.web.applied.ex20.AppliedEx20SubFormBase.Prop;
-import cherry.example.web.util.ViewNameUtil;
 import cherry.foundation.bizerror.BizErrorUtil;
+import cherry.foundation.spring.webmvc.ViewNameUtil;
 
 @Controller
 public class AppliedEx21ControllerImpl implements AppliedEx21Controller {
@@ -113,7 +113,7 @@ public class AppliedEx21ControllerImpl implements AppliedEx21Controller {
 		// 項目間チェック
 		if (form.getItem().get(rownum).getDt() == null && form.getItem().get(rownum).getTm() != null) {
 			BizErrorUtil.rejectValue(binding, AppliedEx21Form.getItemPropName(rownum, Prop.Dt),
-					LogicalError.RequiredWhen, AppliedEx21Form.resolveItemProp(rownum, Prop.Dt),
+					BizErrorId.RequiredWhen, AppliedEx21Form.resolveItemProp(rownum, Prop.Dt),
 					AppliedEx21Form.resolveItemProp(rownum, Prop.Tm));
 		}
 

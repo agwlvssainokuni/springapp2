@@ -101,4 +101,17 @@ subprojects {
 		testCompile "org.hamcrest:hamcrest-all:${versionHamcrest}"
 		testCompile "org.mockito:mockito-all:${versionMockito}"
 	}
+
+	def messageDir = "src/main/resources/message"
+	if (file("${messageDir}/form").isDirectory()) {
+		task mergeformmessage << {
+			ant.concat(destfile: "${messageDir}/form/${project.name}-form.properties", encoding: "UTF-8", outputencoding: "UTF-8") {
+				fileset(dir: "${messageDir}/form/") {
+					include(name: "**.txt")
+					exclude(name: "**.properties")
+				}
+			}
+			ant.native2ascii(src: "${messageDir}/form/", dest: "${messageDir}/", includes: "${project.name}-form.properties", encoding: "UTF-8")
+		}
+	}
 }

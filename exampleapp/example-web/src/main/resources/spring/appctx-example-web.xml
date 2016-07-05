@@ -39,8 +39,8 @@
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basenames">
 			<list>
-				<value>message/form</value>
 				<value>message/example-web-bizerror</value>
+				<value>message/example-web-form</value>
 				<value>message/example-web-page</value>
 				<value>message/validation</value>
 				<value>message/foundation-bizerror</value>
