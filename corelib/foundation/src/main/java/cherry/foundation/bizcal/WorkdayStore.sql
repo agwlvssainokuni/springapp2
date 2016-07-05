@@ -11,8 +11,6 @@ WHERE
 	H0.name = :name
 	AND
 	H0.dt BETWEEN :from AND :to
-	AND
-	H0.deleted_flg = 0
 ;
 
 -- NAME: getNextWorkday
@@ -33,8 +31,6 @@ FROM
 		H0.name = :name
 		AND
 		H0.dt BETWEEN :from AND D.dt
-		AND
-		H0.deleted_flg = 0
 WHERE
 	NOT EXISTS (
 		SELECT 1 FROM dayoff_master H1
@@ -42,8 +38,6 @@ WHERE
 			H1.name = :name
 			AND
 			H1.dt = D.dt
-			AND
-			H1.deleted_flg = 0
 	)
 GROUP BY
 	D.n

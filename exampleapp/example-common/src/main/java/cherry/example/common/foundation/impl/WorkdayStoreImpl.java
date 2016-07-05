@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.transaction.annotation.Transactional;
 
 import cherry.example.db.gen.query.QDayoffMaster;
@@ -94,9 +93,7 @@ public class WorkdayStoreImpl implements WorkdayStore {
 		query.where(selectOne().from(h1).where(h1.name.eq(name), h1.dt.eq(ddt)).notExists());
 		query.groupBy(dnm);
 		query.having(h0.dt.count().eq(dnm.subtract(numberOfWorkday).add(1)));
-		List<LocalDate> list = query.fetch();
-
-		return DataAccessUtils.requiredSingleResult(list);
+		return query.fetchOne();
 	}
 
 }
