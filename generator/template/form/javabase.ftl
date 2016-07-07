@@ -20,7 +20,17 @@ import cherry.foundation.bizerror.BizErrorUtil;
 public abstract class ${className(typeDef.fqcn)}Base implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-<#macro groups prop>{ javax.validation.groups.Default.class<#if prop.g1?? && prop.g1 == "○">, cherry.foundation.validator.groups.G1.class</#if><#if prop.g2?? && prop.g2 == "○">, cherry.foundation.validator.groups.G2.class</#if><#if prop.g3?? && prop.g3 == "○">, cherry.foundation.validator.groups.G3.class</#if><#if prop.g4?? && prop.g4 == "○">, cherry.foundation.validator.groups.G4.class</#if><#if prop.g5?? && prop.g5 == "○">, cherry.foundation.validator.groups.G5.class</#if><#if prop.g6?? && prop.g6 == "○">, cherry.foundation.validator.groups.G6.class</#if><#if prop.g7?? && prop.g7 == "○">, cherry.foundation.validator.groups.G7.class</#if><#if prop.g8?? && prop.g8 == "○">, cherry.foundation.validator.groups.G8.class</#if><#if prop.g9?? && prop.g9 == "○">, cherry.foundation.validator.groups.G9.class</#if> }</#macro>
+<#macro groups prop>{ javax.validation.groups.Default.class${""
+}<#if prop.g1?? && prop.g1 == "○">, cherry.foundation.validator.groups.G1.class</#if>${""
+}<#if prop.g2?? && prop.g2 == "○">, cherry.foundation.validator.groups.G2.class</#if>${""
+}<#if prop.g3?? && prop.g3 == "○">, cherry.foundation.validator.groups.G3.class</#if>${""
+}<#if prop.g4?? && prop.g4 == "○">, cherry.foundation.validator.groups.G4.class</#if>${""
+}<#if prop.g5?? && prop.g5 == "○">, cherry.foundation.validator.groups.G5.class</#if>${""
+}<#if prop.g6?? && prop.g6 == "○">, cherry.foundation.validator.groups.G6.class</#if>${""
+}<#if prop.g7?? && prop.g7 == "○">, cherry.foundation.validator.groups.G7.class</#if>${""
+}<#if prop.g8?? && prop.g8 == "○">, cherry.foundation.validator.groups.G8.class</#if>${""
+}<#if prop.g9?? && prop.g9 == "○">, cherry.foundation.validator.groups.G9.class</#if>${""
+} }</#macro>
 <#macro notnull prop>
 <#if prop.required?? && prop.required == "○">
 	@javax.validation.constraints.NotNull(groups = <@groups prop/>)
@@ -118,6 +128,12 @@ public abstract class ${className(typeDef.fqcn)}Base implements Serializable {
 <#break>
 <#case "ページネーション">
 	private long ${prop.name} = 0L;
+
+<#break>
+<#case "サブフォーム">
+<@notnull prop />
+	@javax.validation.Valid()
+	private ${prop.subformType} ${prop.name} = 0L;
 
 <#break>
 <#case "文字列">
