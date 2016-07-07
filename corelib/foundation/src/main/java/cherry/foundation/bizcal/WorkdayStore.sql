@@ -4,7 +4,7 @@
 --   LocalDate from
 --   LocalDate to
 SELECT
-	COUNT(H0.dt)
+	COUNT(DISTINCT H0.dt)
 FROM
 	dayoff_master H0
 WHERE
@@ -19,28 +19,27 @@ WHERE
 --   LocalDate from
 --   int       numberOfWorkday
 SELECT
-	MIN(D.dt)
+	ADD_DAYS(:from, D.nm)
 FROM
-	(SELECT
-		A.d*10+B.d AS n,
-		ADD_DAYS(:from, A.d*10+B.d) AS dt
-	FROM digit A, digit B
-	) D
-	LEFT OUTER JOIN dayoff_master H0
-	ON
-		H0.name = :name
-		AND
-		H0.dt BETWEEN :from AND D.dt
+	(SELECT A.d*10+B.d AS nm FROM digit A, digit B) D
 WHERE
 	NOT EXISTS (
-		SELECT 1 FROM dayoff_master H1
+		SELECT 1
+		FROM
+			dayoff_master H0
 		WHERE
-			H1.name = :name
+			H0.name = :name
 			AND
-			H1.dt = D.dt
+			H0.dt = ADD_DAYS(:from, D.nm)
 	)
-GROUP BY
-	D.n
-HAVING
-	COUNT(DISTINCT H0.dt) = D.n - :numberOfWorkday + 1
+	AND
+	(
+		SELECT COUNT(DISTINCT H0.dt)
+		FROM
+			dayoff_master H0
+		WHERE
+			H0.name = :name
+			AND
+			H0.dt BETWEEN :from AND ADD_DAYS(:from, D.nm)
+	) = D.nm - :numberOfWorkday + 1
 ;

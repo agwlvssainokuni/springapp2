@@ -18,7 +18,10 @@ package cherry.foundation.querydsl;
 
 import static com.google.common.base.CaseFormat.LOWER_CAMEL;
 import static com.google.common.base.CaseFormat.UPPER_UNDERSCORE;
+import static com.querydsl.core.types.dsl.Expressions.numberTemplate;
 import static com.querydsl.sql.ColumnMetadata.getColumnMetadata;
+import static com.querydsl.sql.SQLExpressions.select;
+import static com.querydsl.sql.SQLExpressions.unionAll;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -28,6 +31,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 import cherry.goods.paginate.PagedList;
 
 import com.querydsl.core.Tuple;
@@ -35,10 +40,12 @@ import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.Operation;
 import com.querydsl.core.types.Ops;
 import com.querydsl.core.types.Path;
+import com.querydsl.core.types.SubQueryExpression;
 import com.querydsl.core.types.dsl.DateExpression;
 import com.querydsl.core.types.dsl.DateTimeExpression;
 import com.querydsl.core.types.dsl.TimeExpression;
 import com.querydsl.sql.ColumnMetadata;
+import com.querydsl.sql.Union;
 
 /**
  * Querydslサポート機能。<br />
@@ -64,6 +71,27 @@ public class QuerydslUtil {
 	 */
 	public static DateTimeExpression<LocalDateTime> currentTimestamp() {
 		return DateTimeExpression.currentTimestamp(LocalDateTime.class);
+	}
+
+	/**
+	 * 指定された範囲の数列を形成するクエリをUNION ALLクエリの形態で作成する。
+	 * 
+	 * @param fm 数列の開始値。
+	 * @param to 数列の終了値
+	 * @param step 数列の増分。
+	 * @param as 形成するクエリの列名。
+	 * @return 数列を形成するUNION ALLクエリ。
+	 */
+	public static Union<Long> createSequenceByUnion(int fm, int to, int step, String as) {
+		List<SubQueryExpression<Long>> list = new ArrayList<>((to - fm + 1) / step);
+		for (int i = fm; i <= to; i += step) {
+			if (StringUtils.isEmpty(as)) {
+				list.add(select(numberTemplate(Long.class, String.valueOf(i))));
+			} else {
+				list.add(select(numberTemplate(Long.class, String.valueOf(i)).as(as)));
+			}
+		}
+		return unionAll(list);
 	}
 
 	/**

@@ -16,31 +16,28 @@
 
 package cherry.example.common.foundation.impl;
 
+import static com.querydsl.core.types.dsl.Expressions.ONE;
 import static com.querydsl.core.types.dsl.Expressions.constant;
 import static com.querydsl.core.types.dsl.Expressions.dateOperation;
-import static com.querydsl.core.types.dsl.Expressions.datePath;
 import static com.querydsl.core.types.dsl.Expressions.numberPath;
 import static com.querydsl.core.types.dsl.Expressions.numberTemplate;
 import static com.querydsl.core.types.dsl.Expressions.path;
 import static com.querydsl.sql.SQLExpressions.select;
 import static com.querydsl.sql.SQLExpressions.selectOne;
-import static com.querydsl.sql.SQLExpressions.unionAll;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import cherry.example.db.gen.query.QDayoffMaster;
 import cherry.foundation.bizcal.WorkdayStore;
+import cherry.foundation.querydsl.QuerydslUtil;
 
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Ops.DateTimeOps;
-import com.querydsl.core.types.SubQueryExpression;
-import com.querydsl.core.types.dsl.DatePath;
+import com.querydsl.core.types.dsl.DateOperation;
 import com.querydsl.core.types.dsl.NumberExpression;
 import com.querydsl.core.types.dsl.NumberPath;
 import com.querydsl.core.types.dsl.SimplePath;
@@ -54,7 +51,6 @@ public class WorkdayStoreImpl implements WorkdayStore {
 	private SQLQueryFactory queryFactory;
 
 	private final QDayoffMaster h0 = new QDayoffMaster("h0");
-	private final QDayoffMaster h1 = new QDayoffMaster("h1");
 
 	private final NumberPath<Long> a = numberPath(Long.class, "a");
 	private final NumberExpression<Long> a0 = numberPath(Long.class, a, String.valueOf(0));
@@ -62,40 +58,32 @@ public class WorkdayStoreImpl implements WorkdayStore {
 	private final NumberExpression<Long> b0 = numberPath(Long.class, b, String.valueOf(0));
 	private final SimplePath<Tuple> d = path(Tuple.class, "d");
 	private final NumberPath<Long> dnm = numberPath(Long.class, d, "nm");
-	private final DatePath<LocalDate> ddt = datePath(LocalDate.class, d, "dt");
-	private final Union<Long> digit = unionAll(createDigitList(0, 9));
+	private final Union<Long> digit = QuerydslUtil.createSequenceByUnion(0, 9, 1, null);
+	private final NumberExpression<Long> TEN = numberTemplate(Long.class, String.valueOf(10));
+	private final SQLQuery<Long> seq = select(a0.multiply(TEN).add(b0).as(dnm)).from(digit.as(a), digit.as(b));
 
 	@Transactional
 	@Override
 	public int getNumberOfWorkday(String name, LocalDate from, LocalDate to) {
-		SQLQuery<?> query = queryFactory.from(h0);
+		SQLQuery<Long> query = queryFactory.select(h0.dt.countDistinct()).from(h0);
 		query.where(h0.name.eq(name), h0.dt.between(from, to));
-		long count = query.select(h0.dt.count()).fetchOne();
+		long count = query.fetchOne();
 		return (int) (from.until(to.plusDays(1), ChronoUnit.DAYS) - count);
 	}
 
 	@Transactional
 	@Override
 	public LocalDate getNextWorkday(String name, LocalDate from, int numberOfWorkday) {
-
-		SQLQuery<Tuple> dtcal = select(a0.multiply(10).add(b0).as(dnm),
-				dateOperation(LocalDate.class, DateTimeOps.ADD_DAYS, constant(from), a0.multiply(10).add(b0)).as(ddt))
-				.from(digit.as(a), digit.as(b));
-
-		SQLQuery<LocalDate> query = queryFactory.select(ddt.min()).from(dtcal.as(d)).leftJoin(h0)
-				.on(h0.name.eq(name), h0.dt.between(constant(from), ddt));
-		query.where(selectOne().from(h1).where(h1.name.eq(name), h1.dt.eq(ddt)).notExists());
-		query.groupBy(dnm);
-		query.having(h0.dt.countDistinct().eq(dnm.subtract(numberOfWorkday).add(1)));
+		SQLQuery<LocalDate> query = queryFactory.select(addDays(from, dnm)).from(seq.as(d));
+		query.where(selectOne().from(h0).where(h0.name.eq(name), h0.dt.eq(addDays(from, dnm))).notExists());
+		query.where(select(h0.dt.countDistinct()).from(h0)
+				.where(h0.name.eq(name), h0.dt.between(constant(from), addDays(from, dnm)))
+				.eq(dnm.subtract(numberOfWorkday).add(ONE)));
 		return query.fetchOne();
 	}
 
-	private List<SubQueryExpression<Long>> createDigitList(int fm, int to) {
-		List<SubQueryExpression<Long>> list = new ArrayList<>(to - fm + 1);
-		for (int i = fm; i <= to; i++) {
-			list.add(select(numberTemplate(Long.class, String.valueOf(i))));
-		}
-		return list;
+	private DateOperation<LocalDate> addDays(LocalDate ldt, NumberExpression<Long> diff) {
+		return dateOperation(LocalDate.class, DateTimeOps.ADD_DAYS, constant(ldt), diff);
 	}
 
 }
