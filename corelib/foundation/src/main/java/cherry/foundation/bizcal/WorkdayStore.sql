@@ -42,5 +42,5 @@ WHERE
 GROUP BY
 	D.n
 HAVING
-	COUNT(H0.dt) = D.n - :numberOfWorkday + 1
+	COUNT(DISTINCT H0.dt) = D.n - :numberOfWorkday + 1
 ;
