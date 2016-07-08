@@ -41,60 +41,60 @@ public abstract class BasicEx40FormBase implements Serializable {
 
 	@javax.validation.constraints.Min(value = -1000000000, groups = { javax.validation.groups.Default.class })
 	@javax.validation.constraints.Max(value = 1000000000, groups = { javax.validation.groups.Default.class })
-	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.LONG)
+	@org.springframework.format.annotation.NumberFormat(pattern = cherry.example.web.FormatPattern.LONG)
 	private Long int64From;
 
 	@javax.validation.constraints.Min(value = -1000000000, groups = { javax.validation.groups.Default.class })
 	@javax.validation.constraints.Max(value = 1000000000, groups = { javax.validation.groups.Default.class })
-	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.LONG)
+	@org.springframework.format.annotation.NumberFormat(pattern = cherry.example.web.FormatPattern.LONG)
 	private Long int64To;
 
 	@javax.validation.constraints.DecimalMin(value = "-1000000000", groups = { javax.validation.groups.Default.class })
 	@javax.validation.constraints.DecimalMax(value = "1000000000", groups = { javax.validation.groups.Default.class })
 	@cherry.foundation.validator.NumberScale(1)
-	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.DECIMAL_1)
+	@org.springframework.format.annotation.NumberFormat(pattern = cherry.example.web.FormatPattern.DECIMAL_1)
 	private java.math.BigDecimal decimal1From;
 
 	@javax.validation.constraints.DecimalMin(value = "-1000000000", groups = { javax.validation.groups.Default.class })
 	@javax.validation.constraints.DecimalMax(value = "1000000000", groups = { javax.validation.groups.Default.class })
 	@cherry.foundation.validator.NumberScale(1)
-	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.DECIMAL_1)
+	@org.springframework.format.annotation.NumberFormat(pattern = cherry.example.web.FormatPattern.DECIMAL_1)
 	private java.math.BigDecimal decimal1To;
 
 	@javax.validation.constraints.DecimalMin(value = "-1000000000", groups = { javax.validation.groups.Default.class })
 	@javax.validation.constraints.DecimalMax(value = "1000000000", groups = { javax.validation.groups.Default.class })
 	@cherry.foundation.validator.NumberScale(3)
-	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.DECIMAL_3)
+	@org.springframework.format.annotation.NumberFormat(pattern = cherry.example.web.FormatPattern.DECIMAL_3)
 	private java.math.BigDecimal decimal3From;
 
 	@javax.validation.constraints.DecimalMin(value = "-1000000000", groups = { javax.validation.groups.Default.class })
 	@javax.validation.constraints.DecimalMax(value = "1000000000", groups = { javax.validation.groups.Default.class })
 	@cherry.foundation.validator.NumberScale(3)
-	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.DECIMAL_3)
+	@org.springframework.format.annotation.NumberFormat(pattern = cherry.example.web.FormatPattern.DECIMAL_3)
 	private java.math.BigDecimal decimal3To;
 
-	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.DATE)
+	@org.springframework.format.annotation.DateTimeFormat(pattern = cherry.example.web.FormatPattern.DATE)
 	private java.time.LocalDate dtFrom;
 
-	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.DATE)
+	@org.springframework.format.annotation.DateTimeFormat(pattern = cherry.example.web.FormatPattern.DATE)
 	private java.time.LocalDate dtTo;
 
-	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.TIME)
+	@org.springframework.format.annotation.DateTimeFormat(pattern = cherry.example.web.FormatPattern.TIME)
 	private java.time.LocalTime tmFrom;
 
-	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.TIME)
+	@org.springframework.format.annotation.DateTimeFormat(pattern = cherry.example.web.FormatPattern.TIME)
 	private java.time.LocalTime tmTo;
 
-	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.DATE)
+	@org.springframework.format.annotation.DateTimeFormat(pattern = cherry.example.web.FormatPattern.DATE)
 	private java.time.LocalDate dtmFromD;
 
-	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.TIME)
+	@org.springframework.format.annotation.DateTimeFormat(pattern = cherry.example.web.FormatPattern.TIME)
 	private java.time.LocalTime dtmFromT;
 
-	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.DATE)
+	@org.springframework.format.annotation.DateTimeFormat(pattern = cherry.example.web.FormatPattern.DATE)
 	private java.time.LocalDate dtmToD;
 
-	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.TIME)
+	@org.springframework.format.annotation.DateTimeFormat(pattern = cherry.example.web.FormatPattern.TIME)
 	private java.time.LocalTime dtmToT;
 
 	private long pno = 0L;

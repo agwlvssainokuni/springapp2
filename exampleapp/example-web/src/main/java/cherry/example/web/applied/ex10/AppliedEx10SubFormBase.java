@@ -45,28 +45,28 @@ public abstract class AppliedEx10SubFormBase implements Serializable {
 
 	@javax.validation.constraints.Min(value = -1000000000, groups = { javax.validation.groups.Default.class })
 	@javax.validation.constraints.Max(value = 1000000000, groups = { javax.validation.groups.Default.class })
-	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.LONG)
+	@org.springframework.format.annotation.NumberFormat(pattern = cherry.example.web.FormatPattern.LONG)
 	private Long int64;
 
 	@javax.validation.constraints.DecimalMin(value = "-1000000000", groups = { javax.validation.groups.Default.class })
 	@javax.validation.constraints.DecimalMax(value = "1000000000", groups = { javax.validation.groups.Default.class })
 	@cherry.foundation.validator.NumberScale(1)
-	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.DECIMAL_1)
+	@org.springframework.format.annotation.NumberFormat(pattern = cherry.example.web.FormatPattern.DECIMAL_1)
 	private java.math.BigDecimal decimal1;
 
 	@javax.validation.constraints.DecimalMin(value = "-1000000000", groups = { javax.validation.groups.Default.class })
 	@javax.validation.constraints.DecimalMax(value = "1000000000", groups = { javax.validation.groups.Default.class })
 	@cherry.foundation.validator.NumberScale(3)
-	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.DECIMAL_3)
+	@org.springframework.format.annotation.NumberFormat(pattern = cherry.example.web.FormatPattern.DECIMAL_3)
 	private java.math.BigDecimal decimal3;
 
-	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.DATE)
+	@org.springframework.format.annotation.DateTimeFormat(pattern = cherry.example.web.FormatPattern.DATE)
 	private java.time.LocalDate dt;
 
-	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.TIME)
+	@org.springframework.format.annotation.DateTimeFormat(pattern = cherry.example.web.FormatPattern.TIME)
 	private java.time.LocalTime tm;
 
-	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.DATETIME)
+	@org.springframework.format.annotation.DateTimeFormat(pattern = cherry.example.web.FormatPattern.DATETIME)
 	private java.time.LocalDateTime dtm;
 
 	private Integer lockVersion;

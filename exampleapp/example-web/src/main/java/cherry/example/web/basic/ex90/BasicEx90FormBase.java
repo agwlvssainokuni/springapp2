@@ -38,13 +38,13 @@ public abstract class BasicEx90FormBase implements Serializable {
 	@javax.validation.constraints.NotNull(groups = { javax.validation.groups.Default.class })
 	private org.springframework.web.multipart.MultipartFile file;
 
-	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.DATE)
+	@org.springframework.format.annotation.DateTimeFormat(pattern = cherry.example.web.FormatPattern.DATE)
 	private java.time.LocalDate dt;
 
-	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.TIME)
+	@org.springframework.format.annotation.DateTimeFormat(pattern = cherry.example.web.FormatPattern.TIME)
 	private java.time.LocalTime tm;
 
-	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.DATETIME)
+	@org.springframework.format.annotation.DateTimeFormat(pattern = cherry.example.web.FormatPattern.DATETIME)
 	private java.time.LocalDateTime dtm;
 
 	@Getter

@@ -35,13 +35,13 @@ public abstract class AppliedEx52FormBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.DATE)
+	@org.springframework.format.annotation.DateTimeFormat(pattern = cherry.example.web.FormatPattern.DATE)
 	private java.time.LocalDate dt;
 
-	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.TIME)
+	@org.springframework.format.annotation.DateTimeFormat(pattern = cherry.example.web.FormatPattern.TIME)
 	private java.time.LocalTime tm;
 
-	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.DATETIME)
+	@org.springframework.format.annotation.DateTimeFormat(pattern = cherry.example.web.FormatPattern.DATETIME)
 	private java.time.LocalDateTime dtm;
 
 	@Getter

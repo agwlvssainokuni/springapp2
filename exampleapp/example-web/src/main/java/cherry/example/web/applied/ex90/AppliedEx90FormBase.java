@@ -45,16 +45,16 @@ public abstract class AppliedEx90FormBase implements Serializable {
 	private String dirname;
 
 	@javax.validation.constraints.NotNull(groups = { javax.validation.groups.Default.class, cherry.foundation.validator.groups.G2.class })
-	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.INTEGER)
+	@org.springframework.format.annotation.NumberFormat(pattern = cherry.example.web.FormatPattern.INTEGER)
 	private Integer numOfFile;
 
-	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.DATE)
+	@org.springframework.format.annotation.DateTimeFormat(pattern = cherry.example.web.FormatPattern.DATE)
 	private java.time.LocalDate dt;
 
-	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.TIME)
+	@org.springframework.format.annotation.DateTimeFormat(pattern = cherry.example.web.FormatPattern.TIME)
 	private java.time.LocalTime tm;
 
-	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.DATETIME)
+	@org.springframework.format.annotation.DateTimeFormat(pattern = cherry.example.web.FormatPattern.DATETIME)
 	private java.time.LocalDateTime dtm;
 
 	@Getter
