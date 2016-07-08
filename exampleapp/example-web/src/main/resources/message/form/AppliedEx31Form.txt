@@ -7,3 +7,4 @@ appliedEx31Form.dt=日付
 appliedEx31Form.tm=時刻
 appliedEx31Form.dtm=日時
 appliedEx31Form.lockVersion=ロックバージョン
+appliedEx31Form.item=子要素

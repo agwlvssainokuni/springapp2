@@ -44,11 +44,16 @@ public abstract class AppliedEx51FormBase implements Serializable {
 	@org.springframework.format.annotation.DateTimeFormat(pattern = cherry.example.web.FormatPattern.DATETIME)
 	private java.time.LocalDateTime dtm;
 
+	@javax.validation.constraints.NotNull(groups = { javax.validation.groups.Default.class })
+	@javax.validation.Valid()
+	private java.util.List<AppliedEx51SubForm> item;
+
 	@Getter
 	public enum Prop {
 		Dt("dt", "appliedEx51Form.dt"), //
 		Tm("tm", "appliedEx51Form.tm"), //
 		Dtm("dtm", "appliedEx51Form.dtm"), //
+		Item("item", "appliedEx51Form.item"), //
 		DUMMY("dummy", "dummy");
 
 		private final String name;

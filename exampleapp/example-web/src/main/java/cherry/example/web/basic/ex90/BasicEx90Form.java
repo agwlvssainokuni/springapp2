@@ -16,11 +16,6 @@
 
 package cherry.example.web.basic.ex90;
 
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-
-import javax.validation.constraints.NotNull;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,8 +28,5 @@ import lombok.ToString;
 public class BasicEx90Form extends BasicEx90FormBase {
 
 	private static final long serialVersionUID = 1L;
-
-	@NotNull()
-	private Charset charset = StandardCharsets.UTF_8;
 
 }

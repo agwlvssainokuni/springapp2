@@ -71,6 +71,10 @@ public abstract class AppliedEx20FormBase implements Serializable {
 
 	private Integer lockVersion;
 
+	@javax.validation.constraints.NotNull(groups = { javax.validation.groups.Default.class })
+	@javax.validation.Valid()
+	private java.util.List<AppliedEx20SubForm> item;
+
 	@Getter
 	public enum Prop {
 		Text10("text10", "appliedEx20Form.text10"), //
@@ -82,6 +86,7 @@ public abstract class AppliedEx20FormBase implements Serializable {
 		Tm("tm", "appliedEx20Form.tm"), //
 		Dtm("dtm", "appliedEx20Form.dtm"), //
 		LockVersion("lockVersion", "appliedEx20Form.lockVersion"), //
+		Item("item", "appliedEx20Form.item"), //
 		DUMMY("dummy", "dummy");
 
 		private final String name;

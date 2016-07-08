@@ -28,6 +28,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -81,6 +82,7 @@ public class AppliedEx90ControllerImpl implements AppliedEx90Controller {
 	@Override
 	public ModelAndView start(AppliedEx90Form form, BindingResult binding, Authentication auth, Locale locale,
 			SitePreference sitePref, NativeWebRequest request) {
+		form.setCharset(StandardCharsets.UTF_8);
 		return withViewname(viewnameOfStart).build();
 	}
 

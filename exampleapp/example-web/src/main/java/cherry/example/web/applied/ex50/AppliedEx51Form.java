@@ -16,11 +16,6 @@
 
 package cherry.example.web.applied.ex50;
 
-import java.util.List;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,9 +28,5 @@ import lombok.ToString;
 public class AppliedEx51Form extends AppliedEx51FormBase {
 
 	private static final long serialVersionUID = 1L;
-
-	@NotNull()
-	@Valid()
-	private List<AppliedEx51SubForm> item;
 
 }

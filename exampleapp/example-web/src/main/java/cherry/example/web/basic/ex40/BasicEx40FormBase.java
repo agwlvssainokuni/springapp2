@@ -97,6 +97,14 @@ public abstract class BasicEx40FormBase implements Serializable {
 	@org.springframework.format.annotation.DateTimeFormat(pattern = cherry.example.web.FormatPattern.TIME)
 	private java.time.LocalTime dtmToT;
 
+	@javax.validation.constraints.NotNull(groups = { javax.validation.groups.Default.class })
+	@javax.validation.Valid()
+	private cherry.example.web.SortParam sort1;
+
+	@javax.validation.constraints.NotNull(groups = { javax.validation.groups.Default.class })
+	@javax.validation.Valid()
+	private cherry.example.web.SortParam sort2;
+
 	private long pno = 0L;
 
 	private long psz = 0L;

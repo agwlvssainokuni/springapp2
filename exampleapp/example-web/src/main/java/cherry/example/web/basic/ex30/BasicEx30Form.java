@@ -16,14 +16,10 @@
 
 package cherry.example.web.basic.ex30;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import cherry.example.web.SortParam;
 
 @Getter
 @Setter
@@ -32,13 +28,5 @@ import cherry.example.web.SortParam;
 public class BasicEx30Form extends BasicEx30FormBase {
 
 	private static final long serialVersionUID = 1L;
-
-	@NotNull()
-	@Valid()
-	private SortParam sort1;
-
-	@NotNull()
-	@Valid()
-	private SortParam sort2;
 
 }

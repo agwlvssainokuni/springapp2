@@ -1,3 +1,4 @@
 appliedEx61Form.dt=日付
 appliedEx61Form.tm=時刻
 appliedEx61Form.dtm=日時
+appliedEx61Form.item=子要素

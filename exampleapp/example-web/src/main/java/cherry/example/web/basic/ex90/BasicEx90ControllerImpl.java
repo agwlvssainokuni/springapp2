@@ -22,6 +22,7 @@ import static cherry.foundation.spring.webmvc.ModelAndViewBuilder.withoutView;
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.fromMethodCall;
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -64,6 +65,7 @@ public class BasicEx90ControllerImpl implements BasicEx90Controller {
 	@Override
 	public ModelAndView start(BasicEx90Form form, BindingResult binding, Authentication auth, Locale locale,
 			SitePreference sitePref, NativeWebRequest request) {
+		form.setCharset(StandardCharsets.UTF_8);
 		return withViewname(viewnameOfStart).build();
 	}
 

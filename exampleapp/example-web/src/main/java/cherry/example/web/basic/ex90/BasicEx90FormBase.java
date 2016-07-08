@@ -38,6 +38,10 @@ public abstract class BasicEx90FormBase implements Serializable {
 	@javax.validation.constraints.NotNull(groups = { javax.validation.groups.Default.class })
 	private org.springframework.web.multipart.MultipartFile file;
 
+	@javax.validation.constraints.NotNull(groups = { javax.validation.groups.Default.class })
+	@javax.validation.Valid()
+	private java.nio.charset.Charset charset;
+
 	@org.springframework.format.annotation.DateTimeFormat(pattern = cherry.example.web.FormatPattern.DATE)
 	private java.time.LocalDate dt;
 

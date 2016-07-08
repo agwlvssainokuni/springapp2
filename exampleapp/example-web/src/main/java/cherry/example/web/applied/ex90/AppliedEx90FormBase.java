@@ -48,6 +48,10 @@ public abstract class AppliedEx90FormBase implements Serializable {
 	@org.springframework.format.annotation.NumberFormat(pattern = cherry.example.web.FormatPattern.INTEGER)
 	private Integer numOfFile;
 
+	@javax.validation.constraints.NotNull(groups = { javax.validation.groups.Default.class, cherry.foundation.validator.groups.G1.class, cherry.foundation.validator.groups.G2.class })
+	@javax.validation.Valid()
+	private java.nio.charset.Charset charset;
+
 	@org.springframework.format.annotation.DateTimeFormat(pattern = cherry.example.web.FormatPattern.DATE)
 	private java.time.LocalDate dt;
 

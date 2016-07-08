@@ -16,17 +16,10 @@
 
 package cherry.example.web.applied.ex90;
 
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-
-import javax.validation.constraints.NotNull;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import cherry.foundation.validator.groups.G1;
-import cherry.foundation.validator.groups.G2;
 
 @Getter
 @Setter
@@ -35,8 +28,5 @@ import cherry.foundation.validator.groups.G2;
 public class AppliedEx90Form extends AppliedEx90FormBase {
 
 	private static final long serialVersionUID = 1L;
-
-	@NotNull(groups = { G1.class, G2.class })
-	private Charset charset = StandardCharsets.UTF_8;
 
 }
