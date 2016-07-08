@@ -61,55 +61,55 @@ public abstract class ${className(typeDef.fqcn)}Base implements Serializable {
 </#if>
 </#if>
 <#if !prop.subtype??>
-	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.DECIMAL_X)
+	@org.springframework.format.annotation.NumberFormat(pattern = ${typeDef.attr.FORMATPATTERN}.DECIMAL_X)
 	private java.math.BigDecimal ${prop.name};
 <#elseif prop.subtype == "整数">
-	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.INTEGER)
+	@org.springframework.format.annotation.NumberFormat(pattern = ${typeDef.attr.FORMATPATTERN}.INTEGER)
 	private Integer ${prop.name};
 <#elseif prop.subtype == "整数(Long)">
-	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.LONG)
+	@org.springframework.format.annotation.NumberFormat(pattern = ${typeDef.attr.FORMATPATTERN}.LONG)
 	private Long ${prop.name};
 <#elseif prop.subtype == "小数1桁">
 	@cherry.foundation.validator.NumberScale(1)
-	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.DECIMAL_1)
+	@org.springframework.format.annotation.NumberFormat(pattern = ${typeDef.attr.FORMATPATTERN}.DECIMAL_1)
 	private java.math.BigDecimal ${prop.name};
 <#elseif prop.subtype == "小数2桁">
 	@cherry.foundation.validator.NumberScale(2)
-	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.DECIMAL_2)
+	@org.springframework.format.annotation.NumberFormat(pattern = ${typeDef.attr.FORMATPATTERN}.DECIMAL_2)
 	private java.math.BigDecimal ${prop.name};
 <#elseif prop.subtype == "小数3桁">
 	@cherry.foundation.validator.NumberScale(3)
-	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.DECIMAL_3)
+	@org.springframework.format.annotation.NumberFormat(pattern = ${typeDef.attr.FORMATPATTERN}.DECIMAL_3)
 	private java.math.BigDecimal ${prop.name};
 <#elseif prop.subtype == "小数4桁">
 	@cherry.foundation.validator.NumberScale(4)
-	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.DECIMAL_4)
+	@org.springframework.format.annotation.NumberFormat(pattern = ${typeDef.attr.FORMATPATTERN}.DECIMAL_4)
 	private java.math.BigDecimal ${prop.name};
 <#elseif prop.subtype == "小数5桁">
 	@cherry.foundation.validator.NumberScale(5)
-	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.DECIMAL_5)
+	@org.springframework.format.annotation.NumberFormat(pattern = ${typeDef.attr.FORMATPATTERN}.DECIMAL_5)
 	private java.math.BigDecimal ${prop.name};
 <#else>
-	@org.springframework.format.annotation.NumberFormat(pattern = FormatPattern.DECIMAL_X)
+	@org.springframework.format.annotation.NumberFormat(pattern = ${typeDef.attr.FORMATPATTERN}.DECIMAL_X)
 	private java.math.BigDecimal ${prop.name};
 </#if>
 
 <#break>
 <#case "日付">
 <@notnull prop />
-	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.DATE)
+	@org.springframework.format.annotation.DateTimeFormat(pattern = ${typeDef.attr.FORMATPATTERN}.DATE)
 	private java.time.LocalDate ${prop.name};
 
 <#break>
 <#case "時刻">
 <@notnull prop />
-	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.TIME)
+	@org.springframework.format.annotation.DateTimeFormat(pattern = ${typeDef.attr.FORMATPATTERN}.TIME)
 	private java.time.LocalTime ${prop.name};
 
 <#break>
 <#case "日時">
 <@notnull prop />
-	@org.springframework.format.annotation.DateTimeFormat(pattern = FormatPattern.DATETIME)
+	@org.springframework.format.annotation.DateTimeFormat(pattern = ${typeDef.attr.FORMATPATTERN}.DATETIME)
 	private java.time.LocalDateTime ${prop.name};
 
 <#break>
