@@ -16,6 +16,8 @@
 
 package cherry.example.web.applied.ex40;
 
+import static cherry.example.common.CodeValue.SORT_BY.SORT_BY_00;
+import static cherry.example.common.CodeValue.SORT_BY.SORT_BY_01;
 import static cherry.foundation.spring.webmvc.ModelAndViewBuilder.redirect;
 import static cherry.foundation.spring.webmvc.ModelAndViewBuilder.withViewname;
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.fromMethodCall;
@@ -41,7 +43,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import cherry.example.db.gen.query.BExTbl1;
 import cherry.example.web.BizErrorId;
 import cherry.example.web.Config;
-import cherry.example.web.SortBy;
 import cherry.example.web.SortOrder;
 import cherry.example.web.SortParam;
 import cherry.example.web.applied.ex40.AppliedEx40FormBase.Prop;
@@ -185,7 +186,7 @@ public class AppliedEx40ControllerImpl implements AppliedEx40Controller {
 			form.setSort1(new SortParam());
 		}
 		if (form.getSort1().getBy() == null) {
-			form.getSort1().setBy(SortBy.ID.getCodeValue());
+			form.getSort1().setBy(SORT_BY_00.getCodeValue());
 		}
 		if (form.getSort1().getOrder() == null) {
 			form.getSort1().setOrder(SortOrder.ASC);
@@ -195,7 +196,7 @@ public class AppliedEx40ControllerImpl implements AppliedEx40Controller {
 			form.setSort2(new SortParam());
 		}
 		if (form.getSort2().getBy() == null) {
-			form.getSort2().setBy(SortBy.TEXT10.getCodeValue());
+			form.getSort2().setBy(SORT_BY_01.getCodeValue());
 		}
 		if (form.getSort2().getOrder() == null) {
 			form.getSort2().setOrder(SortOrder.ASC);

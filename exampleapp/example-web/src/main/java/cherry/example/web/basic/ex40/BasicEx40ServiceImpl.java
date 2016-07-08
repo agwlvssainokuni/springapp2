@@ -16,6 +16,14 @@
 
 package cherry.example.web.basic.ex40;
 
+import static cherry.example.common.CodeValue.SORT_BY.SORT_BY_00;
+import static cherry.example.common.CodeValue.SORT_BY.SORT_BY_01;
+import static cherry.example.common.CodeValue.SORT_BY.SORT_BY_02;
+import static cherry.example.common.CodeValue.SORT_BY.SORT_BY_03;
+import static cherry.example.common.CodeValue.SORT_BY.SORT_BY_04;
+import static cherry.example.common.CodeValue.SORT_BY.SORT_BY_05;
+import static cherry.example.common.CodeValue.SORT_BY.SORT_BY_06;
+import static cherry.example.common.CodeValue.SORT_BY.SORT_BY_07;
 import static java.util.Arrays.asList;
 
 import java.time.LocalDateTime;
@@ -29,9 +37,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cherry.example.common.CodeValue.SORT_BY;
 import cherry.example.db.gen.query.BExTbl1;
 import cherry.example.db.gen.query.QExTbl1;
-import cherry.example.web.SortBy;
 import cherry.example.web.SortOrder;
 import cherry.example.web.SortParam;
 import cherry.foundation.bizcal.BizDateTime;
@@ -132,24 +140,24 @@ public class BasicEx40ServiceImpl implements BasicEx40Service {
 
 	private OrderSpecifier<?> createOrderSpec(SortParam sort) {
 
-		SortBy sortBy = EnumCodeUtil.getCodeMap(SortBy.class).get(sort.getBy());
+		SORT_BY sortBy = EnumCodeUtil.getCodeMap(SORT_BY.class).get(sort.getBy());
 
 		ComparableExpressionBase<?> sortKey;
-		if (sortBy == SortBy.ID) {
+		if (sortBy == SORT_BY_00) {
 			sortKey = et1.id;
-		} else if (sortBy == SortBy.TEXT10) {
+		} else if (sortBy == SORT_BY_01) {
 			sortKey = et1.text10;
-		} else if (sortBy == SortBy.INT64) {
+		} else if (sortBy == SORT_BY_02) {
 			sortKey = et1.int64;
-		} else if (sortBy == SortBy.DECIMAL1) {
+		} else if (sortBy == SORT_BY_03) {
 			sortKey = et1.decimal1;
-		} else if (sortBy == SortBy.DECIMAL3) {
+		} else if (sortBy == SORT_BY_04) {
 			sortKey = et1.decimal3;
-		} else if (sortBy == SortBy.DT) {
+		} else if (sortBy == SORT_BY_05) {
 			sortKey = et1.dt;
-		} else if (sortBy == SortBy.TM) {
+		} else if (sortBy == SORT_BY_06) {
 			sortKey = et1.tm;
-		} else if (sortBy == SortBy.DTM) {
+		} else if (sortBy == SORT_BY_07) {
 			sortKey = et1.dtm;
 		} else {
 			sortKey = et1.id;
