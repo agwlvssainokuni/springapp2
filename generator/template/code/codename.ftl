@@ -1,4 +1,4 @@
-<#include "/header.ftl" />
+<#include "/header_java.ftl" />
 
 package ${packageName(typeDef.fqcn)};
 
@@ -19,6 +19,7 @@ public enum ${className(typeDef.fqcn)} implements ILabelledCodeType<String> {
 </#if>
 </#items>
 </#list>
+	/* 生成ツールの都合による定義。 */
 	DUMMY("", "");
 
 	private String pname;

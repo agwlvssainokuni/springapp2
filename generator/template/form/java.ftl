@@ -1,4 +1,4 @@
-<#include "/header.ftl" />
+<#include "/header_java.ftl" />
 
 package ${packageName(typeDef.fqcn)};
 

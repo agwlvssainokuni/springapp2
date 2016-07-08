@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cherry.foundation.generator.test;
+package cherry.generator.form;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -25,7 +25,7 @@ import lombok.ToString;
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class MiscForm extends MiscFormBase {
+public class NumberForm extends NumberFormBase {
 
 	private static final long serialVersionUID = 1L;
 

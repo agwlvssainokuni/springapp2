@@ -1,4 +1,4 @@
-<#include "/header.ftl" />
+<#include "/header_java.ftl" />
 
 package ${packageName(typeDef.fqcn)};
 
@@ -133,7 +133,7 @@ public abstract class ${className(typeDef.fqcn)}Base implements Serializable {
 <#case "サブフォーム">
 <@notnull prop />
 	@javax.validation.Valid()
-	private ${prop.subformType} ${prop.name} = 0L;
+	private ${prop.subformType} ${prop.name};
 
 <#break>
 <#case "文字列">

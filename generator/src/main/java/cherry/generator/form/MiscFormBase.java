@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cherry.foundation.generator.test;
+package cherry.generator.form;
 
 import java.io.Serializable;
 
@@ -41,6 +41,10 @@ public abstract class MiscFormBase implements Serializable {
 	private org.springframework.web.multipart.MultipartFile misc2;
 
 	private boolean misc3;
+
+	@javax.validation.constraints.NotNull(groups = { javax.validation.groups.Default.class })
+	@javax.validation.Valid()
+	private java.util.List<String> misc4;
 
 	private Integer misc5;
 

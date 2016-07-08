@@ -26,5 +26,5 @@ task generateForm(type: cherry.gradle.task.generator.GenerateForm) {
 	baseDir = file("../")
 	javaBaseDir = "{0}/src/main/java"
 	propBaseDir = "{0}/src/main/resources/message/form"
-	attrDirSpec0 = "APPNAME"
+	attrDirSpec0 = "PROJNAME"
 }

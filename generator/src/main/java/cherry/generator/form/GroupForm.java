@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cherry.foundation.generator.test;
+package cherry.generator.form;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

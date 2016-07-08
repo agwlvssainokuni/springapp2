@@ -1,4 +1,4 @@
-<#include "/header.ftl" />
+<#include "/header_java.ftl" />
 
 package ${packageName(typeDef.fqcn)};
 
@@ -11,10 +11,11 @@ public class ${codeValueName} {
 	public static enum ${upperUnderscore(prop.name)} implements ILabelledCodeType<String> {
 </#macro>
 <#macro enumItem current prop>
-		/** [${current.description}] ${prop.value} (${prop.name}): ${prop.label} */
+		/** [${current.description}] ${prop.value}: ${prop.label} */
 		${upperUnderscore(current.name)}_${upperUnderscore(prop.value)}("${prop.value?j_string}", "${prop.label?j_string}"),
 </#macro>
 <#macro enumEnd prop>
+		/* 生成ツールの都合による定義。 */
 		DUMMY("", "");
 
 		private String value;
