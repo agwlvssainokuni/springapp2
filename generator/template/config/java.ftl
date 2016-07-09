@@ -8,7 +8,7 @@ public class ${className(typeDef.fqcn)} {
 <#macro item prop>
 
 	/** ${prop.label}: ${prop.description} */
-	@org.springframework.beans.factory.annotation.Value("${prop.name}")
+	@org.springframework.beans.factory.annotation.Value("${"${"+prop.name+"}"}")
 	private ${prop.vartype} ${prop.varname};
 </#macro>
 <#list typeDef.itemDef as prop>

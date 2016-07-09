@@ -21,27 +21,27 @@ package cherry.generator.config;
 public class Config {
 
 	/** 整数設定: 整数値を設定する。 */
-	@org.springframework.beans.factory.annotation.Value("generator.config.number1")
+	@org.springframework.beans.factory.annotation.Value("${generator.config.number1}")
 	private int number1;
 
 	/** 小数設定: 小数値を設定する。 */
-	@org.springframework.beans.factory.annotation.Value("generator.config.number2")
+	@org.springframework.beans.factory.annotation.Value("${generator.config.number2}")
 	private java.math.BigDecimal number2;
 
 	/** 文字列設定: 文字列値を設定する。 */
-	@org.springframework.beans.factory.annotation.Value("generator.config.string1")
+	@org.springframework.beans.factory.annotation.Value("${generator.config.string1}")
 	private String string1;
 
 	/** 日付: 性別 */
-	@org.springframework.beans.factory.annotation.Value("generator.config.date")
+	@org.springframework.beans.factory.annotation.Value("${generator.config.date}")
 	private java.time.LocalDate date;
 
 	/** 時刻: 性別 */
-	@org.springframework.beans.factory.annotation.Value("generator.config.time")
+	@org.springframework.beans.factory.annotation.Value("${generator.config.time}")
 	private java.time.LocalTime time;
 
 	/** 日時: 性別 */
-	@org.springframework.beans.factory.annotation.Value("generator.config.datetime")
+	@org.springframework.beans.factory.annotation.Value("${generator.config.datetime}")
 	private java.time.LocalDateTime datetime;
 
 }
