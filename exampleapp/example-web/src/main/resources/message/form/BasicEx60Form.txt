@@ -1,3 +1,4 @@
+# cherry.gradle.task.generator.GenerateForm, 2016-07-09T14:27:13+09:00
 basicEx60Form.text10=文字列【10】
 basicEx60Form.int64From=整数【64bit】(下限)
 basicEx60Form.int64To=整数【64bit】(上限)

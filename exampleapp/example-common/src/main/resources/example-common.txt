@@ -1,0 +1,1 @@
+# cherry.gradle.task.generator.GenerateConfig, 2016-07-09T14:26:39+09:00

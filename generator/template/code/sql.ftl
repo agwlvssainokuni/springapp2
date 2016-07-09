@@ -1,4 +1,6 @@
 <#include "/header_sql.ftl" />
+
+-- cherry.gradle.task.generator.GenerateCode, ${.now?iso_local}
 <#macro enumBegin prop>
 
 -- ${prop.description} (${prop.name})

@@ -1,3 +1,4 @@
+# cherry.gradle.task.generator.GenerateConfig, 2016-07-09T14:26:39+09:00
 # ページネーション「全頁数」
 example-web.app.paginator.totalCount=9
 # ページネーション「左側頁数」

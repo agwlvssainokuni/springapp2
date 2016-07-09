@@ -14,6 +14,8 @@
 -- limitations under the License.
 --
 
+-- cherry.gradle.task.generator.GenerateCode, 2016-07-09T14:27:01+09:00
+
 -- 性別 (gender_type)
 INSERT INTO code_master (name, value, label, sort_order) VALUES ('gender_type', '1', '男性', 0);
 INSERT INTO code_master (name, value, label, sort_order) VALUES ('gender_type', '2', '女性', 1);

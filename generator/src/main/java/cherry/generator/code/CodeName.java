@@ -18,6 +18,7 @@ package cherry.generator.code;
 
 import cherry.foundation.type.ILabelledCodeType;
 
+@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateCode", date = "2016-07-09T14:27:01+09:00")
 public enum CodeName implements ILabelledCodeType<String> {
 	/** 性別 */
 	GENDER_TYPE("gender_type", "性別"),

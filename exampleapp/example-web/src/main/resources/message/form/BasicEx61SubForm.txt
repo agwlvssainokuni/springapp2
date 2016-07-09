@@ -1,3 +1,4 @@
+# cherry.gradle.task.generator.GenerateForm, 2016-07-09T14:27:13+09:00
 basicEx61SubForm.id=ID
 basicEx61SubForm.text10=文字列【10】
 basicEx61SubForm.text100=文字列【100】

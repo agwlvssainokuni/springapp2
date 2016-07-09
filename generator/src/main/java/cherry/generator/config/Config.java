@@ -18,6 +18,7 @@ package cherry.generator.config;
 
 @lombok.Getter()
 @org.springframework.stereotype.Component("generatorConfig")
+@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateConfig", date = "2016-07-09T14:26:39+09:00")
 public class Config {
 
 	/** 整数設定: 整数値を設定する。 */

@@ -18,6 +18,7 @@ package cherry.example.common;
 
 import cherry.foundation.type.ILabelledCodeType;
 
+@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateCode", date = "2016-07-09T14:27:01+09:00")
 public enum CodeName implements ILabelledCodeType<String> {
 	/** 並び順 */
 	SORT_BY("sort_by", "並び順"),

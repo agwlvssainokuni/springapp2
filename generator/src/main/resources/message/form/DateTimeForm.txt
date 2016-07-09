@@ -1,3 +1,4 @@
+# cherry.gradle.task.generator.GenerateForm, 2016-07-09T14:27:13+09:00
 dateTimeForm.date1=date1
 dateTimeForm.date2=date2
 dateTimeForm.date3=date3

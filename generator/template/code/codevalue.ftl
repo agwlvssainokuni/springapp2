@@ -4,6 +4,7 @@ package ${packageName(typeDef.fqcn)};
 
 import cherry.foundation.type.ILabelledCodeType;
 
+@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateCode", date = "${.now?iso_local}")
 public class ${codeValueName} {
 <#macro enumBegin prop>
 

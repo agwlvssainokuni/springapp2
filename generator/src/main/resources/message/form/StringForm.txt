@@ -1,3 +1,4 @@
+# cherry.gradle.task.generator.GenerateForm, 2016-07-09T14:27:13+09:00
 stringForm.string1=string1
 stringForm.string2=string2
 stringForm.string3=string3
