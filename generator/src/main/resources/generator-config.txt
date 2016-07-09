@@ -1,0 +1,12 @@
+# 整数設定
+generator.config.number1=12345
+# 小数設定
+generator.config.number2=12345.6789
+# 文字列設定
+generator.config.string1=マルチバイト文字
+# 日付
+generator.config.date=2016/01/23
+# 時刻
+generator.config.time=12:34:56
+# 日時
+generator.config.datetime=2016/01/23 12:34:56

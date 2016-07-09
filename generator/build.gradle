@@ -14,6 +14,14 @@ task generateCode(type: cherry.gradle.task.generator.GenerateCode) {
 	attrDirSpec0 = "PROJNAME"
 }
 
+task generateConfig(type: cherry.gradle.task.generator.GenerateConfig) {
+	definitionFiles = defFile
+	baseDir = file("../")
+	javaBaseDir = "{0}/src/main/java"
+	propBaseDir = "{0}/src/main/resources"
+	attrDirSpec0 = "PROJNAME"
+}
+
 task generateDto(type: cherry.gradle.task.generator.GenerateDto) {
 	definitionFiles = defFile
 	baseDir = file("../")
