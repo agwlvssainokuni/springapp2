@@ -1,0 +1,48 @@
+apply plugin: "war"
+apply plugin: "eclipse-wtp"
+
+eclipse.wtp.facet {
+	facet name: "java", version: "1.8"
+	facet name: "jst.web", version: "3.0"
+}
+
+war {
+	classpath = jar.outputs.files + configurations.runtime - configurations.providedRuntime
+}
+
+dependencies {
+	compile project(path: ":corelib:foundation")
+	compile project(path: ":corelib:foundation", configuration: "querydslRuntime")
+	compile project(path: ":corelib:foundation", configuration: "servletextRuntime")
+	compile project(path: ":corelib:foundation", configuration: "webmvcRuntime")
+	compile project(path: ":corelib:foundation", configuration: "taglibRuntime")
+	if (!propWithEclipse) {
+		compile project(path: project.path, configuration: "generatedRuntime")
+	}
+	runtime "org.apache.tiles:tiles-core:${versionTiles}"
+	runtime "org.apache.tiles:tiles-api:${versionTiles}"
+	runtime "org.apache.tiles:tiles-servlet:${versionTiles}"
+	runtime "org.apache.tiles:tiles-jsp:${versionTiles}"
+	runtime "org.apache.tiles:tiles-el:${versionTiles}"
+	runtime "org.apache.tiles:tiles-extras:${versionTiles}"
+	compile "org.springframework.security:spring-security-core:${versionSpringSecurity}"
+	compile "org.springframework.security:spring-security-acl:${versionSpringSecurity}"
+	compile "org.springframework.security:spring-security-web:${versionSpringSecurity}"
+	compile "org.springframework.security:spring-security-taglibs:${versionSpringSecurity}"
+	compile "org.springframework.security:spring-security-ldap:${versionSpringSecurity}"
+	compile "org.springframework.security:spring-security-config:${versionSpringSecurity}"
+	compile "org.springframework.mobile:spring-mobile-device:${versionSpringMobile}"
+	runtime "javax.servlet:jstl:${versionJstl}"
+	compileOnly "javax.servlet:javax.servlet-api:${versionJavaServlet}"
+	compileOnly "javax.servlet.jsp:javax.servlet.jsp-api:${versionJavaJsp}"
+	compileOnly "javax.jms:jms-api:${versionJavaJms}"
+	compileOnly "javax.transaction:transaction-api:${versionJavaTransaction}"
+	compileOnly "org.projectlombok:lombok:${versionLombok}"
+	testCompile "org.springframework:spring-test:${versionSpring}"
+	testRuntime "javax.servlet:javax.servlet-api:${versionJavaServlet}"
+	testRuntime "javax.servlet.jsp:javax.servlet.jsp-api:${versionJavaJsp}"
+	testRuntime "com.h2database:h2:${versionH2db}"
+	runtime "org.flywaydb:flyway-core:${versionFlyway}"
+
+	generatedCompile "com.querydsl:querydsl-sql:${versionQuerydsl}"
+}

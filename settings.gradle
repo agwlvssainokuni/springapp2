@@ -1,4 +1,4 @@
 include ":corelib:goods", ":corelib:foundation",
 	":exampleapp:example-dbschema", ":exampleapp:example-common",
 	":exampleapp:example-web",
-	":tutorial:querytutorial"
+	":tutorial:querytutorial", ":tutorial:mvctutorial"
