@@ -232,5 +232,7 @@ dependencies {
 	webmvcCompile "org.springframework:spring-webmvc:${versionSpring}"
 	webmvcCompile "org.springframework.security:spring-security-web:${versionSpringSecurity}"
 	webmvcCompile "org.slf4j:slf4j-api:${versionSlf4j}"
+	webmvcCompile "org.hibernate:hibernate-validator:${versionHibernateValidator}"
+	webmvcCompile "javax.validation:validation-api:${versionJavaValidation}"
 	webmvcCompileOnly "javax.servlet:javax.servlet-api:${versionJavaServlet}"
 }

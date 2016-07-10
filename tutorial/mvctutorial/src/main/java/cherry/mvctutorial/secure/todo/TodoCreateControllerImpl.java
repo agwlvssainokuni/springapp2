@@ -36,6 +36,7 @@ import org.springframework.web.util.UriComponents;
 import cherry.foundation.bizcal.BizDateTime;
 import cherry.foundation.bizerror.BizErrorUtil;
 import cherry.foundation.onetimetoken.OneTimeTokenValidator;
+import cherry.foundation.spring.webmvc.Http4xxChecker;
 import cherry.mvctutorial.Config;
 import cherry.mvctutorial.db.gen.query.BTodo;
 
@@ -120,11 +121,12 @@ public class TodoCreateControllerImpl implements TodoCreateController {
 	@Override
 	public ModelAndView finish(int id, Authentication auth, Locale locale, SitePreference sitePref,
 			NativeWebRequest request) {
-		ModelAndView mav = new ModelAndView("secure/todo/create/finish");
+
 		BTodo todo = todoService.findById(auth.getName(), id);
-		if (todo != null) {
-			mav.addObject(todo);
-		}
+		Http4xxChecker.throwNotFoundIfNull(todo, BTodo.class, auth.getName(), id);
+
+		ModelAndView mav = new ModelAndView("secure/todo/create/finish");
+		mav.addObject(todo);
 		return mav;
 	}
 
