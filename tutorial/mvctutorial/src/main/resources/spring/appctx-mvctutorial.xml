@@ -12,11 +12,9 @@
 	<import resource="appctx-foundation.xml" />
 	<import resource="appctx-foundation-biz.xml" />
 	<import resource="appctx-foundation-trace.xml" />
-	<import resource="appctx-foundation-cache.xml" />
 	<import resource="appctx-foundation-jdbc.xml" />
 	<import resource="appctx-foundation-querydsl.xml" />
 	<import resource="appctx-foundation-servlet.xml" />
-	<import resource="appctx-foundation-servletext.xml" />
 
 	<context:component-scan base-package="cherry.mvctutorial" />
 

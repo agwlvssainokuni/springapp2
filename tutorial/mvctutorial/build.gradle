@@ -13,7 +13,7 @@ war {
 dependencies {
 	compile project(path: ":corelib:foundation")
 	compile project(path: ":corelib:foundation", configuration: "querydslRuntime")
-	compile project(path: ":corelib:foundation", configuration: "servletextRuntime")
+	compile project(path: ":corelib:foundation", configuration: "servletRuntime")
 	compile project(path: ":corelib:foundation", configuration: "webmvcRuntime")
 	compile project(path: ":corelib:foundation", configuration: "taglibRuntime")
 	if (!propWithEclipse) {
