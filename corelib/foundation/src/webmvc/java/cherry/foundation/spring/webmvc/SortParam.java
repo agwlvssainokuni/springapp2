@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 agwlvssainokuni
+ * Copyright 2015,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,23 +14,16 @@
  * limitations under the License.
  */
 
-package cherry.example.web;
+package cherry.foundation.spring.webmvc;
 
 import java.io.Serializable;
 
 import javax.validation.constraints.NotNull;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.validator.constraints.NotEmpty;
 
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
 public class SortParam implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -40,5 +33,26 @@ public class SortParam implements Serializable {
 
 	@NotNull()
 	private SortOrder order;
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+	}
+
+	public String getBy() {
+		return by;
+	}
+
+	public void setBy(String by) {
+		this.by = by;
+	}
+
+	public SortOrder getOrder() {
+		return order;
+	}
+
+	public void setOrder(SortOrder order) {
+		this.order = order;
+	}
 
 }

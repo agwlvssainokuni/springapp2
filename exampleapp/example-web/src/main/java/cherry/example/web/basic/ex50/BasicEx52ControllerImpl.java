@@ -45,10 +45,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 import cherry.example.db.gen.query.BExTbl1;
 import cherry.example.web.BizErrorId;
 import cherry.example.web.Config;
-import cherry.example.web.SortOrder;
-import cherry.example.web.SortParam;
 import cherry.example.web.basic.ex50.BasicEx50FormBase.Prop;
 import cherry.foundation.bizerror.BizErrorUtil;
+import cherry.foundation.spring.webmvc.SortOrder;
+import cherry.foundation.spring.webmvc.SortParam;
 import cherry.foundation.spring.webmvc.ViewNameUtil;
 import cherry.goods.paginate.PagedList;
 

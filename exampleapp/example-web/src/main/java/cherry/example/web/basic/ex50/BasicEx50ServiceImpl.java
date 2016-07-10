@@ -39,11 +39,11 @@ import org.springframework.transaction.annotation.Transactional;
 import cherry.example.common.CodeValue.SORT_BY;
 import cherry.example.db.gen.query.BExTbl1;
 import cherry.example.db.gen.query.QExTbl1;
-import cherry.example.web.SortOrder;
-import cherry.example.web.SortParam;
 import cherry.foundation.bizcal.BizDateTime;
 import cherry.foundation.download.TableDownloadOperation;
 import cherry.foundation.querydsl.QuerydslSupport;
+import cherry.foundation.spring.webmvc.SortOrder;
+import cherry.foundation.spring.webmvc.SortParam;
 import cherry.foundation.type.EnumCodeUtil;
 import cherry.goods.paginate.PagedList;
 

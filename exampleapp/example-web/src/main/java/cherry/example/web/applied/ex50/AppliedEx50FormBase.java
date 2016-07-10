@@ -31,7 +31,7 @@ import cherry.foundation.bizerror.BizErrorUtil;
 @Setter
 @EqualsAndHashCode
 @ToString
-@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateForm", date = "2016-07-09T14:27:13+09:00")
+@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateForm", date = "2016-07-10T09:06:41+09:00")
 public abstract class AppliedEx50FormBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -100,11 +100,11 @@ public abstract class AppliedEx50FormBase implements Serializable {
 
 	@javax.validation.constraints.NotNull(groups = { javax.validation.groups.Default.class })
 	@javax.validation.Valid()
-	private cherry.example.web.SortParam sort1;
+	private cherry.foundation.spring.webmvc.SortParam sort1;
 
 	@javax.validation.constraints.NotNull(groups = { javax.validation.groups.Default.class })
 	@javax.validation.Valid()
-	private cherry.example.web.SortParam sort2;
+	private cherry.foundation.spring.webmvc.SortParam sort2;
 
 	private long pno = 0L;
 

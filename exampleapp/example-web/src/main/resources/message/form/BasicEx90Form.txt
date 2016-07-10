@@ -1,4 +1,4 @@
-# cherry.gradle.task.generator.GenerateForm, 2016-07-09T14:27:13+09:00
+# cherry.gradle.task.generator.GenerateForm, 2016-07-10T09:06:41+09:00
 basicEx90Form.file=ファイル
 basicEx90Form.charset=文字コード
 basicEx90Form.dt=日付
