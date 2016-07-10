@@ -33,7 +33,8 @@ import cherry.foundation.validator.groups.G9;
 public interface TodoCreateController {
 
 	@RequestMapping()
-	ModelAndView init(Authentication auth, Locale locale, SitePreference sitePref, NativeWebRequest request);
+	ModelAndView init(@RequestParam(value = "to", required = false) String redirTo, Authentication auth, Locale locale,
+			SitePreference sitePref, NativeWebRequest request);
 
 	@RequestMapping(value = "start")
 	ModelAndView start(@Validated(G9.class) TodoCreateForm form, BindingResult binding, Authentication auth,

@@ -34,8 +34,8 @@ import cherry.foundation.validator.groups.G9;
 public interface TodoEditController {
 
 	@RequestMapping()
-	ModelAndView init(@RequestParam("id") int id, Authentication auth, Locale locale, SitePreference sitePref,
-			NativeWebRequest request);
+	ModelAndView init(@RequestParam(value = "to", required = false) String redirTo, @RequestParam("id") int id,
+			Authentication auth, Locale locale, SitePreference sitePref, NativeWebRequest request);
 
 	@RequestMapping(value = "start")
 	ModelAndView start(@RequestParam("id") int id, @Validated(G9.class) TodoEditForm form, BindingResult binding,

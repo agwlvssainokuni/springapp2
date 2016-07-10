@@ -38,8 +38,8 @@ import cherry.foundation.validator.groups.G9;
 public interface TodoListController {
 
 	@RequestMapping()
-	ModelAndView init(@RequestParam(value = "redirTo", required = false) String redirTo, Authentication auth,
-			Locale locale, SitePreference sitePref, NativeWebRequest request, SessionStatus status);
+	ModelAndView init(@RequestParam(value = "to", required = false) String redirTo, Authentication auth, Locale locale,
+			SitePreference sitePref, NativeWebRequest request, SessionStatus status);
 
 	@RequestMapping(value = "start")
 	ModelAndView start(@Validated(G9.class) TodoListForm form, BindingResult binding, Authentication auth,

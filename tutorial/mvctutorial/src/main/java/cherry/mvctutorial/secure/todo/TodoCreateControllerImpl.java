@@ -23,6 +23,7 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mobile.device.site.SitePreference;
 import org.springframework.security.core.Authentication;
@@ -32,6 +33,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import cherry.foundation.bizcal.BizDateTime;
 import cherry.foundation.bizerror.BizErrorUtil;
@@ -56,11 +58,16 @@ public class TodoCreateControllerImpl implements TodoCreateController {
 	private OneTimeTokenValidator oneTimeTokenValidator;
 
 	@Override
-	public ModelAndView init(Authentication auth, Locale locale, SitePreference sitePref, NativeWebRequest request) {
-		UriComponents redirTo = fromMethodCall(on(TodoCreateController.class).start(null, null, null, null, null, null))
-				.build();
+	public ModelAndView init(String redirTo, Authentication auth, Locale locale, SitePreference sitePref,
+			NativeWebRequest request) {
+		UriComponents redir;
+		if (StringUtils.isNotEmpty(redirTo)) {
+			redir = UriComponentsBuilder.fromPath(redirTo).build();
+		} else {
+			redir = fromMethodCall(on(TodoCreateController.class).start(null, null, null, null, null, null)).build();
+		}
 		ModelAndView mav = new ModelAndView();
-		mav.setView(new RedirectView(redirTo.toUriString(), true));
+		mav.setView(new RedirectView(redir.toUriString(), true));
 		return mav;
 	}
 

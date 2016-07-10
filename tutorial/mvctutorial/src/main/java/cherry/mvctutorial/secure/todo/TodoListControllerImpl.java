@@ -39,6 +39,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import cherry.foundation.bizcal.BizDateTime;
 import cherry.foundation.download.DownloadOperation;
@@ -72,14 +73,14 @@ public class TodoListControllerImpl implements TodoListController {
 
 		status.setComplete();
 
-		if (StringUtils.isEmpty(redirTo)) {
-			UriComponents uc = fromMethodCall(on(TodoListController.class).start(null, null, null, null, null, null))
-					.build();
-			redirTo = uc.toUriString();
+		UriComponents redir;
+		if (StringUtils.isNotEmpty(redirTo)) {
+			redir = UriComponentsBuilder.fromPath(redirTo).build();
+		} else {
+			redir = fromMethodCall(on(TodoListController.class).start(null, null, null, null, null, null)).build();
 		}
-
 		ModelAndView mav = new ModelAndView();
-		mav.setView(new RedirectView(redirTo, true));
+		mav.setView(new RedirectView(redir.toUriString(), true));
 		return mav;
 	}
 

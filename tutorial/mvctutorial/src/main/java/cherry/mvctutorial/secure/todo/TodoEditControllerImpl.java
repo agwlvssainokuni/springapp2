@@ -23,6 +23,7 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mobile.device.site.SitePreference;
 import org.springframework.security.core.Authentication;
@@ -33,6 +34,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import cherry.foundation.bizcal.BizDateTime;
 import cherry.foundation.bizerror.BizErrorUtil;
@@ -53,13 +55,17 @@ public class TodoEditControllerImpl implements TodoEditController {
 	private OneTimeTokenValidator oneTimeTokenValidator;
 
 	@Override
-	public ModelAndView init(int id, Authentication auth, Locale locale, SitePreference sitePref,
+	public ModelAndView init(String redirTo, int id, Authentication auth, Locale locale, SitePreference sitePref,
 			NativeWebRequest request) {
-		UriComponents redirTo = fromMethodCall(
-				on(TodoEditController.class).start(id, null, null, null, null, null, null)).replaceQueryParam("id", id)
-				.build();
+		UriComponents redir;
+		if (StringUtils.isNotEmpty(redirTo)) {
+			redir = UriComponentsBuilder.fromPath(redirTo).build();
+		} else {
+			redir = fromMethodCall(on(TodoEditController.class).start(id, null, null, null, null, null, null))
+					.replaceQueryParam("id", id).build();
+		}
 		ModelAndView mav = new ModelAndView();
-		mav.setView(new RedirectView(redirTo.toUriString(), true));
+		mav.setView(new RedirectView(redir.toUriString(), true));
 		return mav;
 	}
 
