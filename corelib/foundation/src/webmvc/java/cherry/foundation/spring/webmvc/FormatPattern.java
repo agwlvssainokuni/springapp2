@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cherry.mvctutorial;
+package cherry.foundation.spring.webmvc;
 
 public class FormatPattern {
 
@@ -27,6 +27,18 @@ public class FormatPattern {
 	public static final String DECIMAL_2 = "###0.00########";
 
 	public static final String DECIMAL_3 = "###0.000#######";
+
+	public static final String DECIMAL_4 = "###0.0000######";
+
+	public static final String DECIMAL_5 = "###0.00000#####";
+
+	public static final String DECIMAL_6 = "###0.000000####";
+
+	public static final String DECIMAL_7 = "###0.0000000###";
+
+	public static final String DECIMAL_8 = "###0.00000000##";
+
+	public static final String DECIMAL_9 = "###0.000000000#";
 
 	public static final String DECIMAL_X = "###0.##########";
 

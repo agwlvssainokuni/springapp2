@@ -18,22 +18,22 @@ package cherry.example.web;
 
 public class FormatPattern {
 
-	public static final String INTEGER = "###0";
+	public static final String INTEGER = cherry.foundation.spring.webmvc.FormatPattern.INTEGER;
 
-	public static final String LONG = "###0";
+	public static final String LONG = cherry.foundation.spring.webmvc.FormatPattern.LONG;
 
-	public static final String DECIMAL_1 = "###0.0#########";
+	public static final String DECIMAL_1 = cherry.foundation.spring.webmvc.FormatPattern.DECIMAL_1;
 
-	public static final String DECIMAL_2 = "###0.00########";
+	public static final String DECIMAL_2 = cherry.foundation.spring.webmvc.FormatPattern.DECIMAL_2;
 
-	public static final String DECIMAL_3 = "###0.000#######";
+	public static final String DECIMAL_3 = cherry.foundation.spring.webmvc.FormatPattern.DECIMAL_3;
 
-	public static final String DECIMAL_X = "###0.##########";
+	public static final String DECIMAL_X = cherry.foundation.spring.webmvc.FormatPattern.DECIMAL_X;
 
-	public static final String DATE = "yyyy/MM/dd";
+	public static final String DATE = cherry.foundation.spring.webmvc.FormatPattern.DATE;
 
-	public static final String TIME = "HH:mm:ss";
+	public static final String TIME = cherry.foundation.spring.webmvc.FormatPattern.TIME;
 
-	public static final String DATETIME = "yyyy/MM/dd HH:mm:ss";
+	public static final String DATETIME = cherry.foundation.spring.webmvc.FormatPattern.DATETIME;
 
 }
