@@ -42,12 +42,13 @@ import org.springframework.web.util.UriComponents;
 
 import cherry.foundation.bizcal.BizDateTime;
 import cherry.foundation.download.DownloadOperation;
+import cherry.foundation.spring.webmvc.SortOrder;
+import cherry.foundation.spring.webmvc.SortParam;
 import cherry.goods.paginate.PagedList;
 import cherry.goods.util.LocalDateTimeUtil;
 import cherry.goods.util.LocalDateUtil;
+import cherry.mvctutorial.CodeValue;
 import cherry.mvctutorial.Config;
-import cherry.mvctutorial.SortOrder;
-import cherry.mvctutorial.SortParam;
 import cherry.mvctutorial.db.gen.query.BTodo;
 
 @Controller
@@ -89,7 +90,7 @@ public class TodoListControllerImpl implements TodoListController {
 		form.setDueDateTo(bizDateTime.today().plusDays(config.getDefaultOffsetOfDueDate()));
 		form.setNotDone(true);
 		SortParam param = new SortParam();
-		param.setBy("ID");
+		param.setBy(CodeValue.TODO_LIST_SORT_BY.TODO_LIST_SORT_BY_ID.getCodeValue());
 		param.setOrder(SortOrder.DESC);
 		form.setSort(param);
 

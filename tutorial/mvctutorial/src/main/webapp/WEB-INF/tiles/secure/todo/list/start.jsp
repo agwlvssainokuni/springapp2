@@ -50,7 +50,7 @@
 		<f:label path="sort.by" cssErrorClass="has-error">ソート列</f:label>
 		<f:select path="sort.by" cssErrorClass="has-error">
 			<foundation:codeList var="sortByList" codeName="todo_list_sort_by" />
-			<f:option value="" label="指定しない" />
+			<f:option value="NONE" label="指定しない" />
 			<f:options itemValue="codeValue" itemLabel="codeLabel" items="${sortByList}" />
 		</f:select>
 	</div>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015,2016 agwlvssainokuni
+ * Copyright 2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,29 +16,28 @@
 
 package cherry.mvctutorial;
 
-import java.io.Serializable;
+import cherry.foundation.type.ICodeType;
 
-import javax.validation.constraints.NotNull;
+public class CodeValue {
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+	public static enum TODO_LIST_SORT_BY implements ICodeType<String> {
+		/** ID */
+		TODO_LIST_SORT_BY_ID("ID"),
+		/** 登録日時 */
+		TODO_LIST_SORT_BY_POSTED_AT("POSTED_AT"),
+		/** 期日 */
+		TODO_LIST_SORT_BY_DUE_DATE("DUE_DATE");
 
-import org.hibernate.validator.constraints.NotEmpty;
+		private String value;
 
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
-public class SortParam implements Serializable {
+		private TODO_LIST_SORT_BY(String value) {
+			this.value = value;
+		}
 
-	private static final long serialVersionUID = 1L;
-
-	@NotEmpty()
-	private String by;
-
-	@NotNull()
-	private SortOrder order;
+		@Override
+		public String getCodeValue() {
+			return value;
+		}
+	}
 
 }

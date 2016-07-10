@@ -1,5 +1,5 @@
 /*
- * Copyright 2015,2016 agwlvssainokuni
+ * Copyright 2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,21 @@
 
 package cherry.mvctutorial;
 
-public enum SortOrder {
-	/** 昇順 */
-	ASC,
-	/** 降順 */
-	DESC;
+import cherry.foundation.type.ICodeType;
+
+public enum CodeName implements ICodeType<String> {
+	/** TODO検索並び順列 */
+	TODO_LIST_SORT_BY("todo_list_sort_by");
+
+	private String value;
+
+	private CodeName(String value) {
+		this.value = value;
+	}
+
+	@Override
+	public String getCodeValue() {
+		return value;
+	}
+
 }

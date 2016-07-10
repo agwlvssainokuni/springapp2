@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.function.Function;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,11 +27,14 @@ import org.springframework.transaction.annotation.Transactional;
 import cherry.foundation.etl.CsvConsumer;
 import cherry.foundation.etl.NoneLimiter;
 import cherry.foundation.querydsl.QuerydslSupport;
+import cherry.foundation.spring.webmvc.SortOrder;
+import cherry.foundation.type.EnumCodeUtil;
 import cherry.goods.paginate.PagedList;
-import cherry.mvctutorial.SortOrder;
+import cherry.mvctutorial.CodeValue;
 import cherry.mvctutorial.db.gen.query.BTodo;
 import cherry.mvctutorial.db.gen.query.QTodo;
 
+import com.querydsl.core.types.dsl.ComparableExpressionBase;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.sql.SQLQuery;
 import com.querydsl.sql.SQLQueryFactory;
@@ -117,28 +119,26 @@ public class TodoServiceImpl implements TodoService {
 
 	private Function<SQLQuery<?>, SQLQuery<?>> orderByClause(QTodo t, String loginId, SearchCondition cond) {
 		return (query) -> {
-			if (StringUtils.isEmpty(cond.getSort().getBy())) {
-				return query;
-			} else if ("ID".equals(cond.getSort().getBy())) {
-				if (cond.getSort().getOrder() == SortOrder.DESC) {
-					return query.orderBy(t.id.desc());
-				} else {
-					return query.orderBy(t.id.asc());
-				}
-			} else if ("POSTED_AT".equals(cond.getSort().getBy())) {
-				if (cond.getSort().getOrder() == SortOrder.DESC) {
-					return query.orderBy(t.postedAt.desc());
-				} else {
-					return query.orderBy(t.postedAt.asc());
-				}
-			} else if ("DUE_DATE".equals(cond.getSort().getBy())) {
-				if (cond.getSort().getOrder() == SortOrder.DESC) {
-					return query.orderBy(t.dueDate.desc());
-				} else {
-					return query.orderBy(t.dueDate.asc());
-				}
+
+			ComparableExpressionBase<?> sortKey;
+			CodeValue.TODO_LIST_SORT_BY sortBy = EnumCodeUtil.getCodeMap(CodeValue.TODO_LIST_SORT_BY.class).get(
+					cond.getSort().getBy());
+			if (sortBy == CodeValue.TODO_LIST_SORT_BY.TODO_LIST_SORT_BY_ID) {
+				sortKey = t.id;
+			} else if (sortBy == CodeValue.TODO_LIST_SORT_BY.TODO_LIST_SORT_BY_POSTED_AT) {
+				sortKey = t.postedAt;
+			} else if (sortBy == CodeValue.TODO_LIST_SORT_BY.TODO_LIST_SORT_BY_DUE_DATE) {
+				sortKey = t.dueDate;
 			} else {
+				sortKey = null;
+			}
+
+			if (sortKey == null) {
 				return query;
+			} else if (cond.getSort().getOrder() == SortOrder.ASC) {
+				return query.orderBy(sortKey.asc());
+			} else {
+				return query.orderBy(sortKey.desc());
 			}
 		};
 	}

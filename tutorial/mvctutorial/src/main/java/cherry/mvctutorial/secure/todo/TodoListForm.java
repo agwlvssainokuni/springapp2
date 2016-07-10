@@ -30,8 +30,8 @@ import lombok.ToString;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import cherry.foundation.spring.webmvc.SortParam;
 import cherry.mvctutorial.FormatPattern;
-import cherry.mvctutorial.SortParam;
 
 @Setter
 @Getter
