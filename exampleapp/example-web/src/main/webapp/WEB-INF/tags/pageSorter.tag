@@ -15,10 +15,10 @@
 		</f:select>
 	</div>
 	<div class="form-group">
-		<c:forEach var="item" items="${foundation:getEnumList('cherry.example.web.SortOrder')}">
+		<c:forEach var="item" items="${foundation:getEnumList('cherry.foundation.spring.webmvc.SortOrder')}">
 			<label class="radio-inline">
 				<f:radiobutton path="${sortOrder}" value="${item.name()}" cssClass="${cssClass}" />
-				<s:message code="cherry.example.web.SortOrder.${item.name()}" />
+				<s:message code="cherry.foundation.spring.webmvc.SortOrder.${item.name()}" />
 			</label>
 		</c:forEach>
 	</div>

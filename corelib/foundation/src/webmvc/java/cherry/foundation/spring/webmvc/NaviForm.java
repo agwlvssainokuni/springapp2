@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 agwlvssainokuni
+ * Copyright 2015,2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,24 +14,31 @@
  * limitations under the License.
  */
 
-package cherry.example.web.home;
+package cherry.foundation.spring.webmvc;
 
 import java.io.Serializable;
 import java.util.List;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
 public class NaviForm implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private List<String> history;
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+	}
+
+	public List<String> getHistory() {
+		return history;
+	}
+
+	public void setHistory(List<String> history) {
+		this.history = history;
+	};
 
 }

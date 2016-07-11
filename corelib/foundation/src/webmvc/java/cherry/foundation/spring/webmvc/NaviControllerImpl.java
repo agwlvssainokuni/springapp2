@@ -14,68 +14,57 @@
  * limitations under the License.
  */
 
-package cherry.example.web.home;
+package cherry.foundation.spring.webmvc;
 
 import static cherry.foundation.spring.webmvc.ModelAndViewBuilder.redirect;
-import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.fromMethodCall;
-import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
 
 import java.util.LinkedList;
-import java.util.Locale;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mobile.device.site.SitePreference;
-import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.util.UriComponents;
 
-import cherry.example.web.Config;
-
-@Controller
 public class NaviControllerImpl implements NaviController {
 
-	@Autowired
-	private Config config;
+	private String home;
+
+	private int historySize;
+
+	public void setHome(String home) {
+		this.home = home;
+	}
+
+	public void setHistorySize(int historySize) {
+		this.historySize = historySize;
+	}
 
 	@Override
-	public ModelAndView back(NaviForm form, BindingResult binding, Authentication auth, Locale locale,
-			SitePreference sitePref, NativeWebRequest request) {
+	public ModelAndView back(NaviForm form, BindingResult binding) {
 		String uri = restoreHistory(form);
 		if (StringUtils.isBlank(uri)) {
-			return redirect(redirectToHome()).build();
+			return redirect(home).build();
 		}
 		return redirect(uri).build();
 	}
 
 	@Override
-	public ModelAndView save1(String to, String fm, NaviForm form, BindingResult binding, Authentication auth,
-			Locale locale, SitePreference sitePref, NativeWebRequest request) {
+	public ModelAndView save1(String to, String fm, NaviForm form, BindingResult binding) {
 		saveHistory(form, fm);
 		return redirect(to).build();
 	}
 
 	@Override
-	public ModelAndView save2(String to, String referer, NaviForm form, BindingResult binding, Authentication auth,
-			Locale locale, SitePreference sitePref, NativeWebRequest request) {
+	public ModelAndView save2(String to, String referer, NaviForm form, BindingResult binding) {
 		saveHistory(form, referer);
 		return redirect(to).build();
 	}
 
 	@Override
-	public ModelAndView clear(NaviForm form, BindingResult binding, Authentication auth, Locale locale,
-			SitePreference sitePref, NativeWebRequest request, SessionStatus status) {
+	public ModelAndView clear(String to, NaviForm form, BindingResult binding, SessionStatus status) {
 		status.setComplete();
-		return redirect(redirectToHome()).build();
-	}
-
-	private UriComponents redirectToHome() {
-		return fromMethodCall(on(HomeController.class).start(null, null, null, null)).build();
+		return redirect(to).build();
 	}
 
 	private void saveHistory(NaviForm form, String uri) {
@@ -83,7 +72,7 @@ public class NaviControllerImpl implements NaviController {
 			form.setHistory(new LinkedList<String>());
 		}
 		form.getHistory().add(uri);
-		while (form.getHistory().size() > config.getHistorySize()) {
+		while (form.getHistory().size() > historySize) {
 			form.getHistory().remove(0);
 		}
 	}
