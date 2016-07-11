@@ -1,7 +1,15 @@
 sourceSets {
 	excel
+	collection
 	telno
 	fluent
+}
+
+compileCollectionJava.options.encoding = compileJava.options.encoding
+task collectionJar(type: Jar, dependsOn: collectionClasses) {
+	from sourceSets.collection.output.classesDir
+	from sourceSets.collection.output.resourcesDir
+	appendix = "collection"
 }
 
 compileExcelJava.options.encoding = compileJava.options.encoding
@@ -26,6 +34,7 @@ task fluentJar(type: Jar, dependsOn: fluentClasses) {
 }
 
 artifacts {
+	collectionRuntime collectionJar
 	excelRuntime excelJar
 	telnoRuntime telnoJar
 	fluentRuntime fluentJar
@@ -37,8 +46,12 @@ dependencies {
 	compile "org.slf4j:slf4j-api:${versionSlf4j}"
 	runtime "org.slf4j:jcl-over-slf4j:${versionSlf4j}"
 	testCompile "commons-codec:commons-codec:${versionCommonsCodec}"
+	testCompile project(path: project.path, configuration: "collectionRuntime")
 	testCompile project(path: project.path, configuration: "excelRuntime")
 	testCompile project(path: project.path, configuration: "telnoRuntime")
+
+	collectionCompile "org.apache.commons:commons-lang3:${versionCommonsLang3}"
+	collectionCompile "org.apache.commons:commons-collections4:${versionCommonsCollections4}"
 
 	excelCompile "org.apache.poi:poi:${versionPoi}"
 	excelCompile "org.apache.poi:poi-ooxml:${versionPoi}"
