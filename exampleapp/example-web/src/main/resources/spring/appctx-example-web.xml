@@ -33,11 +33,6 @@
 		</property>
 	</bean>
 
-	<bean class="cherry.foundation.spring.webmvc.NaviControllerImpl">
-		<property name="home" value="/secure/" />
-		<property name="historySize" value="${example-web.app.historySize}" />
-	</bean>
-
 	<bean class="cherry.goods.log.Log" factory-method="setMessageDef">
 		<constructor-arg value="example-web-log" />
 	</bean>
@@ -65,7 +60,6 @@
 
 	<security:http auto-config="false" authentication-manager-ref="authenticationManager">
 		<security:intercept-url pattern="/secure/**" access="isAuthenticated()" />
-		<security:intercept-url pattern="/navi/**" access="isAuthenticated()" />
 		<security:form-login login-page="/login/start" login-processing-url="/login/execute" authentication-failure-url="/login/start?loginFailed"
 			default-target-url="/secure/" always-use-default-target="false" username-parameter="loginId" password-parameter="password" />
 		<security:logout logout-url="/logout" logout-success-url="/login/start?loggedOut" invalidate-session="true" />
@@ -93,7 +87,6 @@
 			<mvc:mapping path="/login/**" />
 			<mvc:mapping path="/logout/**" />
 			<mvc:mapping path="/secure/**" />
-			<mvc:mapping path="/navi/**" />
 			<bean class="cherry.foundation.spring.security.OperationLogHandlerInterceptor" />
 		</mvc:interceptor>
 		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
