@@ -50,14 +50,14 @@ public class NaviControllerImpl implements NaviController {
 	}
 
 	@Override
-	public ModelAndView save1(String to, String fm, NaviForm form, BindingResult binding) {
-		saveHistory(form, fm);
+	public ModelAndView save1(String to, NaviForm form, BindingResult binding) {
+		saveHistory(form, to);
 		return redirect(to).build();
 	}
 
 	@Override
-	public ModelAndView save2(String to, String referer, NaviForm form, BindingResult binding) {
-		saveHistory(form, referer);
+	public ModelAndView save2(String to, String fm, NaviForm form, BindingResult binding) {
+		saveHistory(form, fm);
 		return redirect(to).build();
 	}
 

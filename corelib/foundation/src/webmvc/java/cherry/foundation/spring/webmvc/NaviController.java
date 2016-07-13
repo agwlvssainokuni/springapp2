@@ -18,7 +18,6 @@ package cherry.foundation.spring.webmvc;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -32,13 +31,12 @@ public interface NaviController {
 	@RequestMapping()
 	ModelAndView back(@Validated() NaviForm form, BindingResult binding);
 
-	@RequestMapping(params = { "to", "fm" })
-	ModelAndView save1(@RequestParam("to") String to, @RequestParam("fm") String fm, @Validated() NaviForm form,
-			BindingResult binding);
-
 	@RequestMapping(params = { "to" })
-	ModelAndView save2(@RequestParam("to") String to, @RequestHeader("referer") String referer,
-			@Validated() NaviForm form, BindingResult binding);
+	ModelAndView save1(@RequestParam("to") String to, @Validated() NaviForm form, BindingResult binding);
+
+	@RequestMapping(params = { "to", "fm" })
+	ModelAndView save2(@RequestParam("to") String to, @RequestParam("fm") String fm, @Validated() NaviForm form,
+			BindingResult binding);
 
 	@RequestMapping(params = { "to", "clear" })
 	ModelAndView clear(@RequestParam("to") String to, @Validated() NaviForm form, BindingResult binding,
