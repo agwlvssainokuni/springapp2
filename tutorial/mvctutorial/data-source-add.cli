@@ -1,1 +1,0 @@
-data-source add --name=TutorialApp --jndi-name=java:/datasources/TutorialApp --driver-name=h2 --driver-class=org.h2.Driver --connection-url=jdbc:h2:mem:TutorialApp --user-name=sa --transaction-isolation=TRANSACTION_READ_COMMITTED --enabled=true
