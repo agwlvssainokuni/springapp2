@@ -122,7 +122,7 @@ artifacts {
 }
 
 dependencies {
-	compile project(path: ":corelib:goods")
+	compile project(path: ":corelib:elemental")
 	compile "org.apache.commons:commons-collections4:${versionCommonsCollections4}"
 	compile "commons-codec:commons-codec:${versionCommonsCodec}"
 	compile "org.freemarker:freemarker:${versionFreemarker}"
@@ -185,12 +185,12 @@ dependencies {
 	batchextCompile project(path: project.path, configuration: "batchRuntime")
 	batchextCompile project(path: project.path, configuration: "jdbcRuntime")
 
-	jdbcCompile project(path: ":corelib:goods")
-	jdbcCompile project(path: ":corelib:goods", configuration: "excelRuntime")
+	jdbcCompile project(path: ":corelib:elemental")
+	jdbcCompile project(path: ":corelib:elemental", configuration: "excelRuntime")
 	jdbcCompile "org.springframework:spring-jdbc:${versionSpring}"
 	jdbcRuntime "org.springframework:spring-tx:${versionSpring}"
 
-	optoolCompile project(path: ":corelib:goods")
+	optoolCompile project(path: ":corelib:elemental")
 	optoolCompile "org.springframework:spring-jdbc:${versionSpring}"
 	optoolCompile "org.springframework:spring-webmvc:${versionSpring}"
 	optoolCompile "com.querydsl:querydsl-sql:${versionQuerydsl}"
@@ -218,10 +218,10 @@ dependencies {
 		compileOnly "javax.servlet.jsp:javax.servlet.jsp-api:${versionJavaJsp}"
 	}
 
-	telnoCompile project(path: ":corelib:goods", configuration: "telnoRuntime")
+	telnoCompile project(path: ":corelib:elemental", configuration: "telnoRuntime")
 	telnoCompile "org.springframework:spring-beans:${versionSpring}"
 
-	testtoolCompile project(path: ":corelib:goods")
+	testtoolCompile project(path: ":corelib:elemental")
 	testtoolCompile "org.apache.commons:commons-collections4:${versionCommonsCollections4}"
 	testtoolCompile "com.fasterxml.jackson.core:jackson-databind:${versionJackson}"
 	testtoolCompile "org.springframework:spring-web:${versionSpring}"

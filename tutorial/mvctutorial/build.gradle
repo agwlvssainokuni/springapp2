@@ -11,11 +11,11 @@ war {
 }
 
 dependencies {
-	compile project(path: ":corelib:foundation")
-	compile project(path: ":corelib:foundation", configuration: "querydslRuntime")
-	compile project(path: ":corelib:foundation", configuration: "servletRuntime")
-	compile project(path: ":corelib:foundation", configuration: "webmvcRuntime")
-	compile project(path: ":corelib:foundation", configuration: "taglibRuntime")
+	compile project(path: ":corelib:fundamental")
+	compile project(path: ":corelib:fundamental", configuration: "querydslRuntime")
+	compile project(path: ":corelib:fundamental", configuration: "servletRuntime")
+	compile project(path: ":corelib:fundamental", configuration: "webmvcRuntime")
+	compile project(path: ":corelib:fundamental", configuration: "taglibRuntime")
 	if (!propWithEclipse) {
 		compile project(path: project.path, configuration: "generatedRuntime")
 	}

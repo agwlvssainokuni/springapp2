@@ -1,6 +1,6 @@
 dependencies {
-	compile project(path: ":corelib:foundation")
-	compile project(path: ":corelib:foundation", configuration: "querydslRuntime")
+	compile project(path: ":corelib:fundamental")
+	compile project(path: ":corelib:fundamental", configuration: "querydslRuntime")
 	testCompile project(path: project.path, configuration: "generatedRuntime")
 
 	runtime "org.springframework:spring-web:${versionSpring}"

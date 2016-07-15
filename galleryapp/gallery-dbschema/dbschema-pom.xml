@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>example</groupId>
+	<groupId>gallery</groupId>
 	<artifactId>dbschema</artifactId>
 	<version>1.0</version>
 	<properties>
@@ -42,8 +42,8 @@
 					<jdbcDriver>org.h2.Driver</jdbcDriver>
 					<jdbcUrl>jdbc:h2:file:./target/dbgen</jdbcUrl>
 					<jdbcUser>sa</jdbcUser>
-					<packageName>cherry.example.db.gen.query</packageName>
-					<targetFolder>${project.basedir}/../example-common/src/generated/java</targetFolder>
+					<packageName>cherry.gallery.db.gen.query</packageName>
+					<targetFolder>${project.basedir}/../gallery-common/src/generated/java</targetFolder>
 					<namePrefix>Q</namePrefix>
 					<beanPrefix>B</beanPrefix>
 					<exportBeans>true</exportBeans>

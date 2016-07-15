@@ -1,7 +1,7 @@
 dependencies {
-	compile project(path: ":corelib:foundation")
-	compile project(path: ":corelib:foundation", configuration: "querydslRuntime")
-	runtime project(path: ":exampleapp:example-dbschema")
+	compile project(path: ":corelib:fundamental")
+	compile project(path: ":corelib:fundamental", configuration: "querydslRuntime")
+	runtime project(path: ":galleryapp:gallery-dbschema")
 	if (!propWithEclipse) {
 		compile project(path: project.path, configuration: "generatedRuntime")
 	}

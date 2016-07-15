@@ -11,11 +11,11 @@ war {
 }
 
 dependencies {
-	compile project(path: ":exampleapp:example-common")
-	compile project(path: ":corelib:foundation", configuration: "servletextRuntime")
-	compile project(path: ":corelib:foundation", configuration: "webmvcRuntime")
-	compile project(path: ":corelib:foundation", configuration: "taglibRuntime")
-	runtime project(path: ":corelib:foundation", configuration: "testtoolRuntime")
+	compile project(path: ":galleryapp:gallery-common")
+	compile project(path: ":corelib:fundamental", configuration: "servletextRuntime")
+	compile project(path: ":corelib:fundamental", configuration: "webmvcRuntime")
+	compile project(path: ":corelib:fundamental", configuration: "taglibRuntime")
+	runtime project(path: ":corelib:fundamental", configuration: "testtoolRuntime")
 	runtime "org.apache.tiles:tiles-core:${versionTiles}"
 	runtime "org.apache.tiles:tiles-api:${versionTiles}"
 	runtime "org.apache.tiles:tiles-servlet:${versionTiles}"

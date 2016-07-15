@@ -55,7 +55,7 @@ subprojects {
 	}
 
 	ext {
-		// goods
+		// elemental
 		versionGuava = "19.0"
 		versionCommonsLang3 = "3.4"
 		versionCommonsCollections4 = "4.0"
@@ -64,7 +64,7 @@ subprojects {
 		versionLogback = "1.1.7"
 		versionPoi = "3.11"
 		versionFluentLogger = "0.3.0"
-		// foundation
+		// fundamental
 		versionFreemarker = "2.3.23"
 		versionIcu4j = "57.1"
 		versionQuerydsl = "4.1.2"
@@ -85,7 +85,7 @@ subprojects {
 		versionH2db = "1.4.190"
 		versionFlyway = "3.2.1"
 
-		// exampleapp
+		// galleryapp
 		versionTiles = "3.0.5"
 		versionJstl = "1.2"
 		versionLombok = "1.16.6"
