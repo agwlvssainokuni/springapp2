@@ -2,8 +2,8 @@
 
 package ${packageName(typeDef.fqcn)};
 
-import cherry.goods.log.ILogId;
-import cherry.goods.log.Level;
+import cherry.elemental.log.ILogId;
+import cherry.elemental.log.Level;
 
 @javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateLog", date = "${.now?iso_local}")
 public enum ${className(typeDef.fqcn)} implements ILogId {

@@ -11,7 +11,7 @@ import lombok.ToString;
 
 import org.springframework.context.MessageSourceResolvable;
 
-import cherry.foundation.bizerror.BizErrorUtil;
+import cherry.fundamental.bizerror.BizErrorUtil;
 
 @Getter
 @Setter
@@ -22,15 +22,15 @@ public abstract class ${className(typeDef.fqcn)}Base implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 <#macro groups prop>{ javax.validation.groups.Default.class${""
-}<#if prop.g1?? && prop.g1 == "○">, cherry.foundation.validator.groups.G1.class</#if>${""
-}<#if prop.g2?? && prop.g2 == "○">, cherry.foundation.validator.groups.G2.class</#if>${""
-}<#if prop.g3?? && prop.g3 == "○">, cherry.foundation.validator.groups.G3.class</#if>${""
-}<#if prop.g4?? && prop.g4 == "○">, cherry.foundation.validator.groups.G4.class</#if>${""
-}<#if prop.g5?? && prop.g5 == "○">, cherry.foundation.validator.groups.G5.class</#if>${""
-}<#if prop.g6?? && prop.g6 == "○">, cherry.foundation.validator.groups.G6.class</#if>${""
-}<#if prop.g7?? && prop.g7 == "○">, cherry.foundation.validator.groups.G7.class</#if>${""
-}<#if prop.g8?? && prop.g8 == "○">, cherry.foundation.validator.groups.G8.class</#if>${""
-}<#if prop.g9?? && prop.g9 == "○">, cherry.foundation.validator.groups.G9.class</#if>${""
+}<#if prop.g1?? && prop.g1 == "○">, cherry.fundamental.validator.groups.G1.class</#if>${""
+}<#if prop.g2?? && prop.g2 == "○">, cherry.fundamental.validator.groups.G2.class</#if>${""
+}<#if prop.g3?? && prop.g3 == "○">, cherry.fundamental.validator.groups.G3.class</#if>${""
+}<#if prop.g4?? && prop.g4 == "○">, cherry.fundamental.validator.groups.G4.class</#if>${""
+}<#if prop.g5?? && prop.g5 == "○">, cherry.fundamental.validator.groups.G5.class</#if>${""
+}<#if prop.g6?? && prop.g6 == "○">, cherry.fundamental.validator.groups.G6.class</#if>${""
+}<#if prop.g7?? && prop.g7 == "○">, cherry.fundamental.validator.groups.G7.class</#if>${""
+}<#if prop.g8?? && prop.g8 == "○">, cherry.fundamental.validator.groups.G8.class</#if>${""
+}<#if prop.g9?? && prop.g9 == "○">, cherry.fundamental.validator.groups.G9.class</#if>${""
 } }</#macro>
 <#macro notnull prop>
 <#if prop.required?? && prop.required == "○">
@@ -71,23 +71,23 @@ public abstract class ${className(typeDef.fqcn)}Base implements Serializable {
 	@org.springframework.format.annotation.NumberFormat(pattern = ${typeDef.attr.FORMATPATTERN}.LONG)
 	private Long ${prop.name};
 <#elseif prop.subtype == "小数1桁">
-	@cherry.foundation.validator.NumberScale(1)
+	@cherry.fundamental.validator.NumberScale(1)
 	@org.springframework.format.annotation.NumberFormat(pattern = ${typeDef.attr.FORMATPATTERN}.DECIMAL_1)
 	private java.math.BigDecimal ${prop.name};
 <#elseif prop.subtype == "小数2桁">
-	@cherry.foundation.validator.NumberScale(2)
+	@cherry.fundamental.validator.NumberScale(2)
 	@org.springframework.format.annotation.NumberFormat(pattern = ${typeDef.attr.FORMATPATTERN}.DECIMAL_2)
 	private java.math.BigDecimal ${prop.name};
 <#elseif prop.subtype == "小数3桁">
-	@cherry.foundation.validator.NumberScale(3)
+	@cherry.fundamental.validator.NumberScale(3)
 	@org.springframework.format.annotation.NumberFormat(pattern = ${typeDef.attr.FORMATPATTERN}.DECIMAL_3)
 	private java.math.BigDecimal ${prop.name};
 <#elseif prop.subtype == "小数4桁">
-	@cherry.foundation.validator.NumberScale(4)
+	@cherry.fundamental.validator.NumberScale(4)
 	@org.springframework.format.annotation.NumberFormat(pattern = ${typeDef.attr.FORMATPATTERN}.DECIMAL_4)
 	private java.math.BigDecimal ${prop.name};
 <#elseif prop.subtype == "小数5桁">
-	@cherry.foundation.validator.NumberScale(5)
+	@cherry.fundamental.validator.NumberScale(5)
 	@org.springframework.format.annotation.NumberFormat(pattern = ${typeDef.attr.FORMATPATTERN}.DECIMAL_5)
 	private java.math.BigDecimal ${prop.name};
 <#else>
@@ -140,42 +140,42 @@ public abstract class ${className(typeDef.fqcn)}Base implements Serializable {
 <#case "文字列">
 <@notempty prop />
 <#if prop.minlen??>
-	@cherry.foundation.validator.MinLength(value = ${prop.minlen}, groups = <@groups prop/>)
+	@cherry.fundamental.validator.MinLength(value = ${prop.minlen}, groups = <@groups prop/>)
 </#if>
 <#if prop.maxlen??>
-	@cherry.foundation.validator.MaxLength(value = ${prop.maxlen}, groups = <@groups prop/>)
+	@cherry.fundamental.validator.MaxLength(value = ${prop.maxlen}, groups = <@groups prop/>)
 </#if>
 <#if !prop.subtype??>
 <#elseif prop.subtype == "メール">
 	@org.hibernate.validator.constraints.Email(groups = <@groups prop/>)
 <#elseif prop.subtype == "電話番号">
-	@cherry.foundation.validator.TelNo(groups = <@groups prop/>)
+	@cherry.fundamental.validator.TelNo(groups = <@groups prop/>)
 <#elseif prop.subtype == "郵便番号">
-	@cherry.foundation.validator.ZipCode(groups = <@groups prop/>)
+	@cherry.fundamental.validator.ZipCode(groups = <@groups prop/>)
 <#elseif prop.subtype == "半角">
-	@cherry.foundation.validator.CharTypeBasicLatin(groups = <@groups prop/>)
+	@cherry.fundamental.validator.CharTypeBasicLatin(groups = <@groups prop/>)
 <#elseif prop.subtype == "半角(カナ含む)">
-	@cherry.foundation.validator.CharTypeHalfWidth(groups = <@groups prop/>)
+	@cherry.fundamental.validator.CharTypeHalfWidth(groups = <@groups prop/>)
 <#elseif prop.subtype == "半角数字">
-	@cherry.foundation.validator.CharTypeNumeric(groups = <@groups prop/>)
+	@cherry.fundamental.validator.CharTypeNumeric(groups = <@groups prop/>)
 <#elseif prop.subtype == "半角英字">
-	@cherry.foundation.validator.CharTypeAlpha(groups = <@groups prop/>)
+	@cherry.fundamental.validator.CharTypeAlpha(groups = <@groups prop/>)
 <#elseif prop.subtype == "半角英数字">
-	@cherry.foundation.validator.CharTypeAlphaNumeric(groups = <@groups prop/>)
+	@cherry.fundamental.validator.CharTypeAlphaNumeric(groups = <@groups prop/>)
 <#elseif prop.subtype == "半角カナ">
-	@cherry.foundation.validator.CharTypeHalfKatakana(groups = <@groups prop/>)
+	@cherry.fundamental.validator.CharTypeHalfKatakana(groups = <@groups prop/>)
 <#elseif prop.subtype == "全角">
-	@cherry.foundation.validator.CharTypeFullWidth(groups = <@groups prop/>)
+	@cherry.fundamental.validator.CharTypeFullWidth(groups = <@groups prop/>)
 <#elseif prop.subtype == "全角数字">
-	@cherry.foundation.validator.CharTypeFullNumeric(groups = <@groups prop/>)
+	@cherry.fundamental.validator.CharTypeFullNumeric(groups = <@groups prop/>)
 <#elseif prop.subtype == "全角英字">
-	@cherry.foundation.validator.CharTypeFullAlpha(groups = <@groups prop/>)
+	@cherry.fundamental.validator.CharTypeFullAlpha(groups = <@groups prop/>)
 <#elseif prop.subtype == "全角英数字">
-	@cherry.foundation.validator.CharTypeFullAlphaNumeric(groups = <@groups prop/>)
+	@cherry.fundamental.validator.CharTypeFullAlphaNumeric(groups = <@groups prop/>)
 <#elseif prop.subtype == "全角ひらがな">
-	@cherry.foundation.validator.CharTypeFullHiragana(groups = <@groups prop/>)
+	@cherry.fundamental.validator.CharTypeFullHiragana(groups = <@groups prop/>)
 <#elseif prop.subtype == "全角カタカナ">
-	@cherry.foundation.validator.CharTypeFullKatakana(groups = <@groups prop/>)
+	@cherry.fundamental.validator.CharTypeFullKatakana(groups = <@groups prop/>)
 <#else>
 </#if>
 	private String ${prop.name};

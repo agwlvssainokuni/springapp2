@@ -25,45 +25,45 @@ import lombok.ToString;
 
 import org.springframework.context.MessageSourceResolvable;
 
-import cherry.foundation.bizerror.BizErrorUtil;
+import cherry.fundamental.bizerror.BizErrorUtil;
 
 @Getter
 @Setter
 @EqualsAndHashCode
 @ToString
-@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateForm", date = "2016-07-09T14:27:13+09:00")
+@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateForm", date = "2016-07-16T07:10:06+09:00")
 public abstract class GroupFormBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@org.hibernate.validator.constraints.NotEmpty(groups = { javax.validation.groups.Default.class, cherry.foundation.validator.groups.G1.class })
+	@org.hibernate.validator.constraints.NotEmpty(groups = { javax.validation.groups.Default.class, cherry.fundamental.validator.groups.G1.class })
 	private String group1;
 
-	@org.hibernate.validator.constraints.NotEmpty(groups = { javax.validation.groups.Default.class, cherry.foundation.validator.groups.G2.class })
+	@org.hibernate.validator.constraints.NotEmpty(groups = { javax.validation.groups.Default.class, cherry.fundamental.validator.groups.G2.class })
 	private String group2;
 
-	@org.hibernate.validator.constraints.NotEmpty(groups = { javax.validation.groups.Default.class, cherry.foundation.validator.groups.G3.class })
+	@org.hibernate.validator.constraints.NotEmpty(groups = { javax.validation.groups.Default.class, cherry.fundamental.validator.groups.G3.class })
 	private String group3;
 
-	@org.hibernate.validator.constraints.NotEmpty(groups = { javax.validation.groups.Default.class, cherry.foundation.validator.groups.G4.class })
+	@org.hibernate.validator.constraints.NotEmpty(groups = { javax.validation.groups.Default.class, cherry.fundamental.validator.groups.G4.class })
 	private String group4;
 
-	@org.hibernate.validator.constraints.NotEmpty(groups = { javax.validation.groups.Default.class, cherry.foundation.validator.groups.G5.class })
+	@org.hibernate.validator.constraints.NotEmpty(groups = { javax.validation.groups.Default.class, cherry.fundamental.validator.groups.G5.class })
 	private String group5;
 
-	@org.hibernate.validator.constraints.NotEmpty(groups = { javax.validation.groups.Default.class, cherry.foundation.validator.groups.G6.class })
+	@org.hibernate.validator.constraints.NotEmpty(groups = { javax.validation.groups.Default.class, cherry.fundamental.validator.groups.G6.class })
 	private String group6;
 
-	@org.hibernate.validator.constraints.NotEmpty(groups = { javax.validation.groups.Default.class, cherry.foundation.validator.groups.G7.class })
+	@org.hibernate.validator.constraints.NotEmpty(groups = { javax.validation.groups.Default.class, cherry.fundamental.validator.groups.G7.class })
 	private String group7;
 
-	@org.hibernate.validator.constraints.NotEmpty(groups = { javax.validation.groups.Default.class, cherry.foundation.validator.groups.G8.class })
+	@org.hibernate.validator.constraints.NotEmpty(groups = { javax.validation.groups.Default.class, cherry.fundamental.validator.groups.G8.class })
 	private String group8;
 
-	@org.hibernate.validator.constraints.NotEmpty(groups = { javax.validation.groups.Default.class, cherry.foundation.validator.groups.G9.class })
+	@org.hibernate.validator.constraints.NotEmpty(groups = { javax.validation.groups.Default.class, cherry.fundamental.validator.groups.G9.class })
 	private String group9;
 
-	@org.hibernate.validator.constraints.NotEmpty(groups = { javax.validation.groups.Default.class, cherry.foundation.validator.groups.G1.class, cherry.foundation.validator.groups.G2.class, cherry.foundation.validator.groups.G3.class, cherry.foundation.validator.groups.G4.class, cherry.foundation.validator.groups.G5.class, cherry.foundation.validator.groups.G6.class, cherry.foundation.validator.groups.G7.class, cherry.foundation.validator.groups.G8.class, cherry.foundation.validator.groups.G9.class })
+	@org.hibernate.validator.constraints.NotEmpty(groups = { javax.validation.groups.Default.class, cherry.fundamental.validator.groups.G1.class, cherry.fundamental.validator.groups.G2.class, cherry.fundamental.validator.groups.G3.class, cherry.fundamental.validator.groups.G4.class, cherry.fundamental.validator.groups.G5.class, cherry.fundamental.validator.groups.G6.class, cherry.fundamental.validator.groups.G7.class, cherry.fundamental.validator.groups.G8.class, cherry.fundamental.validator.groups.G9.class })
 	private String group10;
 
 	@Getter

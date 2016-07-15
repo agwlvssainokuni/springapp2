@@ -1,4 +1,4 @@
-# cherry.gradle.task.generator.GenerateConfig, 2016-07-09T14:26:39+09:00
+# cherry.gradle.task.generator.GenerateConfig, 2016-07-16T07:09:49+09:00
 # 整数設定
 generator.config.number1=12345
 # 小数設定

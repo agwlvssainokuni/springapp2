@@ -25,73 +25,73 @@ import lombok.ToString;
 
 import org.springframework.context.MessageSourceResolvable;
 
-import cherry.foundation.bizerror.BizErrorUtil;
+import cherry.fundamental.bizerror.BizErrorUtil;
 
 @Getter
 @Setter
 @EqualsAndHashCode
 @ToString
-@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateForm", date = "2016-07-09T14:27:13+09:00")
+@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateForm", date = "2016-07-16T07:10:06+09:00")
 public abstract class StringFormBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private String string1;
 
-	@cherry.foundation.validator.MinLength(value = 10, groups = { javax.validation.groups.Default.class })
+	@cherry.fundamental.validator.MinLength(value = 10, groups = { javax.validation.groups.Default.class })
 	private String string2;
 
-	@cherry.foundation.validator.MaxLength(value = 10, groups = { javax.validation.groups.Default.class })
+	@cherry.fundamental.validator.MaxLength(value = 10, groups = { javax.validation.groups.Default.class })
 	private String string3;
 
 	@org.hibernate.validator.constraints.NotEmpty(groups = { javax.validation.groups.Default.class })
 	private String string4;
 
 	@org.hibernate.validator.constraints.NotEmpty(groups = { javax.validation.groups.Default.class })
-	@cherry.foundation.validator.MinLength(value = 10, groups = { javax.validation.groups.Default.class })
+	@cherry.fundamental.validator.MinLength(value = 10, groups = { javax.validation.groups.Default.class })
 	private String string5;
 
 	@org.hibernate.validator.constraints.NotEmpty(groups = { javax.validation.groups.Default.class })
-	@cherry.foundation.validator.MaxLength(value = 10, groups = { javax.validation.groups.Default.class })
+	@cherry.fundamental.validator.MaxLength(value = 10, groups = { javax.validation.groups.Default.class })
 	private String string6;
 
 	@org.hibernate.validator.constraints.Email(groups = { javax.validation.groups.Default.class })
 	private String string7;
 
-	@cherry.foundation.validator.CharTypeBasicLatin(groups = { javax.validation.groups.Default.class })
+	@cherry.fundamental.validator.CharTypeBasicLatin(groups = { javax.validation.groups.Default.class })
 	private String string8;
 
-	@cherry.foundation.validator.CharTypeHalfWidth(groups = { javax.validation.groups.Default.class })
+	@cherry.fundamental.validator.CharTypeHalfWidth(groups = { javax.validation.groups.Default.class })
 	private String string9;
 
-	@cherry.foundation.validator.CharTypeNumeric(groups = { javax.validation.groups.Default.class })
+	@cherry.fundamental.validator.CharTypeNumeric(groups = { javax.validation.groups.Default.class })
 	private String string10;
 
-	@cherry.foundation.validator.CharTypeAlpha(groups = { javax.validation.groups.Default.class })
+	@cherry.fundamental.validator.CharTypeAlpha(groups = { javax.validation.groups.Default.class })
 	private String string11;
 
-	@cherry.foundation.validator.CharTypeAlphaNumeric(groups = { javax.validation.groups.Default.class })
+	@cherry.fundamental.validator.CharTypeAlphaNumeric(groups = { javax.validation.groups.Default.class })
 	private String string12;
 
-	@cherry.foundation.validator.CharTypeHalfKatakana(groups = { javax.validation.groups.Default.class })
+	@cherry.fundamental.validator.CharTypeHalfKatakana(groups = { javax.validation.groups.Default.class })
 	private String string13;
 
-	@cherry.foundation.validator.CharTypeFullWidth(groups = { javax.validation.groups.Default.class })
+	@cherry.fundamental.validator.CharTypeFullWidth(groups = { javax.validation.groups.Default.class })
 	private String string14;
 
-	@cherry.foundation.validator.CharTypeFullNumeric(groups = { javax.validation.groups.Default.class })
+	@cherry.fundamental.validator.CharTypeFullNumeric(groups = { javax.validation.groups.Default.class })
 	private String string15;
 
-	@cherry.foundation.validator.CharTypeFullAlpha(groups = { javax.validation.groups.Default.class })
+	@cherry.fundamental.validator.CharTypeFullAlpha(groups = { javax.validation.groups.Default.class })
 	private String string16;
 
-	@cherry.foundation.validator.CharTypeFullAlphaNumeric(groups = { javax.validation.groups.Default.class })
+	@cherry.fundamental.validator.CharTypeFullAlphaNumeric(groups = { javax.validation.groups.Default.class })
 	private String string17;
 
-	@cherry.foundation.validator.CharTypeFullHiragana(groups = { javax.validation.groups.Default.class })
+	@cherry.fundamental.validator.CharTypeFullHiragana(groups = { javax.validation.groups.Default.class })
 	private String string18;
 
-	@cherry.foundation.validator.CharTypeFullKatakana(groups = { javax.validation.groups.Default.class })
+	@cherry.fundamental.validator.CharTypeFullKatakana(groups = { javax.validation.groups.Default.class })
 	private String string19;
 
 	private String string20;

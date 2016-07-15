@@ -25,13 +25,13 @@ import lombok.ToString;
 
 import org.springframework.context.MessageSourceResolvable;
 
-import cherry.foundation.bizerror.BizErrorUtil;
+import cherry.fundamental.bizerror.BizErrorUtil;
 
 @Getter
 @Setter
 @EqualsAndHashCode
 @ToString
-@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateForm", date = "2016-07-09T14:27:13+09:00")
+@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateForm", date = "2016-07-16T07:10:06+09:00")
 public abstract class NumberFormBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;

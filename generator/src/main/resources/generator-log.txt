@@ -1,4 +1,4 @@
-# cherry.gradle.task.generator.GenerateLog, 2016-07-13T08:24:22+09:00
+# cherry.gradle.task.generator.GenerateLog, 2016-07-16T07:10:19+09:00
 LOG00001=LOG00001 - お知らせレベルのログです。
 LOG00002=LOG00002 - 警告レベルのログです。
 LOG00003=LOG00003 - 異常レベルのログです。

@@ -16,10 +16,10 @@
 
 package cherry.generator.log;
 
-import cherry.goods.log.ILogId;
-import cherry.goods.log.Level;
+import cherry.elemental.log.ILogId;
+import cherry.elemental.log.Level;
 
-@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateLog", date = "2016-07-13T08:24:22+09:00")
+@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateLog", date = "2016-07-16T07:10:19+09:00")
 public enum LogId implements ILogId {
 	/** LOG00001 [INFO]: お知らせレベルのログです。 */
 	LOG00001("LOG00001", Level.INFO),
