@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- AOP設定 -->
+	<aop:config>
+		<aop:advisor advice-ref="stubInterceptor" pointcut-ref="pointcut" />
+	</aop:config>
+
+	<!-- AOP: スタブ -->
+	<bean id="stubInterceptor" class="cherry.fundamental.testtool.stub.StubInterceptor">
+		<property name="repository" ref="stubRepository" />
+	</bean>
+	<bean id="stubRepository" class="cherry.fundamental.testtool.stub.StubRepositoryImpl" />
+
+	<!-- テストツール共用 -->
+	<bean id="reflectionResolver" class="cherry.fundamental.testtool.reflect.ReflectionResolverImpl" />
+
+	<!-- API呼出し機能 -->
+	<!-- JSON -->
+	<bean id="jsonInvoker" class="cherry.fundamental.testtool.invoker.InvokerImpl">
+		<property name="objectMapper" ref="objectMapper" />
+	</bean>
+	<bean id="jsonInvokerService" class="cherry.fundamental.testtool.invoker.InvokerServiceImpl">
+		<property name="reflectionResolver" ref="reflectionResolver" />
+		<property name="invoker" ref="jsonInvoker" />
+		<property name="objectMapper" ref="objectMapper" />
+	</bean>
+	<!-- YAML -->
+	<bean id="yamlInvoker" class="cherry.fundamental.testtool.invoker.InvokerImpl">
+		<property name="objectMapper" ref="yamlObjectMapper" />
+	</bean>
+	<bean id="yamlInvokerService" class="cherry.fundamental.testtool.invoker.InvokerServiceImpl">
+		<property name="reflectionResolver" ref="reflectionResolver" />
+		<property name="invoker" ref="yamlInvoker" />
+		<property name="objectMapper" ref="yamlObjectMapper" />
+	</bean>
+
+	<!-- スタブ設定機能 -->
+	<!-- JSON -->
+	<bean id="jsonStubService" class="cherry.fundamental.testtool.stub.StubServiceImpl">
+		<property name="reflectionResolver" ref="reflectionResolver" />
+		<property name="repository" ref="stubRepository" />
+		<property name="objectMapper" ref="objectMapper" />
+	</bean>
+	<!-- YAML -->
+	<bean id="yamlStubService" class="cherry.fundamental.testtool.stub.StubServiceImpl">
+		<property name="reflectionResolver" ref="reflectionResolver" />
+		<property name="repository" ref="stubRepository" />
+		<property name="objectMapper" ref="yamlObjectMapper" />
+	</bean>
+
+</beans>

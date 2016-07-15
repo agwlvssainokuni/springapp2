@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Querydsl設定 -->
+	<bean id="queryFactory" class="com.querydsl.sql.SQLQueryFactory">
+		<constructor-arg>
+			<bean class="cherry.fundamental.querydsl.CustomizingConfigurationFactoryBean" init-method="initialize">
+				<property name="configuration">
+					<bean class="com.querydsl.sql.Configuration">
+						<constructor-arg>
+							<bean class="com.querydsl.sql.H2Templates" />
+						</constructor-arg>
+						<property name="exceptionTranslator">
+							<bean class="com.querydsl.sql.spring.SpringExceptionTranslator">
+								<constructor-arg>
+									<bean factory-bean="jdbcOperations" factory-method="getExceptionTranslator" />
+								</constructor-arg>
+							</bean>
+						</property>
+					</bean>
+				</property>
+				<property name="customTypes">
+					<list>
+						<bean class="cherry.fundamental.querydsl.JSR310LocalDateTimeType" />
+						<bean class="cherry.fundamental.querydsl.JSR310LocalDateType" />
+						<bean class="cherry.fundamental.querydsl.JSR310LocalTimeType" />
+					</list>
+				</property>
+			</bean>
+		</constructor-arg>
+		<constructor-arg>
+			<bean class="com.querydsl.sql.spring.SpringConnectionProvider">
+				<constructor-arg ref="dataSource" />
+			</bean>
+		</constructor-arg>
+	</bean>
+	<bean id="querydslSupport" class="cherry.fundamental.querydsl.QuerydslSupportImpl">
+		<property name="queryFactory" ref="queryFactory" />
+		<property name="exceptionTranslator">
+			<bean factory-bean="jdbcOperations" factory-method="getExceptionTranslator" />
+		</property>
+		<property name="paginator" ref="paginator" />
+	</bean>
+
+</beans>

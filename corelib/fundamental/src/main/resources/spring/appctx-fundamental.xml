@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- 型変換設定 -->
+	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+		<property name="customEditors">
+			<map>
+				<entry key="java.util.ResourceBundle" value="org.springframework.beans.propertyeditors.ResourceBundleEditor" />
+				<entry key="com.ibm.icu.text.Transliterator" value="cherry.fundamental.format.TransliteratorEditor" />
+				<entry key="org.springframework.format.number.NumberStyleFormatter" value="cherry.fundamental.format.NumberStyleFormatterEditor" />
+				<entry key="java.time.format.DateTimeFormatter" value="cherry.fundamental.format.DateTimeFormatterEditor" />
+				<entry key="cherry.fundamental.format.PatternCI" value="cherry.fundamental.format.PatternCIEditor" />
+			</map>
+		</property>
+	</bean>
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="registerDefaultFormatters" value="false" />
+		<property name="formatters">
+			<set>
+				<bean class="org.springframework.format.number.NumberFormatAnnotationFormatterFactory" />
+				<bean class="org.springframework.format.number.NumberStyleFormatter">
+					<property name="pattern" value="###0.#########" />
+				</bean>
+			</set>
+		</property>
+		<property name="formatterRegistrars">
+			<set>
+				<bean class="org.springframework.format.datetime.DateFormatterRegistrar" />
+				<bean class="org.springframework.format.datetime.standard.DateTimeFormatterRegistrar">
+					<property name="dateFormatter" value="yyyy/MM/dd" />
+					<property name="timeFormatter" value="HH:mm:ss" />
+					<property name="dateTimeFormatter" value="yyyy/MM/dd HH:mm:ss" />
+				</bean>
+				<bean class="cherry.fundamental.format.JavaTimeSqlConverterRegistrar" />
+				<bean class="cherry.fundamental.format.SecureTypeConverterRegistrar" />
+			</set>
+		</property>
+	</bean>
+
+	<!-- オブジェクト描画 -->
+	<bean id="objectRenderer" class="cherry.fundamental.render.ObjectRendererImpl">
+		<property name="conversionService" ref="conversionService" />
+		<property name="numberStyleFormatter">
+			<list>
+				<value>#,##0.#########</value>
+				<value>#,##0.0</value>
+				<value>#,##0.00</value>
+				<value>#,##0.000</value>
+				<value>#,##0.0000</value>
+				<value>#,##0.00000</value>
+				<value>#,##0.000000</value>
+				<value>#,##0.0000000</value>
+				<value>#,##0.00000000</value>
+				<value>#,##0.000000000</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 単項目バリデーション設定 -->
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+
+	<!-- 単項目バリデーションヘルパ -->
+	<bean id="dataBinderHelper" class="cherry.fundamental.validator.DataBinderHelperImpl">
+		<property name="conversionService" ref="conversionService" />
+		<property name="validator" ref="validator" />
+	</bean>
+
+	<!-- JSONマッピング設定 -->
+	<bean id="objectMapper" class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean">
+		<property name="modules">
+			<array>
+				<bean class="com.fasterxml.jackson.datatype.jsr310.JavaTimeModule" />
+			</array>
+		</property>
+		<property name="featuresToDisable">
+			<array>
+				<util:constant static-field="com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS" />
+			</array>
+		</property>
+	</bean>
+	<!-- YAMLマッピング設定 -->
+	<bean id="yamlObjectMapper" class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean">
+		<property name="objectMapper">
+			<bean class="com.fasterxml.jackson.databind.ObjectMapper">
+				<constructor-arg type="com.fasterxml.jackson.core.JsonFactory">
+					<bean class="com.fasterxml.jackson.dataformat.yaml.YAMLFactory" />
+				</constructor-arg>
+			</bean>
+		</property>
+		<property name="modules">
+			<array>
+				<bean class="com.fasterxml.jackson.datatype.jsr310.JavaTimeModule" />
+			</array>
+		</property>
+		<property name="featuresToDisable">
+			<array>
+				<util:constant static-field="com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS" />
+			</array>
+		</property>
+	</bean>
+
+</beans>

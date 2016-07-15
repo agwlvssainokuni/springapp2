@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean class="cherry.fundamental.optool.web.BuildinfoControllerImpl">
+		<property name="resource">
+			<bean class="org.springframework.core.io.FileSystemResource">
+				<constructor-arg type="java.io.File">
+					<bean class="java.io.File">
+						<constructor-arg index="0" type="java.io.File">
+							<bean factory-bean="instanceInformation" factory-method="getBaseDirectory" />
+						</constructor-arg>
+						<constructor-arg index="1" type="java.lang.String" value="buildinfo.txt" />
+					</bean>
+				</constructor-arg>
+			</bean>
+		</property>
+		<property name="charset" value="UTF-8" />
+	</bean>
+
+	<bean class="cherry.fundamental.optool.web.HealthcheckControllerImpl">
+		<property name="queryFactory" ref="queryFactory" />
+	</bean>
+
+</beans>

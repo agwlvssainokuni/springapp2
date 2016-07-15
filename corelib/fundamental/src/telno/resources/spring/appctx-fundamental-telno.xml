@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 電話番号正規化 -->
+	<bean id="telNoNormalizer" class="cherry.elemental.telno.TelNoNormalizerImpl">
+		<property name="areaCodeTable">
+			<bean class="cherry.fundamental.telno.AreaCodeTableFactory">
+				<property name="soumuExcelParser">
+					<bean class="cherry.elemental.telno.SoumuExcelParser">
+						<property name="numberLabel" value="番号" />
+						<property name="areaCodeLabel" value="市外局番" />
+						<property name="localCodeLabel" value="市内局番" />
+					</bean>
+				</property>
+				<property name="resources">
+					<list value-type="org.springframework.core.io.Resource">
+						<value>classpath:cherry/elemental/telno/soumu/000124070.xls</value>
+						<value>classpath:cherry/elemental/telno/soumu/000124071.xls</value>
+						<value>classpath:cherry/elemental/telno/soumu/000124072.xls</value>
+						<value>classpath:cherry/elemental/telno/soumu/000124073.xls</value>
+						<value>classpath:cherry/elemental/telno/soumu/000124074.xls</value>
+						<value>classpath:cherry/elemental/telno/soumu/000124075.xls</value>
+						<value>classpath:cherry/elemental/telno/soumu/000124076.xls</value>
+						<value>classpath:cherry/elemental/telno/soumu/000124077.xls</value>
+						<value>classpath:cherry/elemental/telno/soumu/000124078.xls</value>
+					</list>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+</beans>

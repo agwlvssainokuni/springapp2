@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- アプリケーションインスタンス -->
+	<util:map id="defaultInstanceInformation" key-type="java.lang.String" value-type="java.lang.String">
+		<entry key="instanceInformation.topdir" value="/opt/app" />
+		<entry key="instanceInformation.id" value="00" />
+		<entry key="instanceInformation.environmentName" value="develop" />
+	</util:map>
+	<context:property-placeholder properties-ref="defaultInstanceInformation" ignore-unresolvable="true" />
+	<bean id="instanceInformation" class="cherry.fundamental.appinfo.InstanceInformationImpl">
+		<property name="id" value="${instanceInformation.id}" />
+		<property name="environmentName" value="${instanceInformation.environmentName}" />
+		<property name="baseDirectory" value="${instanceInformation.topdir}/${instanceInformation.id}" />
+	</bean>
+
+	<!-- 一時ディレクトリ(作業用)管理機能 -->
+	<bean id="tempDirectoryManager" class="cherry.fundamental.tempdir.TempDirectoryManagerImpl" init-method="initializeBaseTempDirectory">
+		<property name="baseTempDirectory">
+			<bean class="java.io.File">
+				<constructor-arg index="0" type="java.io.File">
+					<bean factory-bean="instanceInformation" factory-method="getBaseDirectory" />
+				</constructor-arg>
+				<constructor-arg index="1" type="java.lang.String" value="temp" />
+			</bean>
+		</property>
+		<property name="directoryNamePattern" value="{0,date,yyyyMMddHHmmssSSS}_{1}" />
+		<property name="bizDateTime" ref="bizDateTime" />
+	</bean>
+
+	<!-- 区分値管理機能 -->
+	<bean id="codeManager" class="cherry.fundamental.code.CodeManagerImpl">
+		<property name="valueTemplate" value="{0} - {1}" />
+		<property name="codeStore" ref="codeStore" />
+	</bean>
+
+	<!-- 発番管理機能 -->
+	<bean id="numberingManager" class="cherry.fundamental.numbering.NumberingManagerImpl">
+		<property name="numberingStore" ref="numberingStore" />
+	</bean>
+
+	<!-- コマンド実行機能設定 -->
+	<bean id="commandLauncher" class="cherry.elemental.command.CommandLauncherImpl">
+		<property name="charset" value="UTF-8" />
+		<property name="redirectErrorStream" value="true" />
+	</bean>
+
+</beans>
