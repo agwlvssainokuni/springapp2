@@ -6,10 +6,10 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-	<import resource="appctx-foundation.xml" />
-	<import resource="appctx-foundation-trace.xml" />
-	<import resource="appctx-foundation-jdbc.xml" />
-	<import resource="appctx-foundation-querydsl.xml" />
+	<import resource="appctx-fundamental.xml" />
+	<import resource="appctx-fundamental-trace.xml" />
+	<import resource="appctx-fundamental-jdbc.xml" />
+	<import resource="appctx-fundamental-querydsl.xml" />
 
 	<jdbc:embedded-database id="dataSource" type="H2" />
 
@@ -25,9 +25,9 @@
 		<property name="encoding" value="UTF-8" />
 	</bean>
 
-	<bean id="paginator" class="cherry.goods.paginate.PaginatorImpl">
+	<bean id="paginator" class="cherry.elemental.paginate.PaginatorImpl">
 		<property name="paginateStrategy">
-			<bean class="cherry.goods.paginate.TotalCountStrategy">
+			<bean class="cherry.elemental.paginate.TotalCountStrategy">
 				<property name="totalCount" value="7" />
 				<property name="lowerSideHint" value="3" />
 				<property name="lowerTrim" value="1" />
