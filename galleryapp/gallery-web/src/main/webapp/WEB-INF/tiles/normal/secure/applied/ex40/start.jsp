@@ -5,7 +5,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="foundation" uri="urn:cherry:foundation"%>
+<%@ taglib prefix="fundamental" uri="urn:cherry:fundamental"%>
 <%@ taglib prefix="ex" tagdir="/WEB-INF/tags"%>
 <c:url var="baseUri" value="/secure" />
 <c:set var="hasResultList" value="${pagedList != null && !pagedList.list.isEmpty()}" />
@@ -182,7 +182,7 @@
 				<div class="row">
 					<div class="col-md-3">
 						<s:nestedPath path="appliedEx40Form">
-							<foundation:codeList var="sortByItems" codeName="sort_by" />
+							<fundamental:codeList var="sortByItems" codeName="sort_by" />
 							<ex:pageSorter cssClass="my-sorter" sortOrder="sort1.order" sortBy="sort1.by" sortByItems="${sortByItems}" />
 							<ex:pageSorter cssClass="my-sorter" sortOrder="sort2.order" sortBy="sort2.by" sortByItems="${sortByItems}" />
 						</s:nestedPath>

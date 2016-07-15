@@ -5,7 +5,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="foundation" uri="urn:cherry:foundation"%>
+<%@ taglib prefix="fundamental" uri="urn:cherry:fundamental"%>
 <%@ taglib prefix="ex" tagdir="/WEB-INF/tags"%>
 <c:url var="baseUri" value="/secure" />
 <h2 class="page-header">基本画面遷移: 一括変更系1-一括変更確認</h2>
@@ -16,7 +16,7 @@
 		<li><a href="<ex:uri to="/secure/basic/ex52/" />">検索条件入力へ戻る(初期)</a></li>
 	</ul>
 	<f:form servletRelativeAction="/secure/basic/ex53/execute" method="POST" modelAttribute="basicEx51Form" cssClass="form-horizontal" role="form">
-		<foundation:onetimetoken />
+		<fundamental:onetimetoken />
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -36,7 +36,7 @@
 					<s:nestedPath path="item[${count-1}]">
 						<tr>
 							<td class="text-right"><c:out value="${count}" /></td>
-							<td class="text-right"><foundation:render value="${r.id}" /> <f:hidden path="id" /> <f:hidden path="lockVersion" /></td>
+							<td class="text-right"><fundamental:render value="${r.id}" /> <f:hidden path="id" /> <f:hidden path="lockVersion" /></td>
 							<td><f:input path="text10" cssClass="form-control input-sm" readonly="true" /></td>
 							<td><f:input path="int64" cssClass="form-control input-sm text-right" readonly="true" /></td>
 							<td><f:input path="decimal1" cssClass="form-control input-sm text-right" readonly="true" /></td>

@@ -1,7 +1,7 @@
 <%@ tag language="java" pageEncoding="UTF-8" body-content="empty" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ attribute name="pageSet" required="true" rtexprvalue="true" type="cherry.goods.paginate.PageSet"%>
+<%@ attribute name="pageSet" required="true" rtexprvalue="true" type="cherry.elemental.paginate.PageSet"%>
 <%@ attribute name="form" required="true" rtexprvalue="true"%>
 <%@ attribute name="pno" required="true" rtexprvalue="true"%>
 <%-- Bootstrap標準スタイル Pagination に合わせてページネーションリンクを形成する。 --%>

@@ -5,14 +5,14 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="foundation" uri="urn:cherry:foundation"%>
+<%@ taglib prefix="fundamental" uri="urn:cherry:fundamental"%>
 <%@ taglib prefix="ex" tagdir="/WEB-INF/tags"%>
 <c:url var="baseUri" value="/secure" />
 <h2 class="page-header">応用画面遷移: 一括変更系2-補助確認</h2>
 <div class="panel-body">
 	<f:form servletRelativeAction="/secure/applied/ex62/execute" method="POST" modelAttribute="appliedEx62Form" cssClass="form-horizontal"
 		role="form">
-		<foundation:onetimetoken />
+		<fundamental:onetimetoken />
 		<div class="form-group">
 			<div>
 				<f:label path="dt" cssClass="col-md-2 control-label">日付</f:label>

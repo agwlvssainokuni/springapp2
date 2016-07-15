@@ -6,7 +6,7 @@
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-<%@ taglib prefix="foundation" uri="urn:cherry:foundation"%>
+<%@ taglib prefix="fundamental" uri="urn:cherry:fundamental"%>
 <%@ taglib prefix="ex" tagdir="/WEB-INF/tags"%>
 <c:set var="name">
 	<tiles:getAsString name="name" />
@@ -21,10 +21,10 @@
 <title><s:message code="base_layout/title" /> / <s:message code="${name}/title" /></title>
 <link rel="stylesheet" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
 <link rel="stylesheet" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-<link rel="stylesheet" media="screen" href="<c:url value="/normal/style/example-web.css"/>" />
+<link rel="stylesheet" media="screen" href="<c:url value="/normal/style/gallery-web.css"/>" />
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.js"></script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="<c:url value="/normal/script/example-web.js" />"></script>
+<script type="text/javascript" src="<c:url value="/normal/script/gallery-web.js" />"></script>
 </head>
 <body role="document">
 	<div class="navbar navbar-default" role="navigation">

@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="foundation" uri="urn:cherry:foundation"%>
+<%@ taglib prefix="fundamental" uri="urn:cherry:fundamental"%>
 <%@ attribute name="sortBy" required="true" rtexprvalue="true"%>
 <%@ attribute name="sortOrder" required="true" rtexprvalue="true"%>
 <%@ attribute name="sortByItems" required="true" rtexprvalue="true" type="java.util.List"%>
@@ -15,10 +15,10 @@
 		</f:select>
 	</div>
 	<div class="form-group">
-		<c:forEach var="item" items="${foundation:getEnumList('cherry.foundation.spring.webmvc.SortOrder')}">
+		<c:forEach var="item" items="${fundamental:getEnumList('cherry.fundamental.spring.webmvc.SortOrder')}">
 			<label class="radio-inline">
 				<f:radiobutton path="${sortOrder}" value="${item.name()}" cssClass="${cssClass}" />
-				<s:message code="cherry.foundation.spring.webmvc.SortOrder.${item.name()}" />
+				<s:message code="cherry.fundamental.spring.webmvc.SortOrder.${item.name()}" />
 			</label>
 		</c:forEach>
 	</div>

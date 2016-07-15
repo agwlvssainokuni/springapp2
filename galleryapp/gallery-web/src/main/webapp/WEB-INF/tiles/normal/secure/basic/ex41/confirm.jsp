@@ -5,7 +5,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="foundation" uri="urn:cherry:foundation"%>
+<%@ taglib prefix="fundamental" uri="urn:cherry:fundamental"%>
 <%@ taglib prefix="ex" tagdir="/WEB-INF/tags"%>
 <c:url var="baseUri" value="/secure" />
 <h2 class="page-header">基本画面遷移: 検索一覧系2-単票変更確認</h2>
@@ -17,7 +17,7 @@
 	</ul>
 	<f:form servletRelativeAction="/secure/basic/ex41/execute?id=${param.id}" method="POST" modelAttribute="basicEx41Form"
 		cssClass="form-horizontal" role="form">
-		<foundation:onetimetoken />
+		<fundamental:onetimetoken />
 		<f:hidden path="lockVersion" />
 		<div class="form-group">
 			<div>

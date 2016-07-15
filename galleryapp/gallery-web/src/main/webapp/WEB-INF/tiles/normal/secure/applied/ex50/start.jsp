@@ -5,7 +5,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="foundation" uri="urn:cherry:foundation"%>
+<%@ taglib prefix="fundamental" uri="urn:cherry:fundamental"%>
 <%@ taglib prefix="ex" tagdir="/WEB-INF/tags"%>
 <c:url var="baseUri" value="/secure" />
 <c:set var="hasResultList" value="${pagedList != null && !pagedList.list.isEmpty()}" />
@@ -182,7 +182,7 @@
 				<div class="row">
 					<div class="col-md-3">
 						<s:nestedPath path="appliedEx50Form">
-							<foundation:codeList var="sortByItems" codeName="sort_by" />
+							<fundamental:codeList var="sortByItems" codeName="sort_by" />
 							<ex:pageSorter cssClass="my-sorter" sortOrder="sort1.order" sortBy="sort1.by" sortByItems="${sortByItems}" />
 							<ex:pageSorter cssClass="my-sorter" sortOrder="sort2.order" sortBy="sort2.by" sortByItems="${sortByItems}" />
 						</s:nestedPath>
@@ -223,14 +223,14 @@
 											<f:hidden path="id" />
 										</s:nestedPath></td>
 									<td class="text-right"><c:out value="${pagedList.pageSet.current.from + count}" /></td>
-									<td class="text-right"><foundation:render value="${r.id}" /></td>
-									<td><foundation:render value="${r.text10}" /></td>
-									<td class="text-right"><foundation:render value="${r.int64}" /></td>
-									<td class="text-right"><foundation:render value="${r.decimal1}" mode="1" /></td>
-									<td class="text-right"><foundation:render value="${r.decimal3}" mode="3" /></td>
-									<td><foundation:render value="${r.dt}" /></td>
-									<td><foundation:render value="${r.tm}" /></td>
-									<td><foundation:render value="${r.dtm}" /></td>
+									<td class="text-right"><fundamental:render value="${r.id}" /></td>
+									<td><fundamental:render value="${r.text10}" /></td>
+									<td class="text-right"><fundamental:render value="${r.int64}" /></td>
+									<td class="text-right"><fundamental:render value="${r.decimal1}" mode="1" /></td>
+									<td class="text-right"><fundamental:render value="${r.decimal3}" mode="3" /></td>
+									<td><fundamental:render value="${r.dt}" /></td>
+									<td><fundamental:render value="${r.tm}" /></td>
+									<td><fundamental:render value="${r.dtm}" /></td>
 								</tr>
 							</c:forEach>
 						</tbody>

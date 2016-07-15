@@ -5,14 +5,14 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="foundation" uri="urn:cherry:foundation"%>
+<%@ taglib prefix="fundamental" uri="urn:cherry:fundamental"%>
 <%@ taglib prefix="ex" tagdir="/WEB-INF/tags"%>
 <c:url var="baseUri" value="/secure" />
 <h2 class="page-header">応用画面遷移: 単票入力系2-変更確認</h2>
 <div class="panel-body">
 	<f:form servletRelativeAction="/secure/applied/ex22/execute?id=${param.id}" method="POST" modelAttribute="appliedEx20Form"
 		cssClass="form-horizontal" role="form">
-		<foundation:onetimetoken />
+		<fundamental:onetimetoken />
 		<f:hidden path="lockVersion" />
 		<div class="form-group">
 			<div>

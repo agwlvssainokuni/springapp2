@@ -5,7 +5,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="foundation" uri="urn:cherry:foundation"%>
+<%@ taglib prefix="fundamental" uri="urn:cherry:fundamental"%>
 <%@ taglib prefix="ex" tagdir="/WEB-INF/tags"%>
 <c:url var="baseUri" value="/secure" />
 <h2 class="page-header">応用画面遷移: 一括変更系1-一括変更完了</h2>
@@ -40,7 +40,7 @@
 					<s:nestedPath path="appliedEx51Form.item[${count-1}]">
 						<tr>
 							<td class="text-right"><c:out value="${count}" /></td>
-							<td class="text-right"><foundation:render value="${r.id}" /> <f:hidden path="id" /></td>
+							<td class="text-right"><fundamental:render value="${r.id}" /> <f:hidden path="id" /></td>
 							<td><f:input path="text10" cssClass="form-control input-sm" readonly="true" /></td>
 							<td><f:input path="int64" cssClass="form-control input-sm text-right" readonly="true" /></td>
 							<td><f:input path="decimal1" cssClass="form-control input-sm text-right" readonly="true" /></td>

@@ -5,7 +5,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="foundation" uri="urn:cherry:foundation"%>
+<%@ taglib prefix="fundamental" uri="urn:cherry:fundamental"%>
 <%@ taglib prefix="ex" tagdir="/WEB-INF/tags"%>
 <c:url var="baseUri" value="/secure" />
 <h2 class="page-header">基本画面遷移: アップロード系1-完了</h2>
@@ -37,7 +37,7 @@
 					</s:nestedPath>
 					<c:forEach var="entry" items="${basicEx90ResultDto.ngInfo.entrySet()}">
 						<div>
-							<foundation:render value="${entry.key}" />
+							<fundamental:render value="${entry.key}" />
 							件目:
 							<c:forEach var="msg" items="${entry.value}">
 								<c:out value="${msg}" />
