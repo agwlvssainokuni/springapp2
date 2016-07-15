@@ -20,7 +20,7 @@ import java.sql.Types;
 @Generated("com.querydsl.sql.codegen.MetaDataSerializer")
 public class QVerifySecure extends com.querydsl.sql.RelationalPathBase<BVerifySecure> {
 
-    private static final long serialVersionUID = -222504828;
+    private static final long serialVersionUID = -1117641412;
 
     public static final QVerifySecure verifySecure = new QVerifySecure("VERIFY_SECURE");
 

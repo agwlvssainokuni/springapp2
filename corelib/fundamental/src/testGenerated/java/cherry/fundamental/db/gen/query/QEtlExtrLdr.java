@@ -20,7 +20,7 @@ import java.sql.Types;
 @Generated("com.querydsl.sql.codegen.MetaDataSerializer")
 public class QEtlExtrLdr extends com.querydsl.sql.RelationalPathBase<BEtlExtrLdr> {
 
-    private static final long serialVersionUID = -1957280352;
+    private static final long serialVersionUID = -237543336;
 
     public static final QEtlExtrLdr etlExtrLdr = new QEtlExtrLdr("ETL_EXTR_LDR");
 

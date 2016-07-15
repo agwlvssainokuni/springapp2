@@ -20,7 +20,7 @@ import java.sql.Types;
 @Generated("com.querydsl.sql.codegen.MetaDataSerializer")
 public class QSqlExecution extends com.querydsl.sql.RelationalPathBase<BSqlExecution> {
 
-    private static final long serialVersionUID = -1961419746;
+    private static final long serialVersionUID = 1438410966;
 
     public static final QSqlExecution sqlExecution = new QSqlExecution("SQL_EXECUTION");
 

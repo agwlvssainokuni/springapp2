@@ -20,7 +20,7 @@ import java.sql.Types;
 @Generated("com.querydsl.sql.codegen.MetaDataSerializer")
 public class QVerifyFlag extends com.querydsl.sql.RelationalPathBase<BVerifyFlag> {
 
-    private static final long serialVersionUID = -715695175;
+    private static final long serialVersionUID = 1004041841;
 
     public static final QVerifyFlag verifyFlag = new QVerifyFlag("VERIFY_FLAG");
 

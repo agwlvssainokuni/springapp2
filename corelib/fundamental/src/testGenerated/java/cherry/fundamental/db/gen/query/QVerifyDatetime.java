@@ -20,7 +20,7 @@ import java.sql.Types;
 @Generated("com.querydsl.sql.codegen.MetaDataSerializer")
 public class QVerifyDatetime extends com.querydsl.sql.RelationalPathBase<BVerifyDatetime> {
 
-    private static final long serialVersionUID = 1765812552;
+    private static final long serialVersionUID = 533014528;
 
     public static final QVerifyDatetime verifyDatetime = new QVerifyDatetime("VERIFY_DATETIME");
 

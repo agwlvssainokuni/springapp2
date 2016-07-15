@@ -20,7 +20,7 @@ import java.sql.Types;
 @Generated("com.querydsl.sql.codegen.MetaDataSerializer")
 public class QVerifyConstraints extends com.querydsl.sql.RelationalPathBase<BVerifyConstraints> {
 
-    private static final long serialVersionUID = 739199305;
+    private static final long serialVersionUID = 718614417;
 
     public static final QVerifyConstraints verifyConstraints = new QVerifyConstraints("VERIFY_CONSTRAINTS");
 
