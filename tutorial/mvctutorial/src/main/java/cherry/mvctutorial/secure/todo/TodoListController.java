@@ -31,7 +31,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import cherry.foundation.validator.groups.G9;
+import cherry.fundamental.validator.groups.G9;
 
 @SessionAttributes(types = { TodoListForm.class })
 @RequestMapping("/secure/todo/list")

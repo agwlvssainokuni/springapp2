@@ -35,10 +35,10 @@ import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import cherry.foundation.bizcal.BizDateTime;
-import cherry.foundation.bizerror.BizErrorUtil;
-import cherry.foundation.onetimetoken.OneTimeTokenValidator;
-import cherry.foundation.spring.webmvc.Http4xxChecker;
+import cherry.fundamental.bizcal.BizDateTime;
+import cherry.fundamental.bizerror.BizErrorUtil;
+import cherry.fundamental.onetimetoken.OneTimeTokenValidator;
+import cherry.fundamental.spring.webmvc.Http4xxChecker;
 import cherry.mvctutorial.Config;
 import cherry.mvctutorial.db.gen.query.BTodo;
 

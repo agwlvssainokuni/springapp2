@@ -25,7 +25,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import cherry.foundation.spring.webmvc.SortParam;
+import cherry.fundamental.spring.webmvc.SortParam;
 
 @Setter
 @Getter

@@ -24,12 +24,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import cherry.foundation.etl.CsvConsumer;
-import cherry.foundation.etl.NoneLimiter;
-import cherry.foundation.querydsl.QuerydslSupport;
-import cherry.foundation.spring.webmvc.SortOrder;
-import cherry.foundation.type.EnumCodeUtil;
-import cherry.goods.paginate.PagedList;
+import cherry.elemental.paginate.PagedList;
+import cherry.fundamental.etl.CsvConsumer;
+import cherry.fundamental.etl.NoneLimiter;
+import cherry.fundamental.querydsl.QuerydslSupport;
+import cherry.fundamental.spring.webmvc.SortOrder;
+import cherry.fundamental.type.EnumCodeUtil;
 import cherry.mvctutorial.CodeValue;
 import cherry.mvctutorial.db.gen.query.BTodo;
 import cherry.mvctutorial.db.gen.query.QTodo;

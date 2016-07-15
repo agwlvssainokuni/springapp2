@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import cherry.foundation.validator.groups.G9;
+import cherry.fundamental.validator.groups.G9;
 
 @RequestMapping("/secure/todo/create")
 public interface TodoCreateController {

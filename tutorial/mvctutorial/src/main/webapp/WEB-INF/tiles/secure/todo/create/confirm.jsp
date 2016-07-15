@@ -6,7 +6,7 @@
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-<%@ taglib prefix="foundation" uri="urn:cherry:foundation"%>
+<%@ taglib prefix="fundamental" uri="urn:cherry:fundamental"%>
 <h2>TODO登録</h2>
 <s:nestedPath path="todoCreateForm">
 	<div class="form-group">
@@ -22,5 +22,5 @@
 	<f:hidden path="dueDate" id="dueDateHidden" />
 	<f:hidden path="description" id="descriptionHidden" />
 	<f:button type="submit" class="btn btn-default">登録</f:button>
-	<foundation:onetimetoken />
+	<fundamental:onetimetoken />
 </f:form>

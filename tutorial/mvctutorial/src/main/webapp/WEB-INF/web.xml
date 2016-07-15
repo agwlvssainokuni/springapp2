@@ -28,7 +28,7 @@
 	</servlet-mapping>
 	<filter>
 		<filter-name>mdcFilter</filter-name>
-		<filter-class>cherry.foundation.log.filter.MDCInsertingServletFilter</filter-class>
+		<filter-class>cherry.fundamental.log.filter.MDCInsertingServletFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>mdcFilter</filter-name>

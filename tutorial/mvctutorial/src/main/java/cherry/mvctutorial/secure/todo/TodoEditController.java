@@ -28,7 +28,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import cherry.foundation.validator.groups.G9;
+import cherry.fundamental.validator.groups.G9;
 
 @RequestMapping("/secure/todo/edit")
 public interface TodoEditController {

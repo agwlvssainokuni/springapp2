@@ -6,7 +6,7 @@
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-<%@ taglib prefix="foundation" uri="urn:cherry:foundation"%>
+<%@ taglib prefix="fundamental" uri="urn:cherry:fundamental"%>
 <h2>TODO編集</h2>
 <c:if test="${updated}">
 	<div class="has-success">
@@ -43,5 +43,5 @@
 	</div>
 	<f:hidden path="lockVersion" />
 	<f:button type="submit" class="btn btn-default">更新</f:button>
-	<foundation:onetimetoken />
+	<fundamental:onetimetoken />
 </f:form>

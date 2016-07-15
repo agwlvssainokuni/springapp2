@@ -29,7 +29,7 @@ import lombok.ToString;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import cherry.foundation.validator.MaxLength;
+import cherry.fundamental.validator.MaxLength;
 
 @Setter
 @Getter

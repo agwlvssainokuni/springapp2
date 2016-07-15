@@ -9,18 +9,18 @@
 	<context:property-placeholder location="classpath:mvctutorial-env.properties" ignore-unresolvable="true" />
 	<context:property-placeholder location="classpath:mvctutorial.properties" ignore-unresolvable="true" />
 
-	<import resource="appctx-foundation.xml" />
-	<import resource="appctx-foundation-biz.xml" />
-	<import resource="appctx-foundation-trace.xml" />
-	<import resource="appctx-foundation-jdbc.xml" />
-	<import resource="appctx-foundation-querydsl.xml" />
-	<import resource="appctx-foundation-servlet.xml" />
+	<import resource="appctx-fundamental.xml" />
+	<import resource="appctx-fundamental-biz.xml" />
+	<import resource="appctx-fundamental-trace.xml" />
+	<import resource="appctx-fundamental-jdbc.xml" />
+	<import resource="appctx-fundamental-querydsl.xml" />
+	<import resource="appctx-fundamental-servlet.xml" />
 
 	<context:component-scan base-package="cherry.mvctutorial" />
 
-	<bean id="bizDateTime" class="cherry.foundation.bizcal.SimpleBizDateTime" />
+	<bean id="bizDateTime" class="cherry.fundamental.bizcal.SimpleBizDateTime" />
 
-	<bean id="codeStore" class="cherry.foundation.code.SimpleCodeStore">
+	<bean id="codeStore" class="cherry.fundamental.code.SimpleCodeStore">
 		<property name="codeDefMap">
 			<map key-type="java.lang.String" value-type="java.util.Map">
 				<entry key="todo_list_sort_by">
@@ -34,15 +34,15 @@
 		</property>
 	</bean>
 
-	<bean id="numberingStore" class="cherry.foundation.numbering.SimpleNumberingStore">
+	<bean id="numberingStore" class="cherry.fundamental.numbering.SimpleNumberingStore">
 		<property name="numberingDefinitionMap">
-			<map key-type="java.lang.String" value-type="cherry.foundation.numbering.NumberingDefinition"></map>
+			<map key-type="java.lang.String" value-type="cherry.fundamental.numbering.NumberingDefinition"></map>
 		</property>
 	</bean>
 
-	<bean id="paginator" class="cherry.goods.paginate.PaginatorImpl">
+	<bean id="paginator" class="cherry.elemental.paginate.PaginatorImpl">
 		<property name="paginateStrategy">
-			<bean class="cherry.goods.paginate.TotalCountStrategy">
+			<bean class="cherry.elemental.paginate.TotalCountStrategy">
 				<property name="totalCount" value="10" />
 				<property name="lowerSideHint" value="4" />
 				<property name="lowerTrim" value="1" />
@@ -51,7 +51,7 @@
 		</property>
 	</bean>
 
-	<bean class="cherry.goods.log.Log" factory-method="setMessageDef">
+	<bean class="cherry.elemental.log.Log" factory-method="setMessageDef">
 		<constructor-arg value="mvctutorial-log" />
 	</bean>
 
@@ -60,7 +60,7 @@
 			<list>
 				<value>message/mvctutorial-form</value>
 				<value>message/validation</value>
-				<value>message/foundation-bizerror</value>
+				<value>message/fundamental-bizerror</value>
 			</list>
 		</property>
 	</bean>
@@ -83,7 +83,7 @@
 		<security:csrf request-matcher-ref="csrfRequestMatcher" />
 	</security:http>
 
-	<bean id="csrfRequestMatcher" class="cherry.foundation.spring.security.CsrfRequestMatcher">
+	<bean id="csrfRequestMatcher" class="cherry.fundamental.spring.security.CsrfRequestMatcher">
 		<property name="excludes">
 			<list>
 				<bean class="org.springframework.security.web.util.matcher.AntPathRequestMatcher">
@@ -102,7 +102,7 @@
 			<mvc:mapping path="/logout/**" />
 			<mvc:mapping path="/home/**" />
 			<mvc:mapping path="/secure/**" />
-			<bean class="cherry.foundation.spring.security.OperationLogHandlerInterceptor" />
+			<bean class="cherry.fundamental.spring.security.OperationLogHandlerInterceptor" />
 		</mvc:interceptor>
 		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
 		<bean class="org.springframework.mobile.device.DeviceResolverHandlerInterceptor" />

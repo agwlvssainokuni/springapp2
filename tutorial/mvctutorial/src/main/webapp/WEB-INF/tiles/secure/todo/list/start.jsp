@@ -6,7 +6,7 @@
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-<%@ taglib prefix="foundation" uri="urn:cherry:foundation"%>
+<%@ taglib prefix="fundamental" uri="urn:cherry:fundamental"%>
 <%@ taglib prefix="mytag" tagdir="/WEB-INF/tags"%>
 <h2>TODO検索</h2>
 <s:hasBindErrors name="todoListForm">
@@ -49,7 +49,7 @@
 	<div class="form-group">
 		<f:label path="sort.by" cssErrorClass="has-error">ソート列</f:label>
 		<f:select path="sort.by" cssErrorClass="has-error">
-			<foundation:codeList var="sortByList" codeName="todo_list_sort_by" />
+			<fundamental:codeList var="sortByList" codeName="todo_list_sort_by" />
 			<f:option value="NONE" label="指定しない" />
 			<f:options itemValue="codeValue" itemLabel="codeLabel" items="${sortByList}" />
 		</f:select>

@@ -16,7 +16,7 @@
 
 package cherry.mvctutorial;
 
-import cherry.foundation.type.ICodeType;
+import cherry.fundamental.type.ICodeType;
 
 public class CodeValue {
 

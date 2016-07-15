@@ -18,7 +18,7 @@ package cherry.mvctutorial.secure.todo;
 
 import java.io.Writer;
 
-import cherry.goods.paginate.PagedList;
+import cherry.elemental.paginate.PagedList;
 import cherry.mvctutorial.db.gen.query.BTodo;
 
 public interface TodoService {
