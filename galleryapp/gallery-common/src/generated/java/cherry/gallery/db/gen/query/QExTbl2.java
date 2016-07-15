@@ -20,7 +20,7 @@ import java.sql.Types;
 @Generated("com.querydsl.sql.codegen.MetaDataSerializer")
 public class QExTbl2 extends com.querydsl.sql.RelationalPathBase<BExTbl2> {
 
-    private static final long serialVersionUID = 327057902;
+    private static final long serialVersionUID = -896967418;
 
     public static final QExTbl2 exTbl2 = new QExTbl2("EX_TBL_2");
 

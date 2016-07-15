@@ -20,7 +20,7 @@ import java.sql.Types;
 @Generated("com.querydsl.sql.codegen.MetaDataSerializer")
 public class QSchemaVersion extends com.querydsl.sql.RelationalPathBase<BSchemaVersion> {
 
-    private static final long serialVersionUID = -1261335632;
+    private static final long serialVersionUID = 1023837592;
 
     public static final QSchemaVersion schemaVersion = new QSchemaVersion("schema_version");
 

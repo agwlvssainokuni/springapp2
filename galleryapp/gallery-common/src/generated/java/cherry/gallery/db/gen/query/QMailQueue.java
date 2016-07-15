@@ -20,7 +20,7 @@ import java.sql.Types;
 @Generated("com.querydsl.sql.codegen.MetaDataSerializer")
 public class QMailQueue extends com.querydsl.sql.RelationalPathBase<BMailQueue> {
 
-    private static final long serialVersionUID = 1112626643;
+    private static final long serialVersionUID = 446661563;
 
     public static final QMailQueue mailQueue = new QMailQueue("MAIL_QUEUE");
 

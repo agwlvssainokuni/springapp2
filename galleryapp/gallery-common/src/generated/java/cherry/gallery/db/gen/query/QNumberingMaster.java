@@ -20,7 +20,7 @@ import java.sql.Types;
 @Generated("com.querydsl.sql.codegen.MetaDataSerializer")
 public class QNumberingMaster extends com.querydsl.sql.RelationalPathBase<BNumberingMaster> {
 
-    private static final long serialVersionUID = 720694580;
+    private static final long serialVersionUID = 2043874588;
 
     public static final QNumberingMaster numberingMaster = new QNumberingMaster("NUMBERING_MASTER");
 

@@ -20,7 +20,7 @@ import java.sql.Types;
 @Generated("com.querydsl.sql.codegen.MetaDataSerializer")
 public class QDayoffMaster extends com.querydsl.sql.RelationalPathBase<BDayoffMaster> {
 
-    private static final long serialVersionUID = 1965896124;
+    private static final long serialVersionUID = 654138068;
 
     public static final QDayoffMaster dayoffMaster = new QDayoffMaster("DAYOFF_MASTER");
 

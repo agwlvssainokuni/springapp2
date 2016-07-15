@@ -20,7 +20,7 @@ import java.sql.Types;
 @Generated("com.querydsl.sql.codegen.MetaDataSerializer")
 public class QCodeMaster extends com.querydsl.sql.RelationalPathBase<BCodeMaster> {
 
-    private static final long serialVersionUID = 388017558;
+    private static final long serialVersionUID = 1217936558;
 
     public static final QCodeMaster codeMaster = new QCodeMaster("CODE_MASTER");
 

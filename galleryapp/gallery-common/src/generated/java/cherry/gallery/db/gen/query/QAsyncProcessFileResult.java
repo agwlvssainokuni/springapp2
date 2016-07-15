@@ -20,7 +20,7 @@ import java.sql.Types;
 @Generated("com.querydsl.sql.codegen.MetaDataSerializer")
 public class QAsyncProcessFileResult extends com.querydsl.sql.RelationalPathBase<BAsyncProcessFileResult> {
 
-    private static final long serialVersionUID = 1361201619;
+    private static final long serialVersionUID = -1794902805;
 
     public static final QAsyncProcessFileResult asyncProcessFileResult = new QAsyncProcessFileResult("ASYNC_PROCESS_FILE_RESULT");
 

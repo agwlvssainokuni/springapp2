@@ -20,7 +20,7 @@ import java.sql.Types;
 @Generated("com.querydsl.sql.codegen.MetaDataSerializer")
 public class QBizdatetimeMaster extends com.querydsl.sql.RelationalPathBase<BBizdatetimeMaster> {
 
-    private static final long serialVersionUID = -1402431287;
+    private static final long serialVersionUID = -1136763215;
 
     public static final QBizdatetimeMaster bizdatetimeMaster = new QBizdatetimeMaster("BIZDATETIME_MASTER");
 

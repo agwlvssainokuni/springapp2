@@ -20,7 +20,7 @@ import java.sql.Types;
 @Generated("com.querydsl.sql.codegen.MetaDataSerializer")
 public class QMailTemplate extends com.querydsl.sql.RelationalPathBase<BMailTemplate> {
 
-    private static final long serialVersionUID = 1840726136;
+    private static final long serialVersionUID = 528968080;
 
     public static final QMailTemplate mailTemplate = new QMailTemplate("MAIL_TEMPLATE");
 

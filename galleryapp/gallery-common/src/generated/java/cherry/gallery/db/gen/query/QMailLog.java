@@ -20,7 +20,7 @@ import java.sql.Types;
 @Generated("com.querydsl.sql.codegen.MetaDataSerializer")
 public class QMailLog extends com.querydsl.sql.RelationalPathBase<BMailLog> {
 
-    private static final long serialVersionUID = -579852154;
+    private static final long serialVersionUID = 130068590;
 
     public static final QMailLog mailLog = new QMailLog("MAIL_LOG");
 
