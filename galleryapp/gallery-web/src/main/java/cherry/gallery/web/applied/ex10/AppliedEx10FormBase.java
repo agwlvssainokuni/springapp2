@@ -31,7 +31,7 @@ import cherry.fundamental.bizerror.BizErrorUtil;
 @Setter
 @EqualsAndHashCode
 @ToString
-@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateForm", date = "2016-07-10T09:06:41+09:00")
+@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateForm", date = "2016-07-16T07:28:21+09:00")
 public abstract class AppliedEx10FormBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;

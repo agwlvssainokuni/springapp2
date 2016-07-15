@@ -31,30 +31,25 @@ import cherry.fundamental.bizerror.BizErrorUtil;
 @Setter
 @EqualsAndHashCode
 @ToString
-@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateForm", date = "2016-07-10T09:06:41+09:00")
+@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateForm", date = "2016-07-16T07:28:22+09:00")
 public abstract class AppliedEx90FormBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@javax.validation.constraints.NotNull(groups = { javax.validation.groups.Default.class,
-			cherry.fundamental.validator.groups.G1.class })
+	@javax.validation.constraints.NotNull(groups = { javax.validation.groups.Default.class, cherry.fundamental.validator.groups.G1.class })
 	private org.springframework.web.multipart.MultipartFile file;
 
 	private String originalFilename;
 
-	@org.hibernate.validator.constraints.NotEmpty(groups = { javax.validation.groups.Default.class,
-			cherry.fundamental.validator.groups.G2.class })
-	@cherry.fundamental.validator.CharTypeBasicLatin(groups = { javax.validation.groups.Default.class,
-			cherry.fundamental.validator.groups.G2.class })
+	@org.hibernate.validator.constraints.NotEmpty(groups = { javax.validation.groups.Default.class, cherry.fundamental.validator.groups.G2.class })
+	@cherry.fundamental.validator.CharTypeBasicLatin(groups = { javax.validation.groups.Default.class, cherry.fundamental.validator.groups.G2.class })
 	private String dirname;
 
-	@javax.validation.constraints.NotNull(groups = { javax.validation.groups.Default.class,
-			cherry.fundamental.validator.groups.G2.class })
+	@javax.validation.constraints.NotNull(groups = { javax.validation.groups.Default.class, cherry.fundamental.validator.groups.G2.class })
 	@org.springframework.format.annotation.NumberFormat(pattern = cherry.gallery.web.FormatPattern.INTEGER)
 	private Integer numOfFile;
 
-	@javax.validation.constraints.NotNull(groups = { javax.validation.groups.Default.class,
-			cherry.fundamental.validator.groups.G1.class, cherry.fundamental.validator.groups.G2.class })
+	@javax.validation.constraints.NotNull(groups = { javax.validation.groups.Default.class, cherry.fundamental.validator.groups.G1.class, cherry.fundamental.validator.groups.G2.class })
 	@javax.validation.Valid()
 	private java.nio.charset.Charset charset;
 

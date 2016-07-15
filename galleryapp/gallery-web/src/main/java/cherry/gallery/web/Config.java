@@ -18,7 +18,7 @@ package cherry.gallery.web;
 
 @lombok.Getter()
 @org.springframework.stereotype.Component("webConfig")
-@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateConfig", date = "2016-07-09T14:26:39+09:00")
+@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateConfig", date = "2016-07-16T07:27:49+09:00")
 public class Config {
 
 	/** ページネーション「全頁数」: ページネーションの「全頁数」を構成する。 */

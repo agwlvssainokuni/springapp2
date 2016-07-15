@@ -1,5 +1,5 @@
 /*
- * Copyright 2016,2016 agwlvssainokuni
+ * Copyright 2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ import cherry.fundamental.bizerror.BizErrorUtil;
 @Setter
 @EqualsAndHashCode
 @ToString
-@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateForm", date = "2016-07-10T09:06:41+09:00")
+@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateForm", date = "2016-07-16T07:28:22+09:00")
 public abstract class BasicEx20FormBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
