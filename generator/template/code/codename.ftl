@@ -2,6 +2,7 @@
 
 package ${packageName(typeDef.fqcn)};
 
+import cherry.elemental.code.EnumCodeUtil;
 import cherry.elemental.code.ILabelledCodeType;
 
 @javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateCode", date = "${.now?iso_local}")
@@ -22,6 +23,12 @@ public enum ${className(typeDef.fqcn)} implements ILabelledCodeType<String> {
 </#list>
 	/* 生成ツールの都合による定義。 */
 	DUMMY("", "");
+
+	private static final java.util.Map<String, ${className(typeDef.fqcn)}> nameMap = EnumCodeUtil.getCodeMap(${className(typeDef.fqcn)}.values());
+
+	public static ${className(typeDef.fqcn)} resolve(String name) {
+		return nameMap.get(name);
+	}
 
 	private String pname;
 

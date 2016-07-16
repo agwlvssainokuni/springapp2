@@ -36,7 +36,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import cherry.elemental.code.EnumCodeUtil;
 import cherry.elemental.paginate.PagedList;
 import cherry.fundamental.bizcal.BizDateTime;
 import cherry.fundamental.download.TableDownloadOperation;
@@ -139,7 +138,7 @@ public class BasicEx50ServiceImpl implements BasicEx50Service {
 
 	private OrderSpecifier<?> createOrderSpec(SortParam sort) {
 
-		SORT_BY sortBy = EnumCodeUtil.getCodeMap(SORT_BY.class).get(sort.getBy());
+		SORT_BY sortBy = SORT_BY.resolve(sort.getBy());
 
 		ComparableExpressionBase<?> sortKey;
 		if (sortBy == SORT_BY_00) {

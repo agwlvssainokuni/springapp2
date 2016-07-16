@@ -16,9 +16,10 @@
 
 package cherry.generator.code;
 
+import cherry.elemental.code.EnumCodeUtil;
 import cherry.elemental.code.ILabelledCodeType;
 
-@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateCode", date = "2016-07-16T10:06:04+09:00")
+@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateCode", date = "2016-07-16T10:19:46+09:00")
 public enum CodeName implements ILabelledCodeType<String> {
 	/** 性別 */
 	GENDER_TYPE("gender_type", "性別"),
@@ -26,6 +27,12 @@ public enum CodeName implements ILabelledCodeType<String> {
 	PREF_CD("pref_cd", "都道府県コード"),
 	/* 生成ツールの都合による定義。 */
 	DUMMY("", "");
+
+	private static final java.util.Map<String, CodeName> nameMap = EnumCodeUtil.getCodeMap(CodeName.values());
+
+	public static CodeName resolve(String name) {
+		return nameMap.get(name);
+	}
 
 	private String pname;
 

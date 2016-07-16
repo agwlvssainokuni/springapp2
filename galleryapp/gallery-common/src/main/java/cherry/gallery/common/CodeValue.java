@@ -16,9 +16,10 @@
 
 package cherry.gallery.common;
 
+import cherry.elemental.code.EnumCodeUtil;
 import cherry.elemental.code.ILabelledCodeType;
 
-@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateCode", date = "2016-07-16T10:06:23+09:00")
+@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateCode", date = "2016-07-16T10:19:13+09:00")
 public class CodeValue {
 
 	/** 並び順 */
@@ -41,6 +42,12 @@ public class CodeValue {
 		SORT_BY_07("07", "日時"),
 		/* 生成ツールの都合による定義。 */
 		DUMMY("", "");
+
+		private static final java.util.Map<String, SORT_BY> valueMap = EnumCodeUtil.getCodeMap(SORT_BY.values());
+
+		public static SORT_BY resolve(String name) {
+			return valueMap.get(name);
+		}
 
 		private String value;
 

@@ -16,6 +16,7 @@
 
 package cherry.mvctutorial;
 
+import cherry.elemental.code.EnumCodeUtil;
 import cherry.elemental.code.ICodeType;
 
 public class CodeValue {
@@ -27,6 +28,13 @@ public class CodeValue {
 		TODO_LIST_SORT_BY_POSTED_AT("POSTED_AT"),
 		/** 期日 */
 		TODO_LIST_SORT_BY_DUE_DATE("DUE_DATE");
+
+		private static final java.util.Map<String, TODO_LIST_SORT_BY> valueMap = EnumCodeUtil
+				.getCodeMap(TODO_LIST_SORT_BY.values());
+
+		public static TODO_LIST_SORT_BY resolve(String name) {
+			return valueMap.get(name);
+		}
 
 		private String value;
 

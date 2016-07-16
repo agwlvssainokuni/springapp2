@@ -235,14 +235,14 @@
 	<function>
 		<description>GetEnumList</description>
 		<name>getEnumList</name>
-		<function-class>cherry.fundamental.type.EnumUtil</function-class>
+		<function-class>cherry.elemental.code.EnumUtil</function-class>
 		<function-signature>java.util.List getEnumList(java.lang.String)</function-signature>
 	</function>
 
 	<function>
 		<description>GetEnumCodeList</description>
 		<name>getEnumCodeList</name>
-		<function-class>cherry.fundamental.type.EnumCodeUtil</function-class>
+		<function-class>cherry.elemental.code.EnumCodeUtil</function-class>
 		<function-signature>java.util.List getCodeList(java.lang.String)</function-signature>
 	</function>
 

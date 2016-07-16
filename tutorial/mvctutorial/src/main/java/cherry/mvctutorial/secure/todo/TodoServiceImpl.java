@@ -24,13 +24,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import cherry.elemental.code.EnumCodeUtil;
 import cherry.elemental.paginate.PagedList;
 import cherry.fundamental.etl.CsvConsumer;
 import cherry.fundamental.etl.NoneLimiter;
 import cherry.fundamental.querydsl.QuerydslSupport;
 import cherry.fundamental.spring.webmvc.SortOrder;
 import cherry.mvctutorial.CodeValue;
+import cherry.mvctutorial.CodeValue.TODO_LIST_SORT_BY;
 import cherry.mvctutorial.db.gen.query.BTodo;
 import cherry.mvctutorial.db.gen.query.QTodo;
 
@@ -121,8 +121,7 @@ public class TodoServiceImpl implements TodoService {
 		return (query) -> {
 
 			ComparableExpressionBase<?> sortKey;
-			CodeValue.TODO_LIST_SORT_BY sortBy = EnumCodeUtil.getCodeMap(CodeValue.TODO_LIST_SORT_BY.class).get(
-					cond.getSort().getBy());
+			TODO_LIST_SORT_BY sortBy = TODO_LIST_SORT_BY.resolve(cond.getSort().getBy());
 			if (sortBy == CodeValue.TODO_LIST_SORT_BY.TODO_LIST_SORT_BY_ID) {
 				sortKey = t.id;
 			} else if (sortBy == CodeValue.TODO_LIST_SORT_BY.TODO_LIST_SORT_BY_POSTED_AT) {

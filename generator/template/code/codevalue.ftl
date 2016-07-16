@@ -2,6 +2,7 @@
 
 package ${packageName(typeDef.fqcn)};
 
+import cherry.elemental.code.EnumCodeUtil;
 import cherry.elemental.code.ILabelledCodeType;
 
 @javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateCode", date = "${.now?iso_local}")
@@ -18,6 +19,12 @@ public class ${codeValueName} {
 <#macro enumEnd prop>
 		/* 生成ツールの都合による定義。 */
 		DUMMY("", "");
+
+		private static final java.util.Map<String, ${upperUnderscore(prop.name)}> valueMap = EnumCodeUtil.getCodeMap(${upperUnderscore(prop.name)}.values());
+
+		public static ${upperUnderscore(prop.name)} resolve(String name) {
+			return valueMap.get(name);
+		}
 
 		private String value;
 

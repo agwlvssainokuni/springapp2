@@ -61,4 +61,12 @@ public class EnumCodeUtil {
 		}
 	}
 
+	public static <C, E extends ICodeType<C>> Map<C, E> getCodeMap(@SuppressWarnings("unchecked") E... es) {
+		Map<C, E> map = new LinkedHashMap<>();
+		for (E e : es) {
+			map.put(e.getCodeValue(), e);
+		}
+		return map;
+	}
+
 }

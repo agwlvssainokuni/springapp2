@@ -37,14 +37,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import cherry.elemental.code.EnumCodeUtil;
 import cherry.elemental.paginate.PagedList;
 import cherry.fundamental.bizcal.BizDateTime;
 import cherry.fundamental.download.TableDownloadOperation;
 import cherry.fundamental.querydsl.QuerydslSupport;
 import cherry.fundamental.spring.webmvc.SortOrder;
 import cherry.fundamental.spring.webmvc.SortParam;
-import cherry.gallery.common.CodeValue;
+import cherry.gallery.common.CodeValue.SORT_BY;
 import cherry.gallery.db.gen.query.BExTbl1;
 import cherry.gallery.db.gen.query.QExTbl1;
 
@@ -140,7 +139,7 @@ public class AppliedEx30ServiceImpl implements AppliedEx30Service {
 
 	private OrderSpecifier<?> createOrderSpec(SortParam sort) {
 
-		CodeValue.SORT_BY sortBy = EnumCodeUtil.getCodeMap(CodeValue.SORT_BY.class).get(sort.getBy());
+		SORT_BY sortBy = SORT_BY.resolve(sort.getBy());
 
 		ComparableExpressionBase<?> sortKey;
 		if (sortBy == SORT_BY_00) {
