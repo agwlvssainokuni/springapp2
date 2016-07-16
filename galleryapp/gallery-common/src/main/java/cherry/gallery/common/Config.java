@@ -17,7 +17,7 @@
 package cherry.gallery.common;
 
 @org.springframework.stereotype.Component("commonConfig")
-@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateConfig", date = "2016-07-16T07:27:49+09:00")
+@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateConfig")
 public class Config {
 
 }

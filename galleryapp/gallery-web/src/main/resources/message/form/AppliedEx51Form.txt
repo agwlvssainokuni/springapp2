@@ -1,4 +1,4 @@
-# cherry.gradle.task.generator.GenerateForm, 2016-07-16T07:28:22+09:00
+# cherry.gradle.task.generator.GenerateForm
 appliedEx51Form.dt=日付
 appliedEx51Form.tm=時刻
 appliedEx51Form.dtm=日時

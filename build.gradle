@@ -102,6 +102,13 @@ subprojects {
 		testCompile "org.mockito:mockito-all:${versionMockito}"
 	}
 
+	def resourceDir = "src/main/resources"
+	if (file("${resourceDir}/${project.name}.txt").isFile()) {
+		task native2ascii << {
+			ant.native2ascii(src: resourceDir, dest: resourceDir, ext: ".properties", includes: "${project.name}*.txt", encoding: "UTF-8")
+		}
+	}
+
 	def messageDir = "src/main/resources/message"
 	if (file("${messageDir}/form").isDirectory()) {
 		task mergeformmessage << {

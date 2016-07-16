@@ -1,4 +1,4 @@
-# cherry.gradle.task.generator.GenerateForm, 2016-07-16T07:28:22+09:00
+# cherry.gradle.task.generator.GenerateForm
 appliedEx90Form.file=ファイル
 appliedEx90Form.originalFilename=ファイル名
 appliedEx90Form.dirname=一時ディレクトリ名

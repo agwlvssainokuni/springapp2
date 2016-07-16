@@ -1,4 +1,4 @@
-# cherry.gradle.task.generator.GenerateForm, 2016-07-16T07:10:06+09:00
+# cherry.gradle.task.generator.GenerateForm
 miscForm.misc1=misc1
 miscForm.misc2=misc2
 miscForm.misc3=misc3

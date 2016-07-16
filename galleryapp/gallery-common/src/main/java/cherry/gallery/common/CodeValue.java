@@ -19,7 +19,7 @@ package cherry.gallery.common;
 import cherry.elemental.code.EnumCodeUtil;
 import cherry.elemental.code.ILabelledCodeType;
 
-@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateCode", date = "2016-07-16T10:19:13+09:00")
+@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateCode")
 public class CodeValue {
 
 	/** 並び順 */

@@ -1,4 +1,4 @@
-# cherry.gradle.task.generator.GenerateForm, 2016-07-16T07:28:22+09:00
+# cherry.gradle.task.generator.GenerateForm
 basicEx20Form.text10=文字列【10】
 basicEx20Form.text100=文字列【100】
 basicEx20Form.int64=整数【64bit】
