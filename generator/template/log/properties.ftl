@@ -1,4 +1,4 @@
-# cherry.gradle.task.generator.GenerateLog, ${.now?iso_local}
+# cherry.gradle.task.generator.GenerateLog<#if enableTimestamp>, ${.now?iso_local}</#if>
 <#macro item prop>
 ${prop.name}=${prop.name} - ${prop.value}
 </#macro>

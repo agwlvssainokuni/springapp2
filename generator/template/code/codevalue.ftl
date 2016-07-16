@@ -5,7 +5,7 @@ package ${packageName(typeDef.fqcn)};
 import cherry.elemental.code.EnumCodeUtil;
 import cherry.elemental.code.ILabelledCodeType;
 
-@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateCode", date = "${.now?iso_local}")
+@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateCode"<#if enableTimestamp>, date = "${.now?iso_local}"</#if>)
 public class ${codeValueName} {
 <#macro enumBegin prop>
 

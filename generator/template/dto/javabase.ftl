@@ -13,7 +13,7 @@ import lombok.ToString;
 @Setter
 @EqualsAndHashCode
 @ToString
-@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateDto", date = "${.now?iso_local}")
+@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateDto"<#if enableTimestamp>, date = "${.now?iso_local}"</#if>)
 public class ${className(typeDef.fqcn)}Base implements Serializable {
 
 	private static final long serialVersionUID = 1L;

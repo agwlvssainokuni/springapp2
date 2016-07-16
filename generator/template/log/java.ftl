@@ -5,7 +5,7 @@ package ${packageName(typeDef.fqcn)};
 import cherry.elemental.log.ILogId;
 import cherry.elemental.log.Level;
 
-@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateLog", date = "${.now?iso_local}")
+@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateLog"<#if enableTimestamp>, date = "${.now?iso_local}"</#if>)
 public enum ${className(typeDef.fqcn)} implements ILogId {
 <#macro item prop>
 	/** ${prop.name} [${prop.level}]: ${prop.value} */

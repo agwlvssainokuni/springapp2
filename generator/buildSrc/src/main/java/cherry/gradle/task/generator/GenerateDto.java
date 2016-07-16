@@ -55,6 +55,8 @@ public class GenerateDto extends DefaultTask {
 
 	private boolean verbose = true;
 
+	private boolean enableTimestamp = false;
+
 	private boolean overwrite = false;
 
 	private List<File> definitionFiles = new ArrayList<>();
@@ -113,6 +115,7 @@ public class GenerateDto extends DefaultTask {
 
 			Map<String, Object> context = new HashMap<>();
 			context.put("typeDef", typeDef);
+			context.put("enableTimestamp", enableTimestamp);
 			context.put("upperCamel", new FunctionModel(FunctionFactory.upperCamel()));
 			context.put("lowerCamel", new FunctionModel(FunctionFactory.lowerCamel()));
 			context.put("lowerUnderscore", new FunctionModel(FunctionFactory.lowerUnderscore()));

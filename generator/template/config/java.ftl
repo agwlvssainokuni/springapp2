@@ -4,7 +4,7 @@ package ${packageName(typeDef.fqcn)};
 
 @lombok.Getter()
 @org.springframework.stereotype.Component("${typeDef.attr.name}")
-@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateConfig", date = "${.now?iso_local}")
+@javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateConfig"<#if enableTimestamp>, date = "${.now?iso_local}"</#if>)
 public class ${className(typeDef.fqcn)} {
 <#macro item prop>
 

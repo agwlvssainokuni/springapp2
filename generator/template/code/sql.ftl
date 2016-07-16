@@ -1,6 +1,6 @@
 <#include "/header_sql.ftl" />
 
--- cherry.gradle.task.generator.GenerateCode, ${.now?iso_local}
+-- cherry.gradle.task.generator.GenerateCode<#if enableTimestamp>, ${.now?iso_local}</#if>
 <#macro enumBegin prop>
 
 -- ${prop.description} (${prop.name})
