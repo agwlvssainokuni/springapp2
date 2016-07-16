@@ -16,7 +16,7 @@
 
 package cherry.fundamental.code;
 
-import cherry.fundamental.type.ILabelledCodeType;
+import cherry.elemental.code.ILabelledCodeType;
 
 /**
  * 区分値管理機能。<br />

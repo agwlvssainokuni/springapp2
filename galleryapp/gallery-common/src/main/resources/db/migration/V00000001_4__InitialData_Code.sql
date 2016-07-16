@@ -14,7 +14,7 @@
 -- limitations under the License.
 --
 
--- cherry.gradle.task.generator.GenerateCode, 2016-07-16T07:26:57+09:00
+-- cherry.gradle.task.generator.GenerateCode, 2016-07-16T10:06:23+09:00
 
 -- 並び順 (sort_by)
 INSERT INTO code_master (name, value, label, sort_order) VALUES ('sort_by', '00', 'ID', 0);

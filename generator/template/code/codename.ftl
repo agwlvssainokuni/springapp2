@@ -2,7 +2,7 @@
 
 package ${packageName(typeDef.fqcn)};
 
-import cherry.fundamental.type.ILabelledCodeType;
+import cherry.elemental.code.ILabelledCodeType;
 
 @javax.annotation.Generated(value = "cherry.gradle.task.generator.GenerateCode", date = "${.now?iso_local}")
 public enum ${className(typeDef.fqcn)} implements ILabelledCodeType<String> {

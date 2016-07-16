@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cherry.fundamental.type;
+package cherry.elemental.code;
 
 import static com.google.common.base.Preconditions.checkArgument;
 

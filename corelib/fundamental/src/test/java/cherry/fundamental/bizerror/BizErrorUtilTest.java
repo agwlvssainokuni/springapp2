@@ -28,7 +28,7 @@ import org.junit.Test;
 import org.springframework.context.MessageSourceResolvable;
 import org.springframework.validation.BindingResult;
 
-import cherry.fundamental.type.ICodeType;
+import cherry.elemental.code.ICodeType;
 
 public class BizErrorUtilTest {
 

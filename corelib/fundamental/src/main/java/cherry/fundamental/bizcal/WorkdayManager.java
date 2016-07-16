@@ -18,7 +18,7 @@ package cherry.fundamental.bizcal;
 
 import java.time.LocalDate;
 
-import cherry.fundamental.type.ICodeType;
+import cherry.elemental.code.ICodeType;
 
 /**
  * 営業日管理機能。<br />

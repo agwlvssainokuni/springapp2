@@ -26,7 +26,7 @@ import java.util.Map;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import cherry.fundamental.type.ICodeType;
+import cherry.elemental.code.ICodeType;
 
 /**
  * 区分値管理機能。<br />

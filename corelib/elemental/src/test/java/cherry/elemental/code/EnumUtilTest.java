@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package cherry.fundamental.type;
+package cherry.elemental.code;
 
-import static cherry.fundamental.type.EnumUtil.getEnumList;
+import static cherry.elemental.code.EnumUtil.getEnumList;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;

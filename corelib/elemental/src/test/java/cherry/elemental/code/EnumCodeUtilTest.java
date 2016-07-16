@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package cherry.fundamental.type;
+package cherry.elemental.code;
 
-import static cherry.fundamental.type.EnumCodeUtil.getCodeList;
-import static cherry.fundamental.type.EnumCodeUtil.getCodeMap;
+import static cherry.elemental.code.EnumCodeUtil.getCodeList;
+import static cherry.elemental.code.EnumCodeUtil.getCodeMap;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;

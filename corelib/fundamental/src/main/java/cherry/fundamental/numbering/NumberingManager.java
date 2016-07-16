@@ -16,7 +16,7 @@
 
 package cherry.fundamental.numbering;
 
-import cherry.fundamental.type.ICodeType;
+import cherry.elemental.code.ICodeType;
 
 /**
  * 発番管理機能。<br />

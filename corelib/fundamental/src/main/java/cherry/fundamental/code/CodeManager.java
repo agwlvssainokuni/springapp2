@@ -19,7 +19,7 @@ package cherry.fundamental.code;
 import java.util.List;
 import java.util.Map;
 
-import cherry.fundamental.type.ICodeType;
+import cherry.elemental.code.ICodeType;
 
 /**
  * 区分値管理機能。<br />

@@ -26,7 +26,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import cherry.fundamental.type.ICodeType;
+import cherry.elemental.code.ICodeType;
 
 public class NumberingManagerImplTest {
 

@@ -23,7 +23,7 @@ import java.text.MessageFormat;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import cherry.fundamental.type.ICodeType;
+import cherry.elemental.code.ICodeType;
 
 public class NumberingManagerImpl implements NumberingManager {
 

@@ -16,7 +16,7 @@
 
 package cherry.fundamental.async;
 
-import cherry.fundamental.type.ICodeType;
+import cherry.elemental.code.ICodeType;
 
 /**
  * 非同期実行フレームワーク。<br />

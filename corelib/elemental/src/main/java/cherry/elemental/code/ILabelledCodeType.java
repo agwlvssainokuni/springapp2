@@ -1,5 +1,5 @@
 /*
- * Copyright 2014,2016 agwlvssainokuni
+ * Copyright 2016 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package cherry.fundamental.type;
+package cherry.elemental.code;
 
-public interface ICodeType<T> {
+public interface ILabelledCodeType<T> extends ICodeType<T> {
 
-	T getCodeValue();
+	String getCodeLabel();
 
 }

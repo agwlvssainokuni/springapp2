@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cherry.fundamental.type;
+package cherry.elemental.code;
 
 import java.util.ArrayList;
 import java.util.List;
