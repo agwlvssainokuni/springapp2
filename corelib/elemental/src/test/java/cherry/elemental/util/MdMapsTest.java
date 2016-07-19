@@ -31,9 +31,11 @@ public class MdMapsTest {
 	public void test1d() {
 		Map<Integer, Boolean> map1 = MdMaps.defaulted1dMap(MdMaps.HASHMAP, Boolean.FALSE);
 		Map<Integer, Boolean> map2 = MdMaps.defaulted1dMap(MdMaps.HASHMAP, () -> Boolean.TRUE);
+		Map<Integer, Boolean> map3 = MdMaps.lazy1dMap(MdMaps.HASHMAP, () -> Boolean.FALSE);
 		for (int x1 = 0; x1 < 1000000; x1++) {
 			assertFalse(MdMaps.getOpt(map1, rand()).get());
 			assertTrue(MdMaps.getOpt(map2, rand()).get());
+			assertFalse(MdMaps.getOpt(map3, rand()).get());
 		}
 	}
 
@@ -41,10 +43,12 @@ public class MdMapsTest {
 	public void test2d() {
 		Map<Integer, Map<Integer, Boolean>> map1 = MdMaps.defaulted2dMap(MdMaps.TREEMAP, Boolean.FALSE);
 		Map<Integer, Map<Integer, Boolean>> map2 = MdMaps.defaulted2dMap(MdMaps.TREEMAP, () -> Boolean.TRUE);
+		Map<Integer, Map<Integer, Boolean>> map3 = MdMaps.lazy2dMap(MdMaps.TREEMAP, () -> Boolean.FALSE);
 		for (int x1 = 0; x1 < 1000; x1++) {
 			for (int x2 = 0; x2 < 1000; x2++) {
 				assertFalse(MdMaps.getOpt(map1, rand(), rand()).get());
 				assertTrue(MdMaps.getOpt(map2, rand(), rand()).get());
+				assertFalse(MdMaps.getOpt(map3, rand(), rand()).get());
 			}
 		}
 	}
@@ -55,11 +59,14 @@ public class MdMapsTest {
 				Boolean.FALSE);
 		Map<Integer, Map<Integer, Map<Integer, Boolean>>> map2 = MdMaps.defaulted3dMap(MdMaps.LINKEDHASHMAP,
 				() -> Boolean.TRUE);
+		Map<Integer, Map<Integer, Map<Integer, Boolean>>> map3 = MdMaps.lazy3dMap(MdMaps.LINKEDHASHMAP,
+				() -> Boolean.FALSE);
 		for (int x1 = 0; x1 < 100; x1++) {
 			for (int x2 = 0; x2 < 100; x2++) {
 				for (int x3 = 0; x3 < 100; x3++) {
 					assertFalse(MdMaps.getOpt(map1, rand(), rand(), rand()).get());
 					assertTrue(MdMaps.getOpt(map2, rand(), rand(), rand()).get());
+					assertFalse(MdMaps.getOpt(map3, rand(), rand(), rand()).get());
 				}
 			}
 		}
@@ -71,12 +78,15 @@ public class MdMapsTest {
 				Boolean.FALSE);
 		Map<Integer, Map<Integer, Map<Integer, Map<Integer, Boolean>>>> map2 = MdMaps.defaulted4dMap(MdMaps.HASHMAP,
 				() -> Boolean.TRUE);
+		Map<Integer, Map<Integer, Map<Integer, Map<Integer, Boolean>>>> map3 = MdMaps.lazy4dMap(MdMaps.HASHMAP,
+				() -> Boolean.FALSE);
 		for (int x1 = 0; x1 < 100; x1++) {
 			for (int x2 = 0; x2 < 100; x2++) {
 				for (int x3 = 0; x3 < 10; x3++) {
 					for (int x4 = 0; x4 < 10; x4++) {
 						assertFalse(MdMaps.getOpt(map1, rand(), rand(), rand(), rand()).get());
 						assertTrue(MdMaps.getOpt(map2, rand(), rand(), rand(), rand()).get());
+						assertFalse(MdMaps.getOpt(map3, rand(), rand(), rand(), rand()).get());
 					}
 				}
 			}
@@ -89,6 +99,8 @@ public class MdMapsTest {
 				MdMaps.TREEMAP, Boolean.FALSE);
 		Map<Integer, Map<Integer, Map<Integer, Map<Integer, Map<Integer, Boolean>>>>> map2 = MdMaps.defaulted5dMap(
 				MdMaps.TREEMAP, () -> Boolean.TRUE);
+		Map<Integer, Map<Integer, Map<Integer, Map<Integer, Map<Integer, Boolean>>>>> map3 = MdMaps.lazy5dMap(
+				MdMaps.TREEMAP, () -> Boolean.FALSE);
 		for (int x1 = 0; x1 < 100; x1++) {
 			for (int x2 = 0; x2 < 10; x2++) {
 				for (int x3 = 0; x3 < 10; x3++) {
@@ -96,6 +108,7 @@ public class MdMapsTest {
 						for (int x5 = 0; x5 < 10; x5++) {
 							assertFalse(MdMaps.getOpt(map1, rand(), rand(), rand(), rand(), rand()).get());
 							assertTrue(MdMaps.getOpt(map2, rand(), rand(), rand(), rand(), rand()).get());
+							assertFalse(MdMaps.getOpt(map3, rand(), rand(), rand(), rand(), rand()).get());
 						}
 					}
 				}
@@ -109,6 +122,8 @@ public class MdMapsTest {
 				.defaulted6dMap(MdMaps.LINKEDHASHMAP, Boolean.FALSE);
 		Map<Integer, Map<Integer, Map<Integer, Map<Integer, Map<Integer, Map<Integer, Boolean>>>>>> map2 = MdMaps
 				.defaulted6dMap(MdMaps.LINKEDHASHMAP, () -> Boolean.TRUE);
+		Map<Integer, Map<Integer, Map<Integer, Map<Integer, Map<Integer, Map<Integer, Boolean>>>>>> map3 = MdMaps
+				.lazy6dMap(MdMaps.LINKEDHASHMAP, () -> Boolean.FALSE);
 		for (int x1 = 0; x1 < 10; x1++) {
 			for (int x2 = 0; x2 < 10; x2++) {
 				for (int x3 = 0; x3 < 10; x3++) {
@@ -117,6 +132,7 @@ public class MdMapsTest {
 							for (int x6 = 0; x6 < 10; x6++) {
 								assertFalse(MdMaps.getOpt(map1, rand(), rand(), rand(), rand(), rand(), rand()).get());
 								assertTrue(MdMaps.getOpt(map2, rand(), rand(), rand(), rand(), rand(), rand()).get());
+								assertFalse(MdMaps.getOpt(map3, rand(), rand(), rand(), rand(), rand(), rand()).get());
 							}
 						}
 					}
