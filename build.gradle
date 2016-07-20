@@ -4,6 +4,8 @@ apply plugin: "eclipse"
 allprojects {
 	version = "1.0"
 	ext {
+		propInstid = (rootProject.hasProperty("instid") ? rootProject.getProperty("instid") : "00")
+		propEnvname = (rootProject.hasProperty("envname") ? rootProject.getProperty("envname") : "develop")
 		propWithEclipse = (rootProject.hasProperty("withEclipse") ? rootProject.getProperty("withEclipse") == "true" : false)
 	}
 }
@@ -17,14 +19,52 @@ subprojects {
 	targetCompatibility = 1.8
 
 	sourceSets {
+		delivery
 		generated
 		testGenerated
 	}
 
 	compileJava.options.encoding = "UTF-8"
 	compileTestJava.options.encoding = "UTF-8"
+	compileDeliveryJava.options.encoding = "UTF-8"
 	compileGeneratedJava.options.encoding = "UTF-8"
 	compileTestGeneratedJava.options.encoding = "UTF-8"
+
+	processDeliveryResources {
+
+		def props = new Properties()
+		[rootProject.file("tokens.properties"), rootProject.file("tokens/${propEnvname}.properties"), rootProject.file("tokens/${propEnvname}_${propInstid}.properties")]*.with {
+			if (exists()) {
+				withInputStream { props.load(it) }
+			}
+		}
+		props.setProperty("tokens.instid", propInstid)
+		props.setProperty("tokens.envname", propEnvname)
+		def topdir = props.getProperty("tokens.topdir", "/opt/${rootProject.name}")
+		props.setProperty("tokens.topdir", topdir)
+		def basedir = props.getProperty("tokens.basedir", "${topdir}/${propInstid}")
+		props.setProperty("tokens.basedir", basedir)
+		def appname = props.getProperty("tokens.${project.name}.name", project.name)
+		props.setProperty("tokens.${project.name}.name", appname)
+		props.setProperty("tokens.app.name", appname)
+		def appdir = props.getProperty("tokens.app.dir", "${basedir}/${appname}")
+		props.setProperty("tokens.app.dir", appdir)
+		def confdir = props.getProperty("tokens.app.confdir", "${appdir}/conf")
+		props.setProperty("tokens.app.confdir", confdir)
+		def logdir = props.getProperty("tokens.app.logdir", "${appdir}/log")
+		props.setProperty("tokens.app.logdir", logdir)
+		def jobdir = props.getProperty("tokens.app.jobdir", "${appdir}/job/\${jobId}")
+		props.setProperty("tokens.app.jobdir", jobdir)
+
+		filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: props)
+		rename("\\.template\$", "")
+	}
+
+	task deliveryJar(type: Jar, dependsOn: deliveryClasses) {
+		from sourceSets.delivery.output.classesDir
+		from sourceSets.delivery.output.resourcesDir
+		appendix = "delivery"
+	}
 
 	task generatedJar(type: Jar, dependsOn: generatedClasses) {
 		from sourceSets.generated.output.classesDir
@@ -39,6 +79,7 @@ subprojects {
 	}
 
 	artifacts {
+		deliveryRuntime deliveryJar
 		generatedRuntime generatedJar
 		testGeneratedRuntime testGeneratedJar
 	}
@@ -86,6 +127,7 @@ subprojects {
 		versionFlyway = "3.2.1"
 
 		// galleryapp
+		versionGroovy = "2.4.7"
 		versionTiles = "3.0.5"
 		versionJstl = "1.2"
 		versionLombok = "1.16.6"

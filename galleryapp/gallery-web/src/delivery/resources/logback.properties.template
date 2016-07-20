@@ -1,0 +1,15 @@
+logback.dir=@tokens.logdir@
+logback.pattern=@tokens.log.pattern.web@
+logback.debug.minIndex=@tokens.log.debug.minIndex@
+logback.debug.maxIndex=@tokens.log.debug.maxIndex@
+logback.debug.maxFileSize=@tokens.log.debug.maxFileSize@
+logback.debug.threshold=@tokens.log.debug.threshold@
+logback.app.maxHistory=@tokens.log.app.maxHistory@
+logback.app.threshold=@tokens.log.app.threshold@
+logback.oper.maxHistory=@tokens.log.oper.maxHistory@
+logback.oper.threshold=@tokens.log.oper.threshold@
+logback.level.app=@tokens.log.level.app@
+logback.level.spring=@tokens.log.level.spring@
+logback.level.querydsl=@tokens.log.level.querydsl@
+logback.level.querydsl.sql=@tokens.log.level.querydsl.sql@
+logback.level.root=@tokens.log.level.root@
