@@ -23,6 +23,9 @@
 		<entry key="cryptoConfiguration.rsasig.1.pubkey" value="classpath:crypto/rsasig/1/pubkey.der" />
 		<entry key="cryptoConfiguration.rsasig.1.privkey" value="classpath:crypto/rsasig/1/privkey.pk8" />
 		<entry key="cryptoConfiguration.rsasig.1.password" value="password" />
+		<entry key="cryptoConfiguration.hmac.defaultVersion" value="0" />
+		<entry key="cryptoConfiguration.hmac.0.key" value="classpath:crypto/hmac/0/key.bin" />
+		<entry key="cryptoConfiguration.hmac.1.key" value="classpath:crypto/hmac/1/key.bin" />
 	</util:map>
 	<context:property-placeholder properties-ref="defaultCryptoConfiguration" ignore-unresolvable="true" />
 
@@ -63,7 +66,7 @@
 		</property>
 	</bean>
 
-	<!-- 電子署名機能設定 -->
+	<!-- RSA電子署名機能設定 -->
 	<bean id="rsaSignature" class="cherry.elemental.crypto.VersionedSignature">
 		<property name="defaultVersion" value="${cryptoConfiguration.rsasig.defaultVersion}" />
 		<property name="signatureMap">
@@ -80,6 +83,27 @@
 						<property name="publicKeyResource" value="${cryptoConfiguration.rsasig.1.pubkey}" />
 						<property name="privateKeyResource" value="${cryptoConfiguration.rsasig.1.privkey}" />
 						<property name="privateKeyPassword" value="${cryptoConfiguration.rsasig.1.password}" />
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- HMAC認証機能設定 -->
+	<bean id="hmacSignature" class="cherry.elemental.crypto.VersionedSignature">
+		<property name="defaultVersion" value="${cryptoConfiguration.hmac.defaultVersion}" />
+		<property name="signatureMap">
+			<map key-type="java.lang.Integer" value-type="cherry.elemental.crypto.Signature">
+				<entry key="0">
+					<bean class="cherry.fundamental.crypto.HmacSignatureSupport" init-method="initialize">
+						<property name="secretKeyResource" value="${cryptoConfiguration.hmac.0.key}" />
+						<property name="keyCrypto" ref="rsaCrypto0" />
+					</bean>
+				</entry>
+				<entry key="1">
+					<bean class="cherry.fundamental.crypto.HmacSignatureSupport" init-method="initialize">
+						<property name="secretKeyResource" value="${cryptoConfiguration.hmac.1.key}" />
+						<property name="keyCrypto" ref="rsaCrypto1" />
 					</bean>
 				</entry>
 			</map>
