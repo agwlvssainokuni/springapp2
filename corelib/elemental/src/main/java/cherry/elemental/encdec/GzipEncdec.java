@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cherry.elemental.codec;
+package cherry.elemental.encdec;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -22,14 +22,15 @@ import java.io.IOException;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-public class GzipCodec implements Codec<byte[], byte[]> {
+public class GzipEncdec implements Encdec<byte[], byte[]> {
 
 	@Override
 	public byte[] encode(byte[] raw) {
-		try (ByteArrayOutputStream out = new ByteArrayOutputStream();
-				GZIPOutputStream gzip = new GZIPOutputStream(out, true)) {
-			gzip.write(raw);
-			gzip.flush();
+		try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+			try (GZIPOutputStream gzip = new GZIPOutputStream(out, true)) {
+				gzip.write(raw);
+				gzip.flush();
+			}
 			return out.toByteArray();
 		} catch (IOException ex) {
 			throw new IllegalStateException(ex);

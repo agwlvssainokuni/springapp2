@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cherry.elemental.codec;
+package cherry.elemental.encdec;
 
 import cherry.elemental.crypto.Signature;
 
@@ -22,7 +22,7 @@ import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 
-public class SignatureCodec implements Codec<byte[], byte[]> {
+public class SignatureEncdec implements Encdec<byte[], byte[]> {
 
 	private Signature signature;
 

@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package cherry.elemental.codec;
+package cherry.elemental.encdec;
 
 import cherry.elemental.crypto.Crypto;
 
-public class CryptoCodec implements Codec<byte[], byte[]> {
+public class CryptoEncdec implements Encdec<byte[], byte[]> {
 
 	private Crypto crypto;
 

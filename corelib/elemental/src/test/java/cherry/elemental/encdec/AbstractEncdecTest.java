@@ -14,27 +14,24 @@
  * limitations under the License.
  */
 
-package cherry.elemental.codec;
+package cherry.elemental.encdec;
 
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
+import static org.junit.Assert.assertArrayEquals;
 
-public class StringCodec implements Codec<String, byte[]> {
+import org.apache.commons.lang3.RandomUtils;
+import org.junit.Test;
 
-	private Charset charset = StandardCharsets.UTF_8;
+public abstract class AbstractEncdecTest<T> {
 
-	public void setCharset(Charset charset) {
-		this.charset = charset;
+	@Test
+	public void testEncodeDecode() {
+		Encdec<byte[], T> impl = create();
+		for (int i = 0; i < 1000; i++) {
+			byte[] raw = RandomUtils.nextBytes(1024);
+			assertArrayEquals(raw, impl.decode(impl.encode(raw)));
+		}
 	}
 
-	@Override
-	public byte[] encode(String raw) {
-		return raw.getBytes(charset);
-	}
-
-	@Override
-	public String decode(byte[] encoded) {
-		return new String(encoded, charset);
-	}
+	protected abstract Encdec<byte[], T> create();
 
 }

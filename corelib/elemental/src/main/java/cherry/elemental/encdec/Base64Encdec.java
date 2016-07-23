@@ -14,12 +14,20 @@
  * limitations under the License.
  */
 
-package cherry.elemental.codec;
+package cherry.elemental.encdec;
 
-public interface Codec<R, E> {
+import java.util.Base64;
 
-	E encode(R raw);
+public class Base64Encdec implements Encdec<byte[], String> {
 
-	R decode(E encoded);
+	@Override
+	public String encode(byte[] raw) {
+		return Base64.getEncoder().encodeToString(raw);
+	}
+
+	@Override
+	public byte[] decode(String encoded) {
+		return Base64.getDecoder().decode(encoded);
+	}
 
 }

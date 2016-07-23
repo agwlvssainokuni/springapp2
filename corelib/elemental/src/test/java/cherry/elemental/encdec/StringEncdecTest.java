@@ -14,20 +14,27 @@
  * limitations under the License.
  */
 
-package cherry.elemental.codec;
+package cherry.elemental.encdec;
 
-import java.util.Base64;
+import static org.junit.Assert.assertEquals;
 
-public class Base64Codec implements Codec<byte[], String> {
+import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Test;
 
-	@Override
-	public String encode(byte[] raw) {
-		return Base64.getEncoder().encodeToString(raw);
+public class StringEncdecTest {
+
+	@Test
+	public void testEncodeDecode() {
+		Encdec<String, byte[]> impl = create();
+		for (int i = 0; i < 1000; i++) {
+			String raw = RandomStringUtils.randomAlphanumeric(1024);
+			assertEquals(raw, impl.decode(impl.encode(raw)));
+		}
 	}
 
-	@Override
-	public byte[] decode(String encoded) {
-		return Base64.getDecoder().decode(encoded);
+	protected Encdec<String, byte[]> create() {
+		StringEncdec impl = new StringEncdec();
+		return impl;
 	}
 
 }
