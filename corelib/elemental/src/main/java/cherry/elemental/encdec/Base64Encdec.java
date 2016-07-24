@@ -17,17 +17,37 @@
 package cherry.elemental.encdec;
 
 import java.util.Base64;
+import java.util.Base64.Decoder;
+import java.util.Base64.Encoder;
 
 public class Base64Encdec implements Encdec<byte[], String> {
 
+	private boolean base64url = false;
+
+	public void setBase64url(boolean base64url) {
+		this.base64url = base64url;
+	}
+
 	@Override
 	public String encode(byte[] raw) {
-		return Base64.getEncoder().encodeToString(raw);
+		Encoder encoder;
+		if (base64url) {
+			encoder = Base64.getUrlEncoder().withoutPadding();
+		} else {
+			encoder = Base64.getEncoder();
+		}
+		return encoder.encodeToString(raw);
 	}
 
 	@Override
 	public byte[] decode(String encoded) {
-		return Base64.getDecoder().decode(encoded);
+		Decoder decoder;
+		if (base64url) {
+			decoder = Base64.getUrlDecoder();
+		} else {
+			decoder = Base64.getDecoder();
+		}
+		return decoder.decode(encoded);
 	}
 
 }

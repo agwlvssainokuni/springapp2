@@ -17,7 +17,10 @@
 package cherry.elemental.encdec;
 
 import static java.util.Arrays.asList;
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+
+import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
@@ -29,20 +32,35 @@ import cherry.elemental.crypto.HmacSignature;
 public class ChainedEncdecTest {
 
 	@Test
-	public void testEncodeDecode() {
-		Encdec<String, String> impl = create();
+	public void testEncodeDecodeForString() {
+		Encdec<String, String> impl = createForString();
 		for (int i = 0; i < 1000; i++) {
 			String raw = RandomStringUtils.randomAlphanumeric(1024);
 			assertEquals(raw, impl.decode(impl.encode(raw)));
 		}
 	}
 
-	protected Encdec<String, String> create() {
-		return EncdecFactory.createEncdecChain(string(), asList(signature(), crypto(), gzip()), base64());
+	@Test
+	public void testEncodeDecodeForByteArray() {
+		Encdec<byte[], byte[]> impl = createForByteArray();
+		for (int i = 0; i < 1000; i++) {
+			byte[] raw = RandomUtils.nextBytes(1024);
+			assertArrayEquals(raw, impl.decode(impl.encode(raw)));
+		}
+	}
+
+	protected Encdec<String, String> createForString() {
+		return EncdecFactory.createEncdecChain(string(), asList(signature(), crypto(), gzip()), base64(true));
+	}
+
+	protected Encdec<byte[], byte[]> createForByteArray() {
+		return EncdecFactory.createEncdecChain(asList(signature(), crypto(), gzip()));
 	}
 
 	private Encdec<String, byte[]> string() {
-		return new StringEncdec();
+		StringEncdec impl = new StringEncdec();
+		impl.setCharset(StandardCharsets.UTF_8);
+		return impl;
 	}
 
 	private Encdec<byte[], byte[]> signature() {
@@ -67,8 +85,10 @@ public class ChainedEncdecTest {
 		return new GzipEncdec();
 	}
 
-	private Encdec<byte[], String> base64() {
-		return new Base64Encdec();
+	private Encdec<byte[], String> base64(boolean base64url) {
+		Base64Encdec impl = new Base64Encdec();
+		impl.setBase64url(base64url);
+		return impl;
 	}
 
 }
