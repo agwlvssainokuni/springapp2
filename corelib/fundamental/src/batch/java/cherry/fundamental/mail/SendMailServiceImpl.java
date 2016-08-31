@@ -25,6 +25,8 @@ import cherry.elemental.log.Log;
 import cherry.elemental.log.LogFactory;
 import cherry.fundamental.bizcal.BizDateTime;
 
+import com.google.common.util.concurrent.RateLimiter;
+
 public class SendMailServiceImpl implements SendMailService {
 
 	private final Log log = LogFactory.getLog(getClass());
@@ -32,6 +34,8 @@ public class SendMailServiceImpl implements SendMailService {
 	private BizDateTime bizDateTime;
 
 	private MailSendHandler mailSendHandler;
+
+	private RateLimiter rateLimiter;
 
 	public void setBizDateTime(BizDateTime bizDateTime) {
 		this.bizDateTime = bizDateTime;
@@ -41,11 +45,21 @@ public class SendMailServiceImpl implements SendMailService {
 		this.mailSendHandler = mailSendHandler;
 	}
 
+	public void setRateLimiter(RateLimiter rateLimiter) {
+		this.rateLimiter = rateLimiter;
+	}
+
 	@Override
 	public void sendMail() {
 		try {
+
 			LocalDateTime now = bizDateTime.now();
 			for (long messageId : mailSendHandler.listMessage(now)) {
+
+				if (rateLimiter != null) {
+					rateLimiter.acquire();
+				}
+
 				mailSendHandler.sendMessage(messageId);
 			}
 		} catch (MailException | DataAccessException ex) {
