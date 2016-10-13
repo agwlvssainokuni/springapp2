@@ -35,7 +35,7 @@ public class SendMailServiceImpl implements SendMailService {
 
 	private MailSendHandler mailSendHandler;
 
-	private RateLimiter rateLimiter;
+	private Double sendPerSecond;
 
 	public void setBizDateTime(BizDateTime bizDateTime) {
 		this.bizDateTime = bizDateTime;
@@ -45,13 +45,18 @@ public class SendMailServiceImpl implements SendMailService {
 		this.mailSendHandler = mailSendHandler;
 	}
 
-	public void setRateLimiter(RateLimiter rateLimiter) {
-		this.rateLimiter = rateLimiter;
+	public void setSendPerSecond(Double sendPerSecond) {
+		this.sendPerSecond = sendPerSecond;
 	}
 
 	@Override
 	public void sendMail() {
 		try {
+
+			RateLimiter rateLimiter = null;
+			if (sendPerSecond != null && sendPerSecond.doubleValue() > 0.0) {
+				rateLimiter = RateLimiter.create(sendPerSecond.doubleValue());
+			}
 
 			LocalDateTime now = bizDateTime.now();
 			for (long messageId : mailSendHandler.listMessage(now)) {
