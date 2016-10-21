@@ -27,6 +27,7 @@ import static org.mockito.Mockito.when;
 
 import java.text.MessageFormat;
 import java.time.LocalDateTime;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Test;
 
@@ -42,17 +43,17 @@ public class SendMailServiceImplTest {
 
 	@Test
 	public void testSendMail_with_RateLimit() {
-		testSendMail(1.0D);
+		testSendMail(TimeUnit.MINUTES, 60.0D);
 	}
 
 	@Test
 	public void testSendMail_without_RateLimit() {
-		testSendMail(null);
+		testSendMail(TimeUnit.MINUTES, 0.0D);
 	}
 
-	private void testSendMail(Double sendPerSecond) {
+	private void testSendMail(TimeUnit rateUnit, double rateToSend) {
 
-		SendMailService impl = create(sendPerSecond);
+		SendMailService impl = create(rateUnit, rateToSend);
 
 		LocalDateTime now = LocalDateTime.now();
 		when(bizDateTime.now()).thenReturn(now);
@@ -62,7 +63,8 @@ public class SendMailServiceImplTest {
 		long start = System.currentTimeMillis();
 		impl.sendMail();
 		long end = System.currentTimeMillis();
-		System.out.println(MessageFormat.format("Time elapsed {0} ms", end - start));
+		System.out.println(MessageFormat.format("Time elapsed {0} ms, for rate {1} per {2}", end - start, rateToSend,
+				rateUnit));
 
 		verify(bizDateTime, times(1)).now();
 		verify(mailSendHandler, times(1)).listMessage(eq(now));
@@ -73,11 +75,13 @@ public class SendMailServiceImplTest {
 
 	@Test
 	public void testRateLimiter_with_Reinitialize() throws InterruptedException {
+		System.out.println("testRateLimiter_with_Reinitialize");
 		testRateLimiter(true);
 	}
 
 	@Test
 	public void testRateLimiter_without_Reinitialize() throws InterruptedException {
+		System.out.println("testRateLimiter_without_Reinitialize");
 		testRateLimiter(false);
 	}
 
@@ -95,13 +99,14 @@ public class SendMailServiceImplTest {
 		}
 	}
 
-	private SendMailServiceImpl create(Double sendPerSecond) {
+	private SendMailServiceImpl create(TimeUnit rateUnit, double rateToSend) {
 		bizDateTime = mock(BizDateTime.class);
 		mailSendHandler = mock(MailSendHandler.class);
 		SendMailServiceImpl impl = new SendMailServiceImpl();
 		impl.setBizDateTime(bizDateTime);
 		impl.setMailSendHandler(mailSendHandler);
-		impl.setSendPerSecond(sendPerSecond);
+		impl.setRateUnit(rateUnit);
+		impl.setRateToSend(rateToSend);
 		return impl;
 	}
 

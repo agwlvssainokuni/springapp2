@@ -17,6 +17,9 @@
 package cherry.fundamental.mail;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.mail.MailException;
@@ -35,7 +38,9 @@ public class SendMailServiceImpl implements SendMailService {
 
 	private MailSendHandler mailSendHandler;
 
-	private Double sendPerSecond;
+	private TimeUnit rateUnit = TimeUnit.SECONDS;
+
+	private double rateToSend = 0.0D;
 
 	public void setBizDateTime(BizDateTime bizDateTime) {
 		this.bizDateTime = bizDateTime;
@@ -45,32 +50,40 @@ public class SendMailServiceImpl implements SendMailService {
 		this.mailSendHandler = mailSendHandler;
 	}
 
-	public void setSendPerSecond(Double sendPerSecond) {
-		this.sendPerSecond = sendPerSecond;
+	public void setRateUnit(TimeUnit rateUnit) {
+		this.rateUnit = rateUnit;
+	}
+
+	public void setRateToSend(double rateToSend) {
+		this.rateToSend = rateToSend;
 	}
 
 	@Override
 	public void sendMail() {
 		try {
 
-			RateLimiter rateLimiter = null;
-			if (sendPerSecond != null && sendPerSecond.doubleValue() > 0.0) {
-				rateLimiter = RateLimiter.create(sendPerSecond.doubleValue());
-			}
-
 			LocalDateTime now = bizDateTime.now();
-			for (long messageId : mailSendHandler.listMessage(now)) {
+			List<Long> list = mailSendHandler.listMessage(now);
 
-				if (rateLimiter != null) {
-					rateLimiter.acquire();
-				}
+			int permits = (int) TimeUnit.SECONDS.convert(1L, rateUnit);
+			Optional<RateLimiter> rateLimiter = prepareRateLimiter(rateToSend);
 
+			for (long messageId : list) {
+				rateLimiter.map(l -> l.acquire(permits));
 				mailSendHandler.sendMessage(messageId);
 			}
 		} catch (MailException | DataAccessException ex) {
 			if (log.isDebugEnabled()) {
 				log.debug(ex, "failed to send mail");
 			}
+		}
+	}
+
+	private Optional<RateLimiter> prepareRateLimiter(double rate) {
+		if (rate <= 0.0D) {
+			return Optional.empty();
+		} else {
+			return Optional.of(RateLimiter.create(rate));
 		}
 	}
 
