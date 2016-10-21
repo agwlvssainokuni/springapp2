@@ -53,7 +53,7 @@
 	<logger name="com.querydsl" level="${logback.level.querydsl}" />
 	<logger name="com.querydsl.sql" level="${logback.level.querydsl.sql}" />
 	<logger name="org.flywaydb" level="INFO" />
-	<logger name="trace" level="TRACE" />
+	<logger name="trace" level="${logback.level.trace}" />
 	<logger name="operation" level="INFO">
 		<appender-ref ref="operlog" />
 	</logger>

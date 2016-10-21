@@ -12,4 +12,5 @@ logback.level.app=@tokens.log.level.app@
 logback.level.spring=@tokens.log.level.spring@
 logback.level.querydsl=@tokens.log.level.querydsl@
 logback.level.querydsl.sql=@tokens.log.level.querydsl.sql@
+logback.level.trace=@tokens.log.level.trace@
 logback.level.root=@tokens.log.level.root@
