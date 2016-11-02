@@ -16,7 +16,14 @@
 
 package cherry.fundamental.crypto;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+
+import javax.crypto.NoSuchPaddingException;
 
 import org.springframework.core.io.Resource;
 
@@ -54,7 +61,8 @@ public class RSACryptoSupport extends RSACrypto {
 	 * RSA暗号アルゴリズムによる暗号化/復号化の機能を初期化する。<br />
 	 * 具体的には、ファイルのパスとして指定された公開鍵と秘密鍵を、ファイルから読込み、復号化し、JCE APIで使用する形式で保持する。
 	 */
-	public void initialize() throws Exception {
+	public void initialize() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
+			InvalidAlgorithmParameterException, InvalidKeySpecException, IOException {
 		try (InputStream in = publicKeyResource.getInputStream()) {
 			setPublicKeyBytes(ByteStreams.toByteArray(in));
 		}

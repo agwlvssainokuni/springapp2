@@ -26,6 +26,8 @@
 		<entry key="cryptoConfiguration.hmac.defaultVersion" value="0" />
 		<entry key="cryptoConfiguration.hmac.0.key" value="classpath:crypto/hmac/0/key.bin" />
 		<entry key="cryptoConfiguration.hmac.1.key" value="classpath:crypto/hmac/1/key.bin" />
+		<entry key="cryptoConfiguration.cryptoKeyTop" value="classpath:crypto/cryptokey" />
+		<entry key="cryptoConfiguration.signatureKeyTop" value="classpath:crypto/sigkey" />
 	</util:map>
 	<context:property-placeholder properties-ref="defaultCryptoConfiguration" ignore-unresolvable="true" />
 
@@ -109,6 +111,21 @@
 			</map>
 		</property>
 	</bean>
+
+	<!-- 鍵スキャン暗号機能 -->
+	<bean id="keyscanCrypto" class="cherry.fundamental.crypto.KeyScanCryptoFactoryBean">
+		<property name="keyTop" value="${cryptoConfiguration.cryptoKeyTop}" />
+		<property name="privateKeyPasswordMap" ref="keyscanCryptoPassword" />
+		<property name="random" ref="secureRandom" />
+	</bean>
+	<util:properties id="keyscanCryptoPassword" location="${cryptoConfiguration.cryptoKeyTop}/privkeypw.properties" />
+
+	<!-- 鍵スキャン認証機能 -->
+	<bean id="keyscanSignature" class="cherry.fundamental.crypto.KeyScanSignatureFactoryBean">
+		<property name="keyTop" value="${cryptoConfiguration.signatureKeyTop}" />
+		<property name="privateKeyPasswordMap" ref="keyscanCryptoPassword" />
+	</bean>
+	<util:properties id="keyscanSignaturePassword" location="${cryptoConfiguration.signatureKeyTop}/privkeypw.properties" />
 
 	<!-- 暗号機能設定 -->
 	<!-- SecureType -->
