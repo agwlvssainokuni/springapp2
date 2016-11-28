@@ -42,6 +42,8 @@ public class SendMailServiceImpl implements SendMailService {
 
 	private double rateToSend = 0.0D;
 
+	private boolean continueOnMailException = true;
+
 	public void setBizDateTime(BizDateTime bizDateTime) {
 		this.bizDateTime = bizDateTime;
 	}
@@ -58,6 +60,10 @@ public class SendMailServiceImpl implements SendMailService {
 		this.rateToSend = rateToSend;
 	}
 
+	public void setContinueOnMailException(boolean continueOnMailException) {
+		this.continueOnMailException = continueOnMailException;
+	}
+
 	@Override
 	public void sendMail() {
 		try {
@@ -70,7 +76,17 @@ public class SendMailServiceImpl implements SendMailService {
 
 			for (long messageId : list) {
 				rateLimiter.map(l -> l.acquire(permits));
-				mailSendHandler.sendMessage(messageId);
+				try {
+					mailSendHandler.sendMessage(messageId);
+				} catch (MailException ex) {
+					if (continueOnMailException) {
+						if (log.isDebugEnabled()) {
+							log.debug(ex, "failed to send mail");
+						}
+						continue;
+					}
+					throw ex;
+				}
 			}
 		} catch (MailException | DataAccessException ex) {
 			if (log.isDebugEnabled()) {
