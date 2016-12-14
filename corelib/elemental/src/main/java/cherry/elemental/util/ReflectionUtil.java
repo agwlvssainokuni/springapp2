@@ -16,9 +16,12 @@
 
 package cherry.elemental.util;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 import com.google.common.base.Joiner;
 
@@ -63,4 +66,19 @@ public class ReflectionUtil {
 
 		return Joiner.on(" ").join(desc);
 	}
+
+	public static Optional<Field> getFieldByMark(Class<?> klass, int mark) {
+		return Stream
+				.of(klass.getDeclaredFields())
+				.filter(item -> Stream.of(item.getAnnotationsByType(ReflectionMark.class))
+						.filter(annot -> annot.value() == mark).findFirst().isPresent()).findFirst();
+	}
+
+	public static Optional<Method> getMethodByMark(Class<?> klass, int mark) {
+		return Stream
+				.of(klass.getDeclaredMethods())
+				.filter(item -> Stream.of(item.getAnnotationsByType(ReflectionMark.class))
+						.filter(annot -> annot.value() == mark).findFirst().isPresent()).findFirst();
+	}
+
 }
