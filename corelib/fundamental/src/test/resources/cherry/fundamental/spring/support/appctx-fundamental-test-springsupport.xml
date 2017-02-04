@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="mapList" class="cherry.fundamental.spring.support.MapListFromCsvResourceFactoryBean">
+		<property name="resource" value="classpath:cherry/fundamental/spring/support/record.csv" />
+		<property name="charset" value="UTF-8" />
+	</bean>
+
+	<bean id="objectList" class="cherry.fundamental.spring.support.ObjectListFromCsvResourceFactoryBean">
+		<property name="resource" value="classpath:cherry/fundamental/spring/support/record.csv" />
+		<property name="charset" value="UTF-8" />
+		<property name="objectClass" value="cherry.fundamental.spring.support.Dto" />
+		<property name="dataBinderHelper" ref="dataBinderHelper" />
+	</bean>
+
+</beans>
