@@ -22,23 +22,21 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.FactoryBean;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;
 
 import cherry.elemental.csv.CsvParser;
 
-public class MapListFromCsvResourceFactoryBean implements FactoryBean<List<Map<String, String>>>, InitializingBean {
+public class MapListFromCsvResourceFactoryBean implements FactoryBean<List<Map<String, String>>> {
 
 	private Resource resource;
 
 	private Charset charset;
-
-	private List<Map<String, String>> mapList;
 
 	public void setResource(Resource resource) {
 		this.resource = resource;
@@ -49,31 +47,28 @@ public class MapListFromCsvResourceFactoryBean implements FactoryBean<List<Map<S
 	}
 
 	@Override
-	public void afterPropertiesSet() throws IOException {
-		mapList = new ArrayList<>();
+	public List<Map<String, String>> getObject() throws IOException {
 		try (InputStream in = resource.getInputStream();
 				Reader reader = new InputStreamReader(in, charset);
 				CsvParser csv = new CsvParser(reader)) {
 
 			String[] header = csv.read();
 			if (header == null) {
-				return;
+				return Collections.emptyList();
 			}
 
+			List<Map<String, String>> mapList = new ArrayList<>();
 			String[] record;
-			for (int rownum = 1; (record = csv.read()) != null; rownum++) {
+			while ((record = csv.read()) != null) {
 				Map<String, String> map = new HashMap<>();
 				for (int i = 0; i < header.length && i < record.length; i++) {
 					map.put(header[i], record[i]);
 				}
 				mapList.add(map);
 			}
-		}
-	}
 
-	@Override
-	public List<Map<String, String>> getObject() throws Exception {
-		return mapList;
+			return mapList;
+		}
 	}
 
 	@Override
@@ -83,7 +78,7 @@ public class MapListFromCsvResourceFactoryBean implements FactoryBean<List<Map<S
 
 	@Override
 	public boolean isSingleton() {
-		return true;
+		return false;
 	}
 
 }

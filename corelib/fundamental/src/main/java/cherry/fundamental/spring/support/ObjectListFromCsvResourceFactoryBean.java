@@ -24,13 +24,13 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.FactoryBean;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.core.io.Resource;
 import org.springframework.validation.BindingResult;
@@ -38,7 +38,7 @@ import org.springframework.validation.BindingResult;
 import cherry.elemental.csv.CsvParser;
 import cherry.fundamental.validator.DataBinderHelper;
 
-public class ObjectListFromCsvResourceFactoryBean<T> implements FactoryBean<List<T>>, InitializingBean {
+public class ObjectListFromCsvResourceFactoryBean<T> implements FactoryBean<List<T>> {
 
 	private Resource resource;
 
@@ -47,8 +47,6 @@ public class ObjectListFromCsvResourceFactoryBean<T> implements FactoryBean<List
 	private Class<T> objectClass;
 
 	private DataBinderHelper dataBinderHelper;
-
-	private List<T> objectList;
 
 	public void setResource(Resource resource) {
 		this.resource = resource;
@@ -67,17 +65,17 @@ public class ObjectListFromCsvResourceFactoryBean<T> implements FactoryBean<List
 	}
 
 	@Override
-	public void afterPropertiesSet() throws Exception {
-		objectList = new ArrayList<>();
+	public List<T> getObject() throws Exception {
 		try (InputStream in = resource.getInputStream();
 				Reader reader = new InputStreamReader(in, charset);
 				CsvParser csv = new CsvParser(reader)) {
 
 			String[] header = csv.read();
 			if (header == null) {
-				return;
+				return Collections.emptyList();
 			}
 
+			List<T> objectList = new ArrayList<>();
 			Map<Integer, List<String>> errmsg = new LinkedHashMap<>();
 			String[] record;
 			for (int rownum = 1; (record = csv.read()) != null; rownum++) {
@@ -105,12 +103,9 @@ public class ObjectListFromCsvResourceFactoryBean<T> implements FactoryBean<List
 				}).collect(joining("; ", prefix0, ""));
 				throw new IllegalStateException(m);
 			}
-		}
-	}
 
-	@Override
-	public List<T> getObject() throws Exception {
-		return objectList;
+			return objectList;
+		}
 	}
 
 	@Override
@@ -120,7 +115,7 @@ public class ObjectListFromCsvResourceFactoryBean<T> implements FactoryBean<List
 
 	@Override
 	public boolean isSingleton() {
-		return true;
+		return false;
 	}
 
 }

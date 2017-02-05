@@ -26,18 +26,15 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.FactoryBean;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;
 
 import cherry.elemental.csv.CsvParser;
 
-public class RecordListFromCsvResourceFactoryBean implements FactoryBean<List<List<String>>>, InitializingBean {
+public class RecordListFromCsvResourceFactoryBean implements FactoryBean<List<List<String>>> {
 
 	private Resource resource;
 
 	private Charset charset;
-
-	private List<List<String>> recordList;
 
 	public void setResource(Resource resource) {
 		this.resource = resource;
@@ -48,21 +45,19 @@ public class RecordListFromCsvResourceFactoryBean implements FactoryBean<List<Li
 	}
 
 	@Override
-	public void afterPropertiesSet() throws IOException {
-		recordList = new ArrayList<>();
+	public List<List<String>> getObject() throws IOException {
 		try (InputStream in = resource.getInputStream();
 				Reader reader = new InputStreamReader(in, charset);
 				CsvParser csv = new CsvParser(reader)) {
+
+			List<List<String>> recordList = new ArrayList<>();
 			String[] record;
 			while ((record = csv.read()) != null) {
 				recordList.add(Arrays.asList(record));
 			}
-		}
-	}
 
-	@Override
-	public List<List<String>> getObject() throws Exception {
-		return recordList;
+			return recordList;
+		}
 	}
 
 	@Override
@@ -72,7 +67,7 @@ public class RecordListFromCsvResourceFactoryBean implements FactoryBean<List<Li
 
 	@Override
 	public boolean isSingleton() {
-		return true;
+		return false;
 	}
 
 }

@@ -20,23 +20,18 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.springframework.beans.factory.FactoryBean;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class ObjectFromJsonResourceFactoryBean<T> implements FactoryBean<T>, InitializingBean {
+public class ObjectFromJsonResourceFactoryBean<T> implements FactoryBean<T> {
 
 	private Resource resource;
 
 	private String typeName;
 
 	private ObjectMapper objectMapper;
-
-	private T object;
-
-	private Class<T> objectType;
 
 	public void setResource(Resource resource) {
 		this.resource = resource;
@@ -50,29 +45,24 @@ public class ObjectFromJsonResourceFactoryBean<T> implements FactoryBean<T>, Ini
 		this.objectMapper = objectMapper;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public void afterPropertiesSet() throws IOException {
+	public T getObject() throws IOException {
 		JavaType javaType = objectMapper.getTypeFactory().constructFromCanonical(typeName);
 		try (InputStream in = resource.getInputStream()) {
-			object = objectMapper.<T> readValue(in, javaType);
+			return objectMapper.<T> readValue(in, javaType);
 		}
-		objectType = (Class<T>) javaType.getRawClass();
 	}
 
-	@Override
-	public T getObject() throws Exception {
-		return object;
-	}
-
+	@SuppressWarnings("unchecked")
 	@Override
 	public Class<?> getObjectType() {
-		return objectType;
+		JavaType javaType = objectMapper.getTypeFactory().constructFromCanonical(typeName);
+		return (Class<T>) javaType.getRawClass();
 	}
 
 	@Override
 	public boolean isSingleton() {
-		return true;
+		return false;
 	}
 
 }
