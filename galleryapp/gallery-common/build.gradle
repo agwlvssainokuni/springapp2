@@ -8,6 +8,7 @@ dependencies {
 	runtime "org.codehaus.groovy:groovy:${versionGroovy}"
 	compile "org.springframework:spring-web:${versionSpring}"
 	testCompile "org.springframework:spring-test:${versionSpring}"
+	testRuntime "org.glassfish:javax.el:${versionJavaEl}"
 	testRuntime "com.h2database:h2:${versionH2db}"
 	testRuntime "org.flywaydb:flyway-core:${versionFlyway}"
 

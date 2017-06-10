@@ -38,6 +38,7 @@ dependencies {
 	compileOnly "javax.transaction:transaction-api:${versionJavaTransaction}"
 	compileOnly "org.projectlombok:lombok:${versionLombok}"
 	testCompile "org.springframework:spring-test:${versionSpring}"
+	testRuntime "org.glassfish:javax.el:${versionJavaEl}"
 	testRuntime "javax.servlet:javax.servlet-api:${versionJavaServlet}"
 	testRuntime "javax.servlet.jsp:javax.servlet.jsp-api:${versionJavaJsp}"
 }

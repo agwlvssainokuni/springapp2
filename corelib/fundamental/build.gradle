@@ -144,7 +144,8 @@ dependencies {
 	compile "org.springframework:spring-context-support:${versionSpring}"
 	compile "org.springframework:spring-tx:${versionSpring}"
 	compile "org.hibernate:hibernate-validator:${versionHibernateValidator}"
-	compile "javax.mail:mail:${versionJavaMail}"
+	compile "javax.mail:javax.mail-api:${versionJavaMail}"
+	runtime "com.sun.mail:javax.mail:${versionJavaMail}"
 	compile "javax.validation:validation-api:${versionJavaValidation}"
 	runtime "javax.el:javax.el-api:${versionJavaEl}"
 	testCompile project(path: project.path, configuration: "testGeneratedRuntime")

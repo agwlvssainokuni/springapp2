@@ -116,7 +116,7 @@ subprojects {
 		versionSpringSecurity = "4.2.3.RELEASE"
 		versionSpringMobile = "1.1.5.RELEASE"
 		versionHibernateValidator = "5.4.1.Final"
-		versionJavaMail = "1.4.7"
+		versionJavaMail = "1.5.6"
 		versionJavaValidation = "1.1.0.Final"
 		versionJavaEl = "3.0.0"
 		versionJavaServlet = "3.1.0"
