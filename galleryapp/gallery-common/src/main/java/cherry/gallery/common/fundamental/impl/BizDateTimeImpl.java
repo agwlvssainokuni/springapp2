@@ -1,5 +1,5 @@
 /*
- * Copyright 2014,2016 agwlvssainokuni
+ * Copyright 2014,2018 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 import cherry.fundamental.bizcal.BizDateTime;
 import cherry.gallery.db.gen.query.QBizdatetimeMaster;
@@ -38,7 +37,6 @@ public class BizDateTimeImpl implements BizDateTime {
 
 	private final QBizdatetimeMaster bm = new QBizdatetimeMaster("bm");
 
-	@Transactional
 	@Override
 	public LocalDate today() {
 		LocalDate ldt = queryFactory.from(bm).orderBy(bm.id.desc()).select(bm.bizdate).fetchFirst();
@@ -48,7 +46,6 @@ public class BizDateTimeImpl implements BizDateTime {
 		return ldt;
 	}
 
-	@Transactional
 	@Override
 	public LocalDateTime now() {
 		DateTimeExpression<LocalDateTime> curDtm = currentTimestamp(LocalDateTime.class);

@@ -39,8 +39,26 @@
 	</bean>
 
 	<!-- 発番管理機能 -->
-	<bean id="numberingManager" class="cherry.fundamental.numbering.NumberingManagerImpl">
+	<bean id="numberingManagerImpl" class="cherry.fundamental.numbering.NumberingManagerImpl">
 		<property name="numberingStore" ref="numberingStore" />
+	</bean>
+	<bean id="numberingManager" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="target" ref="numberingManagerImpl" />
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRES_NEW</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="numberingManagerInTx" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="target" ref="numberingManagerImpl" />
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
 	</bean>
 
 	<!-- コマンド実行機能設定 -->

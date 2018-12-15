@@ -16,7 +16,25 @@
 
 	<context:component-scan base-package="cherry.gallery.common" />
 
-	<bean id="bizDateTime" class="cherry.gallery.common.fundamental.impl.BizDateTimeImpl" />
+	<bean id="bizDateTimeImpl" class="cherry.gallery.common.fundamental.impl.BizDateTimeImpl" />
+	<bean id="bizDateTime" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="target" ref="bizDateTimeImpl" />
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRES_NEW</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="bizDateTimeInTx" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="target" ref="bizDateTimeImpl" />
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="codeStore" class="cherry.gallery.common.fundamental.impl.CodeStoreImpl">
 		<property name="cacheName" value="codeStoreCache" />
 		<property name="cacheManager" ref="longCacheManager" />

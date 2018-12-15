@@ -1,5 +1,5 @@
 /*
- * Copyright 2015,2016 agwlvssainokuni
+ * Copyright 2015,2018 agwlvssainokuni
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,8 +21,6 @@ import static com.google.common.base.Preconditions.checkState;
 
 import java.text.MessageFormat;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import cherry.elemental.code.ICodeType;
 
 public class NumberingManagerImpl implements NumberingManager {
@@ -33,19 +31,16 @@ public class NumberingManagerImpl implements NumberingManager {
 		this.numberingStore = numberingStore;
 	}
 
-	@Transactional
 	@Override
 	public <T extends ICodeType<String>> String issueAsString(T numberEnum) {
 		return issueAsString(numberEnum.getCodeValue());
 	}
 
-	@Transactional
 	@Override
 	public <T extends ICodeType<String>> String[] issueAsString(T numberEnum, int count) {
 		return issueAsString(numberEnum.getCodeValue(), count);
 	}
 
-	@Transactional
 	@Override
 	public String issueAsString(String numberName) {
 
@@ -69,7 +64,6 @@ public class NumberingManagerImpl implements NumberingManager {
 		}
 	}
 
-	@Transactional
 	@Override
 	public String[] issueAsString(String numberName, int count) {
 
@@ -97,19 +91,16 @@ public class NumberingManagerImpl implements NumberingManager {
 		}
 	}
 
-	@Transactional
 	@Override
 	public <T extends ICodeType<String>> long issueAsLong(T numberEnum) {
 		return issueAsLong(numberEnum.getCodeValue());
 	}
 
-	@Transactional
 	@Override
 	public <T extends ICodeType<String>> long[] issueAsLong(T numberEnum, int count) {
 		return issueAsLong(numberEnum.getCodeValue(), count);
 	}
 
-	@Transactional
 	@Override
 	public long issueAsLong(String numberName) {
 
@@ -131,7 +122,6 @@ public class NumberingManagerImpl implements NumberingManager {
 		}
 	}
 
-	@Transactional
 	@Override
 	public long[] issueAsLong(String numberName, int count) {
 
